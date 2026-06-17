@@ -8,6 +8,9 @@ from pathlib import Path
 # Add script directory to sys.path to resolve config import from any working directory
 sys.path.append(str(Path(__file__).resolve().parent))
 import config
+from utils.logging_utils import get_logger
+
+logger = get_logger("fuzzy_ahp")
 
 # --- File Paths ---
 SURVEY_DATA_PATH = config.DATA_DIR / 'Fuzzy_AHP_Survey_Responses.csv'
@@ -29,34 +32,33 @@ def calculate_fuzzy_ahp_weights():
     Calculates Fuzzy AHP weights from 50-person survey data using
     Triangular Fuzzy Numbers and geometric mean aggregation.
     """
-    print("=" * 60)
-    print("STEP 1: FUZZY AHP WEIGHT CALCULATION")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("STEP 1: FUZZY AHP WEIGHT CALCULATION")
+    logger.info("=" * 60)
 
     try:
         survey_df = pd.read_csv(SURVEY_DATA_PATH)
-        print(f"Survey data loaded: {len(survey_df)} respondents")
+        logger.info(f"Survey data loaded: {len(survey_df)} respondents")
     except FileNotFoundError:
-        print(f"Error: Survey file not found at '{SURVEY_DATA_PATH}'")
+        logger.error(f"Error: Survey file not found at '{SURVEY_DATA_PATH}'")
         return None
 
     # Extract pairwise comparison columns
     survey_data = survey_df.iloc[:, SURVEY_PAIRWISE_START_COL:SURVEY_PAIRWISE_END_COL]
 
     if survey_data.shape[1] != 10:
-        print(f"Error: Expected 10 pairwise columns, found {survey_data.shape[1]}")
-        print(f"Column names found: {list(survey_data.columns)}")
-        print("Please adjust SURVEY_PAIRWISE_START_COL and SURVEY_PAIRWISE_END_COL")
+        logger.error(f"Error: Expected 10 pairwise columns, found {survey_data.shape[1]}")
+        logger.error(f"Column names found: {list(survey_data.columns)}")
         return None
 
-    print(f"Using {survey_data.shape[1]} pairwise comparison columns")
+    logger.info(f"Using {survey_data.shape[1]} pairwise comparison columns")
 
     # --- Build TFN from survey responses ---
     tfn_list = []
     for i, col in enumerate(survey_data.columns):
         values = survey_data[col].dropna()
         if len(values) == 0:
-            print(f"Error: Column '{col}' has no valid data")
+            logger.error(f"Error: Column '{col}' has no valid data")
             return None
         m = float(gmean(values))
         l = float(np.percentile(values, 25))
@@ -64,7 +66,7 @@ def calculate_fuzzy_ahp_weights():
         l = min(l, m)
         u = max(u, m)
         tfn_list.append((l, m, u))
-        print(f"  Pair {i+1}: TFN = ({l:.3f}, {m:.3f}, {u:.3f})")
+        logger.info(f"  Pair {i+1}: TFN = ({l:.3f}, {m:.3f}, {u:.3f})")
 
     # --- Build Fuzzy Pairwise Comparison Matrix ---
     matrix = np.full((N_CRITERIA, N_CRITERIA), None, dtype=object)
@@ -107,10 +109,10 @@ def calculate_fuzzy_ahp_weights():
     CI = (lambda_max - N_CRITERIA) / (N_CRITERIA - 1)
     CR = CI / RI_TABLE[N_CRITERIA]
 
-    # --- Print Results ---
-    print("\n" + "=" * 60)
-    print("FUZZY AHP RESULTS")
-    print("=" * 60)
+    # --- Results ---
+    logger.info("\n" + "=" * 60)
+    logger.info("FUZZY AHP RESULTS")
+    logger.info("=" * 60)
 
     results = pd.DataFrame({
         'Criterion': CRITERIA_NAMES,
@@ -121,24 +123,17 @@ def calculate_fuzzy_ahp_weights():
         'Normalized_Weight_%': weights_normalized * 100
     }).sort_values(by='Normalized_Weight_%', ascending=False)
 
-    print(results.to_string(index=False))
-    print(f"\nConsistency Ratio (CR): {CR:.4f}")
+    logger.info("\n" + results.to_string(index=False))
+    logger.info(f"\nConsistency Ratio (CR): {CR:.4f}")
 
     if CR < 0.10:
-        print("CR < 0.10: Model is CONSISTENT and VALID")
+        logger.info("CR < 0.10: Model is CONSISTENT and VALID")
     else:
-        print("WARNING: CR >= 0.10. Survey data may have inconsistencies.")
+        logger.warning("WARNING: CR >= 0.10. Survey data may have inconsistencies.")
 
     # --- Save weights for reference ---
     results.to_csv(config.WEIGHTS_CSV, index=False)
-    print(f"\nWeights saved to '{config.WEIGHTS_CSV}'")
-
-    print("\n" + "=" * 60)
-    print("SOLIDITY CONSTANTS (Copy to Smart Contract)")
-    print("=" * 60)
-    for name, weight in zip(CRITERIA_NAMES, weights_normalized * 100):
-        solidity_name = name.replace(" ", "_")
-        print(f"uint256 constant W_{solidity_name} = {int(round(weight))};")
+    logger.info(f"\nWeights saved to '{config.WEIGHTS_CSV}'")
 
     return dict(zip(CRITERIA_NAMES, weights_normalized))
 
@@ -150,15 +145,15 @@ def calculate_vulnerability_scores(weights_dict):
     if weights_dict is None:
         return
 
-    print("\n" + "=" * 60)
-    print("STEP 2: VULNERABILITY SCORE CALCULATION")
-    print("=" * 60)
+    logger.info("\n" + "=" * 60)
+    logger.info("STEP 2: VULNERABILITY SCORE CALCULATION")
+    logger.info("=" * 60)
 
     try:
         victims_df = pd.read_csv(VERIFIED_VICTIMS_PATH)
-        print(f"Verified victims loaded: {len(victims_df)} records")
+        logger.info(f"Verified victims loaded: {len(victims_df)} records")
     except FileNotFoundError:
-        print(f"Error: File not found at '{VERIFIED_VICTIMS_PATH}'")
+        logger.error(f"Error: File not found at '{VERIFIED_VICTIMS_PATH}'")
         return
 
     # --- Normalize all 5 factors to 0-1 scale ---
@@ -172,7 +167,7 @@ def calculate_vulnerability_scores(weights_dict):
     if 'Distance_km' in victims_df.columns:
         victims_df['Norm_Distance'] = victims_df['Distance_km'] / victims_df['Distance_km'].max()
     else:
-        print("Warning: Distance_km column not found. Setting Distance weight contribution to 0.")
+        logger.warning("Warning: Distance_km column not found. Setting Distance weight contribution to 0.")
         victims_df['Norm_Distance'] = 0
 
     # --- Calculate Weighted Score (0-100 scale) ---
@@ -188,22 +183,19 @@ def calculate_vulnerability_scores(weights_dict):
 
     # --- Save ---
     victims_df.to_csv(SCORED_VICTIMS_PATH, index=False)
-    print(f"Scored victims saved to '{SCORED_VICTIMS_PATH}'")
+    logger.info(f"Scored victims saved to '{SCORED_VICTIMS_PATH}'")
 
-    print("\n--- Score Distribution ---")
-    print(f"Min Score:  {victims_df['Vulnerability_Score'].min()}")
-    print(f"Max Score:  {victims_df['Vulnerability_Score'].max()}")
-    print(f"Mean Score: {victims_df['Vulnerability_Score'].mean():.2f}")
+    logger.info("\n--- Score Distribution ---")
+    logger.info(f"Min Score:  {victims_df['Vulnerability_Score'].min()}")
+    logger.info(f"Max Score:  {victims_df['Vulnerability_Score'].max()}")
+    logger.info(f"Mean Score: {victims_df['Vulnerability_Score'].mean():.2f}")
 
-    print("\n--- Top 5 Most Vulnerable ---")
-    print(victims_df[['Victim_ID', 'NID', 'Vulnerability_Score']].sort_values(
-        by='Vulnerability_Score', ascending=False).head().to_string(index=False))
+    return victims_df
 
-    print("\n--- Bottom 5 Least Vulnerable ---")
-    print(victims_df[['Victim_ID', 'NID', 'Vulnerability_Score']].sort_values(
-        by='Vulnerability_Score', ascending=True).head().to_string(index=False))
-
+def main():
+    weights = calculate_fuzzy_ahp_weights()
+    if weights:
+        calculate_vulnerability_scores(weights)
 
 if __name__ == "__main__":
-    weights = calculate_fuzzy_ahp_weights()
-    calculate_vulnerability_scores(weights)
+    main()

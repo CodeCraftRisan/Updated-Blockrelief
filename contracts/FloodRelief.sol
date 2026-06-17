@@ -67,6 +67,7 @@ contract FloodRelief {
         uint256 id;
         bytes32 identityHash;   // SHA-256(NID+name+salt) off-chain, stored as bytes32
         uint256 score;          // Fuzzy AHP score × 100  (e.g. 88.10 → 8810)
+        uint256 allocatedAmount; // [FIX-RESEARCH] Stored off-chain allocation in wei
         uint256 reliefAmount;   // wei paid to this victim
         address walletAddress;
         bool    isRegistered;
@@ -86,6 +87,7 @@ contract FloodRelief {
 
     mapping(uint256 => Victim) public victims;
     mapping(address => uint256) public donorIndex;  // 1-based; 0 = not registered
+    mapping(bytes32 => bool)    public registeredIdentity; // [FIX-HIGH] Duplicate protection
     Donor[]        public donors;
 
     // ============================================================
@@ -93,7 +95,7 @@ contract FloodRelief {
     // ============================================================
 
     event DonationReceived(address indexed donor, uint256 amount, uint256 ticketNumber, uint256 totalDonated);
-    event VictimRegistered(uint256 indexed victimId, bytes32 identityHash, uint256 score, address wallet);
+    event VictimRegistered(uint256 indexed victimId, bytes32 identityHash, uint256 score, uint256 allocatedAmount, address wallet);
     event FundReleased(uint256 indexed victimId, uint256 amount, address wallet);
     event AllFundsDistributed(uint256 totalDistributed, uint256 recipients);
     event ReserveWithdrawn(address indexed receiver, uint256 amount);
@@ -132,25 +134,29 @@ contract FloodRelief {
     function registerVictim(
         bytes32 identityHash,
         uint256 score,
+        uint256 allocatedAmount,
         address wallet
     ) external onlyAdmin {
-        require(!isDistributed,        "Distribution already done");
-        require(score > 0,             "Score must be > 0");
-        require(wallet != address(0),  "Invalid wallet");
+        require(!isDistributed,               "Distribution already done");
+        require(score > 0,                    "Score must be > 0");
+        require(wallet != address(0),         "Invalid wallet");
+        require(!registeredIdentity[identityHash], "Duplicate victim");
 
+        registeredIdentity[identityHash] = true;
         victimCount += 1;
         victims[victimCount] = Victim({
-            id:            victimCount,
-            identityHash:  identityHash,
-            score:         score,
-            reliefAmount:  0,
-            walletAddress: wallet,
-            isRegistered:  true,
-            isPaid:        false
+            id:              victimCount,
+            identityHash:    identityHash,
+            score:           score,
+            allocatedAmount: allocatedAmount,
+            reliefAmount:    0,
+            walletAddress:   wallet,
+            isRegistered:    true,
+            isPaid:          false
         });
 
         totalScore += score;
-        emit VictimRegistered(victimCount, identityHash, score, wallet);
+        emit VictimRegistered(victimCount, identityHash, score, allocatedAmount, wallet);
     }
 
     function updateTargetFund(uint256 newTargetInWei) external onlyAdmin {
@@ -236,9 +242,8 @@ contract FloodRelief {
             Victim storage v = victims[i];
             if (!v.isRegistered || v.isPaid) continue;
 
-            uint256 share = (i == victimCount)
-                ? victimPool - totalDistributed          // last victim gets remainder
-                : (victimPool * v.score) / totalScore;
+            // [FIX-RESEARCH] Use stored allocatedAmount
+            uint256 share = v.allocatedAmount;
 
             // [FIX-HIGH] Checks-Effects-Interactions:
             // ALL state updates BEFORE external call
@@ -291,9 +296,8 @@ contract FloodRelief {
             Victim storage v = victims[i];
             if (!v.isRegistered || v.isPaid) continue;
 
-            uint256 share = (i == victimCount)
-                ? victimPool - distributed
-                : (victimPool * v.score) / totalScore;
+            // [FIX-RESEARCH] Use stored allocatedAmount
+            uint256 share = v.allocatedAmount;
 
             // [FIX-HIGH] State BEFORE external call
             v.reliefAmount    = share;
@@ -364,13 +368,14 @@ contract FloodRelief {
         uint256  vid,
         bytes32  identityHash,
         uint256  score,
+        uint256  allocatedAmount,
         uint256  reliefAmount,
         address  wallet,
         bool     isPaid
     ) {
         require(id > 0 && id <= victimCount, "Invalid victim id");
         Victim memory v = victims[id];
-        return (v.id, v.identityHash, v.score, v.reliefAmount, v.walletAddress, v.isPaid);
+        return (v.id, v.identityHash, v.score, v.allocatedAmount, v.reliefAmount, v.walletAddress, v.isPaid);
     }
 
     function getFundProgress() external view returns (

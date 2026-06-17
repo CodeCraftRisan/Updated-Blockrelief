@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+
+# Blockchain
+build/
+cache/
+artifacts/
+
+# Generated data and reports
+data/receipts/
+data/*.log
+data/event_listener_state.json
+reports/slither_report_final.json
+reports/slither_report_final.txt
+
+# OS/Editor
+.DS_Store
+.vscode/
