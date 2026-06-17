@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0376
+  Victim ID       : 76
+  NID             : NID00062
+  Account Holder  : Sohel Sultana
+  Account Number  : ACC00062
+  MFS Linked      : bKash-00062
+  Mobile          : +8801862187215
+
+  Amount Paid     : 956.29 BDT
+                    (0.009563 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:48
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x8997ee3b723c572677c51ab523acdfa35b51138b1d60ad05bbfb21a18934280c
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

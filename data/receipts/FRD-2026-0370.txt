@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0370
+  Victim ID       : 70
+  NID             : NID00026
+  Account Holder  : Dilara Akter
+  Account Number  : ACC00026
+  MFS Linked      : bKash-00026
+  Mobile          : +8801394673574
+
+  Amount Paid     : 918.15 BDT
+                    (0.009181 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x15561bd7cd6f45b11d84499f13358ca343fbc2a258845479c369c51de07fc7a5
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0221
+  Victim ID       : 21
+  NID             : NID00019
+  Account Holder  : Josna Hossain
+  Account Number  : ACC00019
+  MFS Linked      : bKash-00019
+  Mobile          : +8801756977874
+
+  Amount Paid     : 936.08 BDT
+                    (0.009361 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:25
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x6eabb8dc057cafa785fef40ec35fee86a900cfd1ceac34cc680bb592a60be7ff
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

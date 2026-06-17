@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0080
+  Victim ID       : 80
+  NID             : NID00051
+  Account Holder  : Belal Parveen
+  Account Number  : ACC00051
+  MFS Linked      : bKash-00051
+  Mobile          : +8801925814828
+
+  Amount Paid     : 66.90 BDT
+                    (0.000669 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x4969603620ec64e4d028d4a7156f6b9472de8a8149bb003cd6fc6e288970d573
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

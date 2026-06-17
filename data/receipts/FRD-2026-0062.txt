@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0062
+  Victim ID       : 62
+  NID             : NID00057
+  Account Holder  : Sumon Islam
+  Account Number  : ACC00057
+  MFS Linked      : bKash-00057
+  Mobile          : +8801397580056
+
+  Amount Paid     : 87.89 BDT
+                    (0.000879 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xac30a7614e26dbe58f83f731c7b7ce962c2fdd49785e57340d048bfecaae8d36
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0275
+  Victim ID       : 75
+  NID             : NID00065
+  Account Holder  : Roksana Ali
+  Account Number  : ACC00065
+  MFS Linked      : bKash-00065
+  Mobile          : +8801822842659
+
+  Amount Paid     : 930.19 BDT
+                    (0.009302 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:26
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x4e0882808f9eefc9085ca8d8691aabe0dc96bb1e4abef59ae33525598f36f00a
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

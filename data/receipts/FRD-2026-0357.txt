@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0357
+  Victim ID       : 57
+  NID             : NID00014
+  Account Holder  : Jamal Begum
+  Account Number  : ACC00014
+  MFS Linked      : bKash-00014
+  Mobile          : +8801670995760
+
+  Amount Paid     : 921.90 BDT
+                    (0.009219 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf4cd0fbd72caa8e12a82f9545cd5d77a0ed7860072c7a6b1297a30876b92d97e
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

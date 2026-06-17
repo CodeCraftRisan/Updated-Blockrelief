@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0071
+  Victim ID       : 71
+  NID             : NID00039
+  Account Holder  : Tariq Ali
+  Account Number  : ACC00039
+  MFS Linked      : bKash-00039
+  Mobile          : +8801590954884
+
+  Amount Paid     : 121.43 BDT
+                    (0.001214 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xbfadbddb19f2dc606f10b989999ef92ecceac656aa0d3e63078a3cd0de99770b
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

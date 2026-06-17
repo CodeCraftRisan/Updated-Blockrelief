@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0496
+  Victim ID       : 96
+  NID             : NID00006
+  Account Holder  : Salma Khatun
+  Account Number  : ACC00006
+  MFS Linked      : bKash-00006
+  Mobile          : +8801972976036
+
+  Amount Paid     : 1,041.00 BDT
+                    (0.010410 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:13
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x9924a466583a9e2d28c152770c479b97c3a1f627657db52503849e4d366dc357
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

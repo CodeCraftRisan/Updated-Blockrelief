@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0423
+  Victim ID       : 23
+  NID             : NID00025
+  Account Holder  : Salma Sultana
+  Account Number  : ACC00025
+  MFS Linked      : bKash-00025
+  Mobile          : +8801854362902
+
+  Amount Paid     : 876.80 BDT
+                    (0.008768 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:11
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x90d1c3d699109a83b5bd62945a272b5a43fc049c061439268467720f62530de4
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

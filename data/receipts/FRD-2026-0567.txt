@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0567
+  Victim ID       : 67
+  NID             : NID00100
+  Account Holder  : Karim Parveen
+  Account Number  : ACC00100
+  MFS Linked      : bKash-00100
+  Mobile          : +8801533930984
+
+  Amount Paid     : 172.85 BDT
+                    (0.001729 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x3b6f4565ce1b9af9f88f5635d55875676542688c80656f2e19b55d052a833f42
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

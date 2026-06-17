@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0379
+  Victim ID       : 79
+  NID             : NID00045
+  Account Holder  : Aziz Rahman
+  Account Number  : ACC00045
+  MFS Linked      : bKash-00045
+  Mobile          : +8801715409861
+
+  Amount Paid     : 707.78 BDT
+                    (0.007078 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:48
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x31dfc31a5175d2729fddf03ce86d36308c71b92dccd4063673e5854389744738
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

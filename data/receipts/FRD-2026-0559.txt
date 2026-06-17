@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0559
+  Victim ID       : 59
+  NID             : NID00015
+  Account Holder  : Sohel Islam
+  Account Number  : ACC00015
+  MFS Linked      : bKash-00015
+  Mobile          : +8801756547339
+
+  Amount Paid     : 380.19 BDT
+                    (0.003802 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xbe119387e2f9ff5c959230b0bddf76aa2733f783c50c8aa70f9bd846b32d1467
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

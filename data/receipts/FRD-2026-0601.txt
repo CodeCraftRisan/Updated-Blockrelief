@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0601
+  Victim ID       : 1
+  NID             : NID00091
+  Account Holder  : Babul Khatun
+  Account Number  : ACC00091
+  MFS Linked      : bKash-00091
+  Mobile          : +8801517136029
+
+  Amount Paid     : 692.52 BDT
+                    (0.006925 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:36
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x7522d79e1e71fdf10dac8b1d73f7c2d408a377c14854a63e0422423bc4245438
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

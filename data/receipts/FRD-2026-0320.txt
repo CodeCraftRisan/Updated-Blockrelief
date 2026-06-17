@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0320
+  Victim ID       : 20
+  NID             : NID00043
+  Account Holder  : Anwar Ahmed
+  Account Number  : ACC00043
+  MFS Linked      : bKash-00043
+  Mobile          : +8801787031056
+
+  Amount Paid     : 637.66 BDT
+                    (0.006377 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf7c428a2c3f9e745e8cbb93eceee59be0d0a819ced93ebaa29ddf97c6a00b804
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

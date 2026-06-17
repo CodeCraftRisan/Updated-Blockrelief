@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0274
+  Victim ID       : 74
+  NID             : NID00032
+  Account Holder  : Josna Sultana
+  Account Number  : ACC00032
+  MFS Linked      : bKash-00032
+  Mobile          : +8801687273675
+
+  Amount Paid     : 784.06 BDT
+                    (0.007841 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:26
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x6798ba8424483116373ee287d6d609c661310086080e28f0cb14fb711cd565c7
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

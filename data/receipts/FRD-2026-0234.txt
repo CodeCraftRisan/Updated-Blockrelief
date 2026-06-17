@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0234
+  Victim ID       : 34
+  NID             : NID00041
+  Account Holder  : Rahim Parveen
+  Account Number  : ACC00041
+  MFS Linked      : bKash-00041
+  Mobile          : +8801690768647
+
+  Amount Paid     : 931.93 BDT
+                    (0.009319 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:25
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x985b7bb5b4087ba0bc20a1a2fac7c0860e2559710b1f8725014eabd625fa542b
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

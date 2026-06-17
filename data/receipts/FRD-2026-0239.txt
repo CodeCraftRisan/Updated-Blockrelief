@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0239
+  Victim ID       : 39
+  NID             : NID00097
+  Account Holder  : Salma Chowdhury
+  Account Number  : ACC00097
+  MFS Linked      : bKash-00097
+  Mobile          : +8801315001045
+
+  Amount Paid     : 842.67 BDT
+                    (0.008427 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:25
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x4999cb37c532544b0eb38c027f3e4178339804999e141ef2c28fc7609fb9d5b8
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

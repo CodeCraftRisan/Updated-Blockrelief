@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0524
+  Victim ID       : 24
+  NID             : NID00059
+  Account Holder  : Anwar Chowdhury
+  Account Number  : ACC00059
+  MFS Linked      : bKash-00059
+  Mobile          : +8801899589817
+
+  Amount Paid     : 289.31 BDT
+                    (0.002893 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:31
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x31649bdf66286195e3e7218f325dcb0cad2325f6a377c67dc136b9dad1bf3445
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

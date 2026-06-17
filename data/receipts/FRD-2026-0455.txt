@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0455
+  Victim ID       : 55
+  NID             : NID00011
+  Account Holder  : Rafiq Islam
+  Account Number  : ACC00011
+  MFS Linked      : bKash-00011
+  Mobile          : +8801969946863
+
+  Amount Paid     : 991.35 BDT
+                    (0.009914 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:12
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xfa98a0d92af6d237b0e10800cd3af347bff871031d677279a2c36e590bf83577
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

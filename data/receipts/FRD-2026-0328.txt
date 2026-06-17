@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0328
+  Victim ID       : 28
+  NID             : NID00060
+  Account Holder  : Nurjahan Ahmed
+  Account Number  : ACC00060
+  MFS Linked      : bKash-00060
+  Mobile          : +8801749301804
+
+  Amount Paid     : 798.11 BDT
+                    (0.007981 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf34f055bcef6ed9d6d16f05b37ba8e47b77b91d97822e8bc0743866dc02d97b1
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

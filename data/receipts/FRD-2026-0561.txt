@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0561
+  Victim ID       : 61
+  NID             : NID00047
+  Account Holder  : Karim Rahman
+  Account Number  : ACC00047
+  MFS Linked      : bKash-00047
+  Mobile          : +8801822831595
+
+  Amount Paid     : 214.41 BDT
+                    (0.002144 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xdd6151dbec9bc8a0143fb07f668375cf5ebb55645285dc466aa03d34ef3897da
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

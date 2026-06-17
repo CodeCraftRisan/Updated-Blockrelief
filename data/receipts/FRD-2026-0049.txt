@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0049
+  Victim ID       : 49
+  NID             : NID00089
+  Account Holder  : Mokbul Uddin
+  Account Number  : ACC00089
+  MFS Linked      : bKash-00089
+  Mobile          : +8801894461358
+
+  Amount Paid     : 96.28 BDT
+                    (0.000963 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x448d76b1dad3b2488b628f0bad8f768f85e45c9ef0a4747e4d203ef4f6e62bd5
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

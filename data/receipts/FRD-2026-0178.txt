@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0178
+  Victim ID       : 78
+  NID             : NID00077
+  Account Holder  : Nasrin Sultana
+  Account Number  : ACC00077
+  MFS Linked      : bKash-00077
+  Mobile          : +8801555718843
+
+  Amount Paid     : 1,052.37 BDT
+                    (0.010524 ETH)
+
+  TX Hash         : dd7795566ae60ead84f96a75a456a913c3f00bc5cab2663dbb545749ad134b51
+  Timestamp       : 2026-05-25 21:48:19
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xc5a6f4f30f64de0d01048f937817d8bd30e07c101cc6313a125ac12c09ec929d
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

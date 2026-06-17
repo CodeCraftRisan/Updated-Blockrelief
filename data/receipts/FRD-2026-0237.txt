@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0237
+  Victim ID       : 37
+  NID             : NID00029
+  Account Holder  : Rashida Islam
+  Account Number  : ACC00029
+  MFS Linked      : bKash-00029
+  Mobile          : +8801527310852
+
+  Amount Paid     : 610.63 BDT
+                    (0.006106 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:25
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xb128156c9ddee9ee445262f869a3cac64a7aa708338134e7cf09d1f82ed88a16
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

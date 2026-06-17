@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0200
+  Victim ID       : 100
+  NID             : NID00099
+  Account Holder  : Mizan Ali
+  Account Number  : ACC00099
+  MFS Linked      : bKash-00099
+  Mobile          : +8801814345760
+
+  Amount Paid     : 924.17 BDT
+                    (0.009242 ETH)
+
+  TX Hash         : dd7795566ae60ead84f96a75a456a913c3f00bc5cab2663dbb545749ad134b51
+  Timestamp       : 2026-05-25 21:48:19
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x71646486e752cd3ed94f9694d01eec1b42e891599342ace9e0c9718bc2966daf
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

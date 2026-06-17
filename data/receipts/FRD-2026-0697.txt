@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0697
+  Victim ID       : 97
+  NID             : NID00055
+  Account Holder  : Dilara Sultana
+  Account Number  : ACC00055
+  MFS Linked      : bKash-00055
+  Mobile          : +8801399630668
+
+  Amount Paid     : 376.94 BDT
+                    (0.003769 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:39
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x257c65726a15c98c06c180ff8285133218f0702c8db536f72fb73681e3455545
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

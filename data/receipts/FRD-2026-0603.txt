@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0603
+  Victim ID       : 3
+  NID             : NID00079
+  Account Holder  : Sumon Sultana
+  Account Number  : ACC00079
+  MFS Linked      : bKash-00079
+  Mobile          : +8801781275364
+
+  Amount Paid     : 545.16 BDT
+                    (0.005452 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:36
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x90d7027b36282be550c1b8ff0c8c1e3c1445e3a8e6524a0754c5dfbcc20cbf7d
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

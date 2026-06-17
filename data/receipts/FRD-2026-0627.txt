@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0627
+  Victim ID       : 27
+  NID             : NID00093
+  Account Holder  : Monira Mia
+  Account Number  : ACC00093
+  MFS Linked      : bKash-00093
+  Mobile          : +8801846869124
+
+  Amount Paid     : 606.98 BDT
+                    (0.006070 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:37
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xa38e935110b3aa8f7d6f0e6684c1f4b6d1eeb43104ffc101bb3bcfbc2806c89e
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

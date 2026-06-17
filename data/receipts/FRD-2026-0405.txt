@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0405
+  Victim ID       : 5
+  NID             : NID00007
+  Account Holder  : Halima Khan
+  Account Number  : ACC00007
+  MFS Linked      : bKash-00007
+  Mobile          : +8801713741196
+
+  Amount Paid     : 847.36 BDT
+                    (0.008474 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:10
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x459af7091d9bd6410c94b5bea196d15851e64313943ba7f93334f23989550c3d
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

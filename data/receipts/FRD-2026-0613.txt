@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0613
+  Victim ID       : 13
+  NID             : NID00086
+  Account Holder  : Monira Uddin
+  Account Number  : ACC00086
+  MFS Linked      : bKash-00086
+  Mobile          : +8801653109628
+
+  Amount Paid     : 478.09 BDT
+                    (0.004781 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:36
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x354829b7640555da9fc6d522570dab86acd9ed64d5284fc3166048e2a839d281
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

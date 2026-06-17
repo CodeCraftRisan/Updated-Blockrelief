@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0051
+  Victim ID       : 51
+  NID             : NID00076
+  Account Holder  : Rashida Sarker
+  Account Number  : ACC00076
+  MFS Linked      : bKash-00076
+  Mobile          : +8801766987271
+
+  Amount Paid     : 84.68 BDT
+                    (0.000847 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x4463e065b126733eae0c3f8d51f7bdeff462880cfabe1b9ba6f3d71de56550e5
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

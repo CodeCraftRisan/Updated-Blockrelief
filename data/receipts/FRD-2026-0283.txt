@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0283
+  Victim ID       : 83
+  NID             : NID00085
+  Account Holder  : Sumon Rahman
+  Account Number  : ACC00085
+  MFS Linked      : bKash-00085
+  Mobile          : +8801830088365
+
+  Amount Paid     : 1,039.12 BDT
+                    (0.010391 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:26
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x895dba2c8b06a0d2dc16c812e4ff1e51c6c2d3d571f84a434708baaae18c203e
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

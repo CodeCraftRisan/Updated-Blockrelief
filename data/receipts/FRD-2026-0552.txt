@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0552
+  Victim ID       : 52
+  NID             : NID00038
+  Account Holder  : Sohel Khatun
+  Account Number  : ACC00038
+  MFS Linked      : bKash-00038
+  Mobile          : +8801690497273
+
+  Amount Paid     : 258.71 BDT
+                    (0.002587 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x2121d2aee93e1884c2600956072de1956596a9ab2e764c1ff5b3985cc0b9427e
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

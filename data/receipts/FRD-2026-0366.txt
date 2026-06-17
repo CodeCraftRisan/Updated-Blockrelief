@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0366
+  Victim ID       : 66
+  NID             : NID00050
+  Account Holder  : Tariq Begum
+  Account Number  : ACC00050
+  MFS Linked      : bKash-00050
+  Mobile          : +8801684936358
+
+  Amount Paid     : 818.05 BDT
+                    (0.008181 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x7bc5a2f4b878728bf44838f84617da00b7a8df3d4698c4b0ad783cf32ca3241b
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

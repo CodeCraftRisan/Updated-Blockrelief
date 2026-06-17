@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0547
+  Victim ID       : 47
+  NID             : NID00030
+  Account Holder  : Nasrin Khatun
+  Account Number  : ACC00030
+  MFS Linked      : bKash-00030
+  Mobile          : +8801664564054
+
+  Amount Paid     : 292.68 BDT
+                    (0.002927 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x13a0caaf8ecba221d257c549c6a024558c370075c8e1b34b6c3fc81e55109bd5
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

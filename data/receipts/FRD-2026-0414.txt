@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0414
+  Victim ID       : 14
+  NID             : NID00066
+  Account Holder  : Abdul Mia
+  Account Number  : ACC00066
+  MFS Linked      : bKash-00066
+  Mobile          : +8801643978002
+
+  Amount Paid     : 983.99 BDT
+                    (0.009840 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:11
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xeae59cb43ca6e80756c213fd7c5854af62c3e26e00ea0f14391cb4c4f4943580
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,2965 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block-Relief — বন্যা ত্রাণ সহায়তা বিতরণ ব্যবস্থা</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #18263d;
+      --bg2: #20314d;
+      --bg3: #2a3c5f;
+      --bg4: #32466c;
+      --card: rgba(34, 50, 78, 0.92);
+      --card2: rgba(44, 63, 98, 0.95);
+      --border: rgba(147, 197, 253, 0.12);
+      --border2: rgba(147, 197, 253, 0.28);
+      --accent: #3b82f6;
+      --accent2: #93c5fd;
+      --teal: #14b8a6;
+      --teal2: #5eead4;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --green: #22c55e;
+      --text: #eef4ff;
+      --text2: #d2def3;
+      --text3: #96a9c8;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Sora', sans-serif;
+      --shadow: 0 18px 40px rgba(7, 12, 24, 0.22);
+    }
+
+    body {
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(45,212,191,0.10), transparent 24%),
+        linear-gradient(180deg, #1a2a43 0%, #1f3150 35%, #243a5d 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(147,197,253,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(147,197,253,0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(56,189,248,0.08), transparent 18%),
+        radial-gradient(circle at 80% 30%, rgba(45,212,191,0.07), transparent 16%),
+        radial-gradient(circle at 50% 80%, rgba(59,130,246,0.06), transparent 22%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(18px);
+    }
+
+    #root { position: relative; z-index: 1; }
+
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: rgba(147,197,253,0.35); border-radius: 4px; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes glow { 0%,100% { box-shadow: 0 0 8px rgba(96,165,250,0.18); } 50% { box-shadow: 0 0 24px rgba(96,165,250,0.30); } }
+
+    .fade-in { animation: fadeIn 0.5s ease forwards; }
+    .slide-in { animation: slideIn 0.4s ease forwards; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px; font-family: var(--sans);
+      font-size: 14px; font-weight: 500; cursor: pointer;
+      border: none; transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: #fff; }
+    .btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn-outline {
+      background: rgba(255,255,255,0.02); color: var(--accent2);
+      border: 1px solid var(--border2);
+      backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover { background: rgba(59,130,246,0.10); }
+    .btn-teal { background: linear-gradient(135deg, #0f9f90, #2dd4bf); color: #fff; }
+    .btn-teal:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn-danger { background: var(--red); color: #fff; }
+    .btn-danger:hover { filter: brightness(1.1); }
+    .btn-sm { padding: 7px 14px; font-size: 13px; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+    .btn-lang {
+      background: rgba(255,255,255,0.06);
+      color: var(--accent2);
+      border: 1px solid var(--border2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: var(--sans);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+    }
+    .btn-lang:hover {
+      background: rgba(147,197,253,0.14);
+      border-color: var(--accent2);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .card-glow { animation: glow 3s ease infinite; }
+
+    .stat-card {
+      background: linear-gradient(180deg, rgba(48,67,102,0.95), rgba(39,57,88,0.95));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+    }
+    .stat-label { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .stat-value { font-size: 26px; font-weight: 600; font-family: var(--mono); }
+    .stat-sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 13px; color: var(--text2); margin-bottom: 6px; font-weight: 500; }
+    .form-input {
+      width: 100%; padding: 11px 14px; background: rgba(26,39,63,0.72);
+      border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); font-family: var(--sans); font-size: 14px;
+      outline: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .form-input:focus { border-color: var(--accent2); background: rgba(31,47,75,0.92); }
+    .form-select {
+      width: 100%; padding: 10px 14px; background: var(--bg3);
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: var(--sans); font-size: 14px;
+      outline: none; cursor: pointer;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      padding: 10px 14px; text-align: left; font-size: 11px;
+      color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border); font-family: var(--mono);
+    }
+    td {
+      padding: 11px 14px; border-bottom: 1px solid var(--border);
+      color: var(--text2);
+    }
+    tr:hover td { background: rgba(147,197,253,0.05); }
+    tr:last-child td { border-bottom: none; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 500;
+    }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+    .badge-green { background: rgba(34,197,94,0.14); color: #86efac; }
+    .badge-green::before { background: #86efac; }
+    .badge-amber { background: rgba(245,158,11,0.14); color: #fde68a; }
+    .badge-amber::before { background: #fde68a; }
+    .badge-blue { background: rgba(59,130,246,0.14); color: #93c5fd; }
+    .badge-blue::before { background: #93c5fd; }
+    .badge-red { background: rgba(239,68,68,0.14); color: #fca5a5; }
+    .badge-red::before { background: #fca5a5; }
+
+    .progress-bar {
+      height: 10px; background: rgba(16,24,39,0.35);
+      border-radius: 999px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--teal));
+      border-radius: 999px; transition: width 1s ease;
+    }
+
+    .hash {
+      font-family: var(--mono); font-size: 11px; color: #bfd5f4;
+      background: rgba(18,28,47,0.55); padding: 6px 8px; border-radius: 8px;
+      word-break: break-all;
+      border: 1px solid rgba(147,197,253,0.08);
+    }
+
+    .navbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 32px; border-bottom: 1px solid var(--border);
+      background: rgba(20, 31, 50, 0.76); backdrop-filter: blur(16px);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .navbar-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: 18px; font-weight: 700; color: var(--text);
+    }
+    .navbar-brand span { color: var(--accent2); }
+
+    .layout { display: flex; min-height: calc(100vh - 65px); }
+    .sidebar {
+      width: 230px; min-width: 230px; background: rgba(24, 38, 61, 0.72);
+      border-right: 1px solid var(--border); padding: 24px 0;
+      position: sticky; top: 65px; height: calc(100vh - 65px);
+      overflow-y: auto; backdrop-filter: blur(12px);
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 20px; font-size: 14px; color: var(--text2);
+      cursor: pointer; transition: all 0.15s; border-left: 2px solid transparent;
+    }
+    .sidebar-item:hover { color: var(--text); background: rgba(147,197,253,0.06); }
+    .sidebar-item.active {
+      color: var(--accent2); border-left-color: var(--accent);
+      background: rgba(147,197,253,0.09);
+    }
+    .sidebar-icon { font-size: 16px; width: 20px; text-align: center; }
+    .main-content { flex: 1; padding: 32px; overflow-y: auto; }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      padding: 12px 20px; border-radius: 12px; font-size: 14px;
+      animation: fadeIn 0.3s ease; display: flex; align-items: center; gap: 8px;
+      max-width: 360px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+    .toast-success { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+    .toast-error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
+    .toast-info { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; }
+
+    .spinner {
+      width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: currentColor; border-radius: 50%;
+      animation: spin 0.7s linear infinite; display: inline-block;
+    }
+
+    .landing { min-height: 100vh; display: flex; flex-direction: column; }
+    .hero {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; padding: 88px 24px 70px;
+    }
+    .hero-title {
+      font-family: var(--mono); font-size: clamp(34px,5.8vw,66px);
+      font-weight: 700; line-height: 1.14; margin-bottom: 16px;
+      max-width: 980px;
+    }
+    .hero-title span { color: var(--accent2); }
+    .hero-sub {
+      font-size: 16px; color: var(--text2); max-width: 720px;
+      line-height: 1.85; margin-bottom: 34px;
+    }
+
+    .hero-note {
+      max-width: 860px;
+      padding: 16px 18px;
+      border: 1px solid rgba(147,197,253,0.18);
+      background: rgba(27, 41, 66, 0.52);
+      border-radius: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+      font-size: 13px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .portal-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; max-width: 860px; width: 100%; margin: 0 auto;
+    }
+    .portal-card {
+      background: linear-gradient(180deg, rgba(34,50,78,0.95), rgba(30,44,69,0.96));
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 22px; cursor: pointer;
+      transition: all 0.25s; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .portal-card:hover {
+      border-color: var(--border2); transform: translateY(-4px);
+      background: linear-gradient(180deg, rgba(42,60,93,0.98), rgba(34,50,78,0.98));
+    }
+    .portal-icon { font-size: 34px; margin-bottom: 12px; }
+    .portal-title { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+    .portal-desc { font-size: 12px; color: var(--text3); line-height: 1.65; }
+
+    .section-header { margin-bottom: 24px; }
+    .section-title { font-size: 21px; font-weight: 600; margin-bottom: 6px; }
+    .section-sub { font-size: 13px; color: var(--text3); line-height: 1.6; }
+
+    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+    .flex { display: flex; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; }
+    .flex-center { display: flex; align-items: center; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .mt-8 { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-24 { margin-top: 24px; }
+    .mb-8 { margin-bottom: 8px; }
+    .mb-16 { margin-bottom: 16px; }
+    .mb-24 { margin-bottom: 24px; }
+    .text-mono { font-family: var(--mono); }
+    .text-sm { font-size: 13px; }
+    .text-xs { font-size: 11px; }
+    .text-accent { color: var(--accent2); }
+    .text-teal { color: var(--teal2); }
+    .text-amber { color: #fde68a; }
+    .text-red { color: #fca5a5; }
+    .text-green { color: #86efac; }
+    .text-muted { color: var(--text2); }
+    .text-dim { color: var(--text3); }
+    .font-600 { font-weight: 600; }
+
+    .alert {
+      padding: 12px 16px; border-radius: 10px; font-size: 13px; line-height: 1.6;
+      backdrop-filter: blur(8px);
+    }
+    .alert-info { background: rgba(59,130,246,0.10); border: 1px solid rgba(59,130,246,0.18); color: #bfdbfe; }
+    .alert-warning { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.20); color: #fde68a; }
+    .alert-success { background: rgba(34,197,94,0.10); border: 1px solid rgba(34,197,94,0.20); color: #bbf7d0; }
+    .alert-danger { background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.20); color: #fecaca; }
+
+    .hero-mini-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto 28px;
+    }
+
+    .hero-mini-stat {
+      background: rgba(27,41,66,0.58);
+      border: 1px solid rgba(147,197,253,0.14);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-mini-stat .num {
+      font-family: var(--mono);
+      font-size: 22px;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+
+    .hero-mini-stat .lbl {
+      font-size: 12px;
+      color: var(--text3);
+      line-height: 1.5;
+    }
+
+    .quote-strip {
+      max-width: 920px;
+      width: 100%;
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .quote-item {
+      background: rgba(24,36,58,0.52);
+      border: 1px solid rgba(147,197,253,0.12);
+      border-left: 4px solid rgba(147,197,253,0.50);
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #dce9fb;
+      line-height: 1.8;
+      text-align: left;
+      box-shadow: var(--shadow);
+    }
+
+    .quote-item small {
+      display: block;
+      margin-top: 8px;
+      color: var(--text3);
+      font-size: 11px;
+    }
+
+    @media (max-width: 768px) {
+      .portal-grid { grid-template-columns: 1fr; max-width: 340px; }
+      .sidebar { display: none; }
+      .navbar { padding: 12px 16px; }
+      .main-content { padding: 16px; }
+      .grid-3, .grid-4, .hero-mini-stats { grid-template-columns: 1fr 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .hero { padding: 60px 16px 50px; }
+    }
+
+    @media (max-width: 520px) {
+      .grid-3, .grid-4, .hero-mini-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, createContext, useContext } = React;
+
+// ============================================================
+//  TRANSLATIONS (bn = বাংলা, en = English)
+// ============================================================
+const TRANSLATIONS = {
+  bn: {
+    // --- Navbar ---
+    backToHome: '← মূল পাতায় ফিরুন',
+    langLabel: 'English',
+
+    // --- Landing ---
+    heroTagline: 'ব্লকচেইন • বাংলাদেশ • বন্যা সহায়তা',
+    heroTitle1: 'বন্যায় ক্ষতিগ্রস্ত মানুষের হাতে ',
+    heroHighlight: 'দ্রুত, স্বচ্ছ ও নিরাপদ',
+    heroTitle2: ' সহায়তা পৌঁছে দিন',
+    heroSub: 'সিলেট, সুনামগঞ্জ, কুড়িগ্রাম, জামালপুরসহ দেশের বিভিন্ন অঞ্চলে বন্যায় ক্ষতিগ্রস্ত পরিবারগুলো খাদ্য, বিশুদ্ধ পানি, ওষুধ ও জরুরি সহায়তার অপেক্ষায় থাকে। Block-Relief এমন একটি প্ল্যাটফর্ম, যেখানে অনুদান সংগ্রহ থেকে সহায়তা বিতরণ পর্যন্ত প্রতিটি ধাপ ট্র্যাকযোগ্য।',
+    heroNote: 'এই প্ল্যাটফর্মের উদ্দেশ্য হলো দুর্যোগের সময় সাহায্যের অর্থ যেন সঠিক মানুষের কাছে দ্রুত পৌঁছায়, আর দাতারা যেন জানতে পারেন তাদের সহায়তা বাস্তবে কোথায় ব্যবহৃত হলো। প্রযুক্তির সাথে মানবিকতা — এই দুইকে একসাথে এনে আমরা ত্রাণ ব্যবস্থাপনাকে আরও জবাবদিহিমূলক করতে চাই।',
+    donateNowBtn: 'আজই অনুদান করুন',
+    checkStatusBtn: 'আবেদনের অবস্থা দেখুন',
+    miniStat1Title: 'স্বচ্ছ',
+    miniStat1Desc: 'প্রতিটি অনুদান ও বিতরণ ব্লকচেইনে যাচাইযোগ্য',
+    miniStat2Title: 'দ্রুত',
+    miniStat2Desc: 'যাচাই শেষে প্রাপকের কাছে সহায়তা পৌঁছানোর প্রক্রিয়া সহজ',
+    miniStat3Title: 'নিরাপদ',
+    miniStat3Desc: 'তথ্য গোপনীয়তা ও ট্রেসেবল আর্থিক লেনদেন নিশ্চিত',
+    portalAdmin: 'প্রশাসক',
+    portalAdminDesc: 'ত্রাণ তহবিল, নিবন্ধিত সহায়তা প্রাপক, যাচাই ও বিতরণ কার্যক্রম পরিচালনা করুন',
+    portalDonor: 'দানকারী',
+    portalDonorDesc: 'স্বচ্ছ ও ট্র্যাকযোগ্য পদ্ধতিতে বন্যাকবলিত মানুষের জন্য অনুদান দিন',
+    portalVictim: 'সহায়তা প্রাপক',
+    portalVictimDesc: 'আপনার আবেদন, যাচাই অবস্থা ও সম্ভাব্য সহায়তার তথ্য দেখুন',
+    whereHelp: 'এই সহায়তা কোথায় কাজে লাগে',
+    whereHelpDesc: 'আপনার অনুদানের মাধ্যমে ক্ষতিগ্রস্ত পরিবারগুলোর কাছে শুকনা খাবার, বিশুদ্ধ পানির ট্যাবলেট, ওআরএস, প্রাথমিক চিকিৎসা সামগ্রী, নিরাপদ আশ্রয় ও জরুরি আর্থিক সহায়তা পৌঁছে দেওয়া সম্ভব হয়।',
+    ourGoal: 'আমাদের লক্ষ্য',
+    ourGoalDesc: 'দুর্যোগের সময় সহায়তা বণ্টনে স্বচ্ছতা, ন্যায্যতা ও জবাবদিহি নিশ্চিত করা — যাতে সবচেয়ে বেশি ক্ষতিগ্রস্ত পরিবার অগ্রাধিকার ভিত্তিতে সহায়তা পায় এবং দাতারা পুরো প্রক্রিয়াটি দেখতে পারেন।',
+    whyImportant: 'কেন এই প্ল্যাটফর্ম গুরুত্বপূর্ণ',
+    whyList: ['ক্ষতিগ্রস্ত মানুষের তথ্য যাচাই করে সহায়তা প্রদান', 'ঝুঁকি ও প্রয়োজনভিত্তিক তহবিল বণ্টন', 'অতিরিক্ত অর্থ কোথায় যাচ্ছে তা ট্র্যাক করা যায়', 'দানকারীর আস্থা ও স্বচ্ছতা বৃদ্ধি পায়', 'দুর্যোগকালীন সহায়তা ব্যবস্থায় জবাবদিহি তৈরি হয়'],
+    fieldReality: 'মাঠপর্যায়ের বাস্তবতা',
+    fieldRealityDesc: 'বন্যার সময় রাস্তাঘাট বিচ্ছিন্ন হয়ে যায়, আশ্রয়কেন্দ্র দূরে থাকে, পানিবাহিত রোগ ছড়ায়, আয়ের উৎস বন্ধ হয়ে যায়, আর পরিবারগুলো খাবার ও নিরাপত্তাহীনতায় ভোগে। তাই সময়মতো ও সঠিকভাবে সহায়তা পৌঁছে দেওয়া অত্যন্ত জরুরি।',
+    quote1: '"একটি ছোট অনুদানও কোনো এক পরিবারের জন্য একবেলার খাবার, ওষুধ কিংবা নিরাপদ পানির ব্যবস্থা করে দিতে পারে।"',
+    quote1sub: 'মানবিক সহায়তা শুধু অর্থ নয়, এটি আশারও নাম',
+    quote2: '"দুর্যোগের সময় সবার আগে প্রয়োজন দ্রুত সহায়তা, আর তার ঠিক পরেই প্রয়োজন স্বচ্ছতা।"',
+    quote2sub: 'যাতে মানুষ জানে সাহায্য সত্যিই মানুষের কাছেই পৌঁছাচ্ছে',
+    quote3: '"বিপদের দিনে পাশে দাঁড়ানোই মানুষের সবচেয়ে বড় পরিচয়।"',
+    quote3sub: 'আজকের সহায়তা আগামীকালের পুনর্গঠনের শক্তি',
+
+    // --- Admin ---
+    adminPanel: 'প্রশাসক প্যানেল',
+    adminPanelDesc: 'নিয়ন্ত্রণ প্যানেলে প্রবেশ করতে আপনার প্রশাসক MetaMask ওয়ালেটটি সংযুক্ত করুন।',
+    connectMM: 'MetaMask সংযুক্ত করুন',
+    walletConnected: 'ওয়ালেট সংযুক্ত হয়েছে',
+    adminControl: 'প্রশাসক নিয়ন্ত্রণ',
+    walletLabel: 'ওয়ালেট',
+    adminVerified: 'প্রশাসক অনুমোদিত',
+    notAdmin: 'প্রশাসক নয়',
+    notAdminWarn: '⚠ সংযুক্ত ওয়ালেটটি কনট্রাক্টের প্রশাসক নয়। কিছু ফাংশন কাজ নাও করতে পারে।',
+    sideOverview: 'সারসংক্ষেপ',
+    sideVictims: 'সহায়তা প্রাপক',
+    sideDonors: 'দানকারীরা',
+    sideDistribute: 'বিতরণ',
+    sideSensitivity: 'সংবেদনশীলতা',
+    sideSms: 'এসএমএস লগ',
+    sideAnalytics: 'বিশ্লেষণ',
+    systemSummary: 'সিস্টেমের সারসংক্ষেপ',
+    systemSummaryDesc: 'ব্লকচেইন ও ব্যাকএন্ড থেকে তাৎক্ষণিক তথ্য',
+    contractBalance: 'চুক্তির বর্তমান ব্যালেন্স',
+    totalDonated: 'মোট অনুদান',
+    cumFund: 'সঞ্চিত তহবিল',
+    registeredRecipients: 'নিবন্ধিত প্রাপক',
+    onBlockchain: 'ব্লকচেইনে',
+    fundProgress: 'লক্ষ্যমাত্রা অগ্রগতি',
+    vsTarget: 'টার্গেটের তুলনায়',
+    fundCollectionStatus: 'তহবিল সংগ্রহের অবস্থা',
+    ethRaised: 'ETH সংগ্রহ হয়েছে',
+    targetLabel: 'লক্ষ্যমাত্রা',
+    systemStatus: 'সিস্টেম অবস্থা',
+    distribution: 'বিতরণ',
+    completed: 'সম্পন্ন',
+    pending: 'অপেক্ষমাণ',
+    verificationRate: 'যাচাই হার',
+    fraudDetected: 'প্রতারণা শনাক্ত',
+    entries: 'টি এন্ট্রি',
+    totalSubmissions: 'মোট জমা',
+    verifiedRecipients: 'যাচাইকৃত প্রাপক',
+    rejectedApps: 'প্রত্যাখ্যাত আবেদন',
+    avgRiskScore: 'গড় ঝুঁকি স্কোর',
+    recipientList: 'নিবন্ধিত সহায়তা প্রাপকের তালিকা',
+    recipientListDesc: 'প্রথম ২০টি অন-চেইন রেকর্ড দেখানো হচ্ছে (SHA-256 দ্বারা গোপনীয়তা সুরক্ষিত)',
+    idLabel: 'আইডি',
+    identityHash: 'পরিচয় হ্যাশ',
+    ahpScore: 'AHP স্কোর',
+    reliefETH: 'সহায়তা (ETH)',
+    reliefBDT: 'সহায়তা (BDT)',
+    walletAddr: 'ওয়ালেট',
+    statusLabel: 'অবস্থা',
+    paidLabel: 'পাঠানো হয়েছে',
+    noRecipientsYet: 'এখনও কোনো সহায়তা প্রাপক নিবন্ধিত হয়নি',
+    donorList: 'দানকারীদের তালিকা',
+    donorBlockchainSuffix: ' জন দাতা (ব্লকচেইন ডেটা)',
+    donorNo: 'দাতা নম্বর',
+    walletAddress: 'ওয়ালেট ঠিকানা',
+    amountETH: 'পরিমাণ (ETH)',
+    amountBDT: 'পরিমাণ (BDT)',
+    donatedAt: 'অনুদানের সময়',
+    noDonorsYet: 'এখনও কোনো দাতা নেই',
+    fundDistribution: 'তহবিল বিতরণ',
+    fundDistDesc: 'স্মার্ট কনট্রাক্টের মাধ্যমে সহায়তা বিতরণ শুরু করুন',
+    triggerDist: '⚡ স্বয়ংক্রিয় বিতরণ চালু করুন',
+    distLogic: 'বিতরণ নীতি:',
+    distLogicDesc: '১০০% তহবিল → সহায়তা প্রাপকদের মধ্যে Fuzzy AHP স্কোরের ভিত্তিতে',
+    distAlreadyDone: 'বিতরণ ইতোমধ্যে সম্পন্ন হয়েছে',
+    targetNotReached: 'লক্ষ্যমাত্রা এখনো পূর্ণ হয়নি',
+    distMayFail: '। বিতরণ ব্যর্থ হতে পারে।',
+    distributing: 'বিতরণ চলছে...',
+    startDistribution: '🚀 বিতরণ শুরু করুন',
+    updateTarget: '🎯 লক্ষ্যমাত্রা হালনাগাদ',
+    howToSet: 'কীভাবে নির্ধারণ করবেন?',
+    howToSetDesc: 'সূত্র: মোট BDT প্রয়োজন ÷ ETH/BDT রেট\nআপনার কনফিগে: ১০,০০,০০০ BDT ÷ ১,০০,০০০ = 10 ETH\nGanache টেস্টের জন্য: 0.1 ETH ব্যবহার করতে পারেন',
+    newTargetETH: 'নতুন লক্ষ্য (ETH)',
+    newTargetPlaceholder: 'যেমন: 0.1 অথবা 10',
+    saveNewTarget: 'নতুন লক্ষ্য সংরক্ষণ করুন',
+    currentTarget: 'বর্তমান লক্ষ্য',
+    reservePool: '🛟 রিজার্ভ তহবিল',
+    reserveDesc: 'লক্ষ্যমাত্রা পূরণের পর অতিরিক্ত অনুদান reserve pool-এ সংরক্ষিত হয়। এই অর্থ অতিরিক্ত ত্রাণ ব্যয়, মাঠপর্যায়ের পরিচালনা বা সহযোগী সংস্থার কাজে ব্যবহৃত হতে পারে।',
+    currentReserve: 'বর্তমান রিজার্ভ',
+    withdrawing: 'উত্তোলন চলছে...',
+    withdrawReserve: '🧾 রিজার্ভ উত্তোলন করুন',
+    withdrawNote: 'উত্তোলিত অর্থ সংযুক্ত প্রশাসক ওয়ালেটে যাবে।',
+
+    // --- Sensitivity ---
+    sensitivityTitle: 'সংবেদনশীলতা বিশ্লেষণ',
+    sensitivityDesc: 'প্রতিটি মানদণ্ডের ওজন পরিবর্তন করলে স্কোর কীভাবে বদলায় তা দেখুন',
+    sensitivityInfo: 'গবেষণা ও নীতিগত যাচাইয়ের জন্য এই অংশটি গুরুত্বপূর্ণ। কোন মানদণ্ড বেশি গুরুত্ব পেলে প্রাপকের অগ্রাধিকার কতটা বদলায় তা এখানে দেখা যায়।',
+    adjustWeights: 'ওজন সমন্বয়',
+    resetBtn: 'রিসেট',
+    povertyIndex: 'দারিদ্র্য সূচক',
+    waterDepth: 'পানির গভীরতা',
+    shelterDist: 'আশ্রয় দূরত্ব',
+    houseType: 'ঘরের ধরন',
+    floodDuration: 'বন্যার সময়কাল',
+    totalLabel: 'মোট',
+    approx100: '✓ (প্রায় ১০০%)',
+    adjustTo100: '⚠ প্রায় ১০০% করুন',
+    runAnalysis: '🔬 বিশ্লেষণ চালান',
+    resultsLabel: 'ফলাফল',
+    adjustAndRun: 'ওজন সমন্বয় করে "বিশ্লেষণ চালান" চাপুন',
+    recipientLabel: 'প্রাপক',
+    prevScore: 'আগের স্কোর',
+    newScore: 'নতুন স্কোর',
+    changeLabel: 'পরিবর্তন',
+
+    // --- SMS Log ---
+    smsLogTitle: 'এসএমএস লগ',
+    smsLogDesc: 'সকল নোটিফিকেশন প্রচেষ্টা — বাস্তব ও সিমুলেটেড',
+    refreshLoad: '🔄 নতুন করে লোড করুন',
+    apiError: '⚠ Flask API থেকে ডেটা আনা যাচ্ছে না। এখন নমুনা ডেটা দেখানো হচ্ছে।',
+    realSmsSent: 'বাস্তবে পাঠানো',
+    simulated: 'সিমুলেটেড',
+    failedError: 'ব্যর্থ / ত্রুটি',
+    filterLabel: 'ফিল্টার',
+    allLabel: 'সব',
+    sentLabel: 'পাঠানো',
+    failedLabel: 'ব্যর্থ',
+    showingLast50: 'সর্বশেষ ৫০টি এন্ট্রি দেখানো হচ্ছে',
+    loadingSms: 'এসএমএস লগ লোড হচ্ছে...',
+    timeLabel: 'সময়',
+    mobileLabel: 'মোবাইল',
+    msgPreview: 'বার্তার অংশ',
+    noSmsLog: '📭 এখনো কোনো এসএমএস লগ নেই। event_listener.py চালালে লগ জমা হবে।',
+    noFilterEntry: 'এই ফিল্টারে কোনো এন্ট্রি পাওয়া যায়নি।',
+
+    // --- Analytics ---
+    analyticsTitle: 'বিশ্লেষণ ও পরিসংখ্যান',
+    analyticsDesc: 'তহবিল বণ্টন ও যাচাই প্রক্রিয়ার সার্বিক চিত্র',
+    fundSplit: 'তহবিল বণ্টনের অনুপাত',
+    recipients100: 'সহায়তা প্রাপক ১০০%',
+    verificationPipeline: 'যাচাই ধাপের চিত্র',
+    fuzzyWeights: 'Fuzzy AHP ওজন',
+    submittedLabel: 'জমা',
+    verifiedLabel: 'যাচাইকৃত',
+    rejectedLabel: 'প্রত্যাখ্যাত',
+    registeredLabel: 'নিবন্ধিত',
+
+    // --- Donor ---
+    donorPortal: 'দানকারী পোর্টাল',
+    donorPortalDesc: 'আপনার MetaMask ওয়ালেট সংযুক্ত করে অনুদান দিন এবং আপনার সহায়তা কোথায় ব্যবহৃত হচ্ছে তা দেখুন।',
+    connectWallet: 'ওয়ালেট সংযুক্ত করুন',
+    donorPanel: 'দানকারী প্যানেল',
+    sideDonate: 'অনুদান',
+    sideTrack: 'তহবিল ট্র্যাকিং',
+    sideImpact: 'আমার প্রভাব',
+    myWallet: 'আমার ওয়ালেট',
+    donorId: 'দাতা',
+    makeDonation: 'অনুদান করুন',
+    donationDesc: 'স্বচ্ছ, যাচাইযোগ্য এবং ব্লকচেইনে সংরক্ষিত সহায়তা',
+    donateETH: '💎 ETH অনুদান',
+    distCompletedNoDonation: 'বিতরণ সম্পন্ন হয়েছে। নতুন অনুদান গ্রহণ করা হচ্ছে না।',
+    amountLabel: 'পরিমাণ (ETH)',
+    amountPlaceholder: 'যেমন: 0.1',
+    approxBDT: 'প্রায়',
+    donating: 'অনুদান পাঠানো হচ্ছে...',
+    donateNowAction: '💎 এখনই অনুদান করুন',
+    targetReachedReserve: '🎯 লক্ষ্য পূরণ হয়েছে — অতিরিক্ত অনুদান এখন reserve pool-এ সংরক্ষিত হবে',
+    donationGoesToFund: 'আপনার অনুদান ক্ষতিগ্রস্ত মানুষের সহায়তা তহবিলে যুক্ত হবে। অতিরিক্ত অংশ reserve pool-এ রাখা হবে।',
+    fundCurrentStatus: '📊 তহবিলের বর্তমান অবস্থা',
+    totalRaised: 'মোট সংগৃহীত',
+    reserveFund: 'রিজার্ভ তহবিল',
+    totalDonors: 'মোট দাতা',
+    registeredRecip: 'নিবন্ধিত প্রাপক',
+    distCompleted: 'বিতরণ সম্পন্ন',
+    collecting: 'সংগ্রহ চলছে',
+    myTransactions: 'আমার লেনদেনসমূহ',
+    txHash: 'TX হ্যাশ',
+    amountCol: 'পরিমাণ',
+    blockCol: 'ব্লক',
+    fundFlow: 'তহবিলের চলমান পথ',
+    fundFlowDesc: 'আপনার অনুদান কীভাবে ব্যবস্থার ভেতর দিয়ে যাচ্ছে তা দেখুন',
+    fundFlowTitle: 'তহবিল প্রবাহ',
+    donationPool: 'অনুদান তহবিল',
+    victimAllocation: 'সহায়তা বণ্টন',
+    contractVerify: 'চুক্তি যাচাই তথ্য',
+    contractVerifyInfo: 'নিচের কনট্রাক্ট ঠিকানাটি Ganache বা অন্য কোনো টুলে যাচাই করা যেতে পারে।',
+    contractAddr: 'কনট্রাক্ট ঠিকানা',
+    networkLabel: 'নেটওয়ার্ক',
+    distStatusLabel: 'বিতরণের অবস্থা',
+    myImpact: 'আমার সহায়তার প্রভাব',
+    myImpactDesc: 'আমার অবদান বন্যা সহায়তায় কী প্রভাব ফেলেছে',
+    noDonationFound: 'এই ওয়ালেটের জন্য কোনো অনুদান পাওয়া যায়নি।',
+    goToDonate: 'অনুদান দিতে "অনুদান" ট্যাবে যান।',
+    myContribution: 'আমার অনুদান',
+    totalDonatedLabel: 'মোট অনুদান',
+    inBDT: 'বাংলাদেশি টাকায়',
+    donorIdLabel: 'দাতা আইডি',
+    donatedAtLabel: 'অনুদানের সময়',
+    mySharePool: 'মোট তহবিলে আমার অংশ',
+    contributionPct: 'অবদানের শতকরা হার',
+    helpedPeople: 'সম্ভাব্য সহায়তাপ্রাপ্ত মানুষ',
+    peopleSuffix: ' জন',
+    paidList: 'সহায়তা বিতরণ — প্রদত্ত তালিকা',
+    paidListDesc: 'ব্লকচেইনে সংরক্ষিত তথ্য অনুযায়ী কাদের কাছে সহায়তা গেছে',
+    recipientId: 'প্রাপক আইডি',
+    showingOfSuffix: ' জনের মধ্যে প্রথম ২০ জন দেখানো হচ্ছে',
+    loadingPaid: 'ব্লকচেইন থেকে প্রদত্ত সহায়তা তালিকা লোড হচ্ছে...',
+    distNotTriggered: 'প্রশাসক এখনো বিতরণ শুরু করেননি। বিতরণ সম্পন্ন হলে এখানে তালিকা দেখা যাবে।',
+
+    // --- Victim ---
+    victimPortalTitle: 'সহায়তা প্রাপকের তথ্যকেন্দ্র',
+    victimPortalDesc: 'আপনার আবেদন, যাচাই ও সম্ভাব্য সহায়তার অবস্থা দেখুন।',
+    checkStatusTab: '🔍 আবেদনের অবস্থা',
+    nidLabel: '🪪 জাতীয় পরিচয়পত্র নম্বর (NID)',
+    nidPlaceholder: 'যেমন: NID00091',
+    phoneLabel: '📱 মোবাইল নম্বর (ঐচ্ছিক)',
+    phonePlaceholder: 'যেমন: +8801XXXXXXXXX',
+    searching: 'খোঁজা হচ্ছে...',
+    checkStatusAction: '🔍 অবস্থা দেখুন',
+    notFound: 'তথ্য পাওয়া যায়নি',
+    notFoundDesc: 'এই NID আমাদের সিস্টেমে পাওয়া যায়নি। আপনি হয়তো এখনো নিবন্ধিত হননি, অথবা আবেদনটি যাচাই সম্পন্ন হয়নি। অনুগ্রহ করে নিকটস্থ সহায়তা কেন্দ্রের সঙ্গে যোগাযোগ করুন।',
+    appStages: 'আবেদনের ধাপসমূহ',
+    stagePending: 'আবেদন গৃহীত',
+    stageVerified: 'যাচাই সম্পন্ন',
+    stageApproved: 'অনুমোদিত',
+    stageDisbursed: 'সহায়তা পাঠানো',
+    stageRejected: 'বাতিল',
+    applicantInfo: 'আবেদনকারীর তথ্য',
+    nameLabel: 'নাম',
+    upazilaLabel: 'উপজেলা',
+    mfsAccount: 'MFS অ্যাকাউন্ট',
+    houseTypeLabel: 'ঘরের ধরন',
+    povertyIdx: 'দারিদ্র্য সূচক',
+    floodInfo: 'বন্যা পরিস্থিতির তথ্য',
+    waterDepthFt: 'পানির গভীরতা',
+    durationDays: 'বন্যার সময়কাল',
+    distanceKm: 'আশ্রয় দূরত্ব',
+    daysSuffix: ' দিন',
+    reliefAllocation: 'সম্ভাব্য সহায়তা বরাদ্দ',
+    vulnScore: 'ঝুঁকি স্কোর',
+    vulnCalc: 'Fuzzy AHP দ্বারা গণনা (০-১০০)',
+    yourAllocation: 'আপনার সম্ভাব্য সহায়তা',
+    vsEqualShare: 'সমান ভাগ হলে',
+    vulnExplain: 'ঝুঁকি স্কোর যত বেশি, সহায়তার অগ্রাধিকার তত বেশি। এই স্কোর পানির গভীরতা, দারিদ্র্য, ঘরের ধরন, বন্যার সময়কাল এবং আশ্রয়কেন্দ্রের দূরত্বের ওপর ভিত্তি করে নির্ধারিত হয়।',
+    paymentReceipt: '🧾 সহায়তা গ্রহণের রসিদ',
+    receiptId: 'রসিদ নম্বর',
+    txHashLabel: 'লেনদেন হ্যাশ',
+    paymentConfirmed: 'সহায়তা নিশ্চিত হয়েছে',
+
+    // --- Toast Messages ---
+    enterNid: 'অনুগ্রহ করে আপনার NID লিখুন',
+    distTxSent: 'বিতরণ লেনদেন পাঠানো হয়েছে...',
+    distSuccess: '✓ সকল তহবিল সফলভাবে বিতরণ হয়েছে',
+    targetUpdating: 'লক্ষ্যমাত্রা আপডেট করা হচ্ছে...',
+    targetUpdated: '✓ নতুন লক্ষ্যমাত্রা সংরক্ষণ হয়েছে',
+    reserveTxSent: 'রিজার্ভ উত্তোলনের লেনদেন পাঠানো হয়েছে...',
+    reserveWithdrawn: '✓ রিজার্ভ তহবিল প্রশাসকের ওয়ালেটে পাঠানো হয়েছে',
+    donationTxSent: 'অনুদানের লেনদেন পাঠানো হয়েছে...',
+    donatedSuccessSuffix: ' ETH সফলভাবে অনুদান করা হয়েছে',
+    dataLoadError: 'ডেটা লোড করতে সমস্যা হয়েছে: ',
+    mmNotFound: 'MetaMask পাওয়া যায়নি। অনুগ্রহ করে MetaMask ইনস্টল করুন।',
+  },
+
+  en: {
+    backToHome: '← Back to Home',
+    langLabel: 'বাংলা',
+    heroTagline: 'BLOCKCHAIN • BANGLADESH • FLOOD RELIEF',
+    heroTitle1: 'Deliver ',
+    heroHighlight: 'Fast, Transparent & Secure',
+    heroTitle2: ' Aid to Flood Victims',
+    heroSub: 'Families in Sylhet, Sunamganj, Kurigram, Jamalpur and other flood-affected regions urgently need food, clean water, medicine and emergency aid. Block-Relief is a platform where every step—from donation to distribution—is trackable.',
+    heroNote: 'Our goal is to ensure that disaster relief funds reach the right people quickly, and donors can see exactly where their support is used. By combining technology with humanity, we aim to make relief management more accountable.',
+    donateNowBtn: 'Donate Now',
+    checkStatusBtn: 'Check Application Status',
+    miniStat1Title: 'Transparent',
+    miniStat1Desc: 'Every donation and distribution is verifiable on blockchain',
+    miniStat2Title: 'Fast',
+    miniStat2Desc: 'Simplified process to deliver aid after verification',
+    miniStat3Title: 'Secure',
+    miniStat3Desc: 'Data privacy and traceable financial transactions ensured',
+    portalAdmin: 'Admin',
+    portalAdminDesc: 'Manage relief fund, registered recipients, verification & distribution operations',
+    portalDonor: 'Donor',
+    portalDonorDesc: 'Donate to flood-affected people through a transparent & trackable method',
+    portalVictim: 'Recipient',
+    portalVictimDesc: 'View your application, verification status & expected relief information',
+    whereHelp: 'Where Your Help Goes',
+    whereHelpDesc: 'Your donation helps deliver dry food, water purification tablets, ORS, first aid supplies, safe shelter and emergency financial aid to affected families.',
+    ourGoal: 'Our Mission',
+    ourGoalDesc: 'Ensure transparency, fairness & accountability in disaster relief distribution — so the most affected families receive priority, and donors can monitor the entire process.',
+    whyImportant: 'Why This Platform Matters',
+    whyList: ['Verified beneficiary data before distributing aid', 'Need-based and risk-proportional fund allocation', 'Track where excess funds are going', 'Build donor trust through full transparency', 'Create accountability in disaster relief systems'],
+    fieldReality: 'Ground-Level Reality',
+    fieldRealityDesc: 'During floods, roads get cut off, shelters are far away, waterborne diseases spread, income sources stop, and families suffer from food and safety insecurity. Timely and accurate aid delivery is absolutely critical.',
+    quote1: '"Even a small donation can provide one meal, medicine, or safe drinking water for a family."',
+    quote1sub: 'Humanitarian aid is not just money — it is also hope',
+    quote2: '"In times of disaster, what is needed first is quick help — and right after, transparency."',
+    quote2sub: 'So people know the help is actually reaching those in need',
+    quote3: '"Standing beside someone in their darkest hour is the truest mark of humanity."',
+    quote3sub: "Today's aid is tomorrow's strength for rebuilding",
+    adminPanel: 'Admin Panel',
+    adminPanelDesc: 'Connect your admin MetaMask wallet to access the control panel.',
+    connectMM: 'Connect MetaMask',
+    walletConnected: 'Wallet connected',
+    adminControl: 'Admin Control',
+    walletLabel: 'Wallet',
+    adminVerified: 'Admin Verified',
+    notAdmin: 'Not Admin',
+    notAdminWarn: '⚠ Connected wallet is not the contract admin. Some functions may fail.',
+    sideOverview: 'Overview',
+    sideVictims: 'Recipients',
+    sideDonors: 'Donors',
+    sideDistribute: 'Distribute',
+    sideSensitivity: 'Sensitivity',
+    sideSms: 'SMS Log',
+    sideAnalytics: 'Analytics',
+    systemSummary: 'System Summary',
+    systemSummaryDesc: 'Real-time data from blockchain & backend',
+    contractBalance: 'Contract Balance',
+    totalDonated: 'Total Donated',
+    cumFund: 'Cumulative',
+    registeredRecipients: 'Registered Recipients',
+    onBlockchain: 'On Blockchain',
+    fundProgress: 'Fund Progress',
+    vsTarget: 'of target',
+    fundCollectionStatus: 'Fund Collection Status',
+    ethRaised: 'ETH raised',
+    targetLabel: 'Target',
+    systemStatus: 'System Status',
+    distribution: 'Distribution',
+    completed: 'Completed',
+    pending: 'Pending',
+    verificationRate: 'Verification Rate',
+    fraudDetected: 'Fraud Detected',
+    entries: ' entries',
+    totalSubmissions: 'Total Submissions',
+    verifiedRecipients: 'Verified Recipients',
+    rejectedApps: 'Rejected Applications',
+    avgRiskScore: 'Avg. Risk Score',
+    recipientList: 'Registered Recipients List',
+    recipientListDesc: 'Showing first 20 on-chain records (SHA-256 privacy protected)',
+    idLabel: 'ID',
+    identityHash: 'Identity Hash',
+    ahpScore: 'AHP Score',
+    reliefETH: 'Relief (ETH)',
+    reliefBDT: 'Relief (BDT)',
+    walletAddr: 'Wallet',
+    statusLabel: 'Status',
+    paidLabel: 'Paid',
+    noRecipientsYet: 'No recipients registered yet',
+    donorList: 'Donor List',
+    donorBlockchainSuffix: ' donors (blockchain data)',
+    donorNo: 'Donor #',
+    walletAddress: 'Wallet Address',
+    amountETH: 'Amount (ETH)',
+    amountBDT: 'Amount (BDT)',
+    donatedAt: 'Donated At',
+    noDonorsYet: 'No donors yet',
+    fundDistribution: 'Fund Distribution',
+    fundDistDesc: 'Start distributing aid via smart contract',
+    triggerDist: '⚡ Trigger Auto-Distribution',
+    distLogic: 'Distribution Logic:',
+    distLogicDesc: '100% fund → Recipients based on Fuzzy AHP score',
+    distAlreadyDone: 'Distribution already completed',
+    targetNotReached: 'Target not reached yet',
+    distMayFail: '. Distribution may fail.',
+    distributing: 'Distributing...',
+    startDistribution: '🚀 Start Distribution',
+    updateTarget: '🎯 Update Target',
+    howToSet: 'How to set?',
+    howToSetDesc: 'Formula: Total BDT needed ÷ ETH/BDT rate\nConfig: 10,00,000 BDT ÷ 1,00,000 = 10 ETH\nFor Ganache testing: use 0.1 ETH',
+    newTargetETH: 'New Target (ETH)',
+    newTargetPlaceholder: 'e.g. 0.1 or 10',
+    saveNewTarget: 'Save New Target',
+    currentTarget: 'Current target',
+    reservePool: '🛟 Reserve Pool',
+    reserveDesc: 'After target is reached, extra donations go to the reserve pool. This can be used for additional relief expenses, field operations or partner organizations.',
+    currentReserve: 'Current reserve',
+    withdrawing: 'Withdrawing...',
+    withdrawReserve: '🧾 Withdraw Reserve',
+    withdrawNote: 'Withdrawn funds go to the connected admin wallet.',
+    sensitivityTitle: 'Sensitivity Analysis',
+    sensitivityDesc: 'See how scores change when criterion weights are adjusted',
+    sensitivityInfo: 'Important for research & policy validation. Shows how recipient priority changes based on criterion importance.',
+    adjustWeights: 'Adjust Weights',
+    resetBtn: 'Reset',
+    povertyIndex: 'Poverty Index',
+    waterDepth: 'Water Depth',
+    shelterDist: 'Shelter Distance',
+    houseType: 'House Type',
+    floodDuration: 'Flood Duration',
+    totalLabel: 'Total',
+    approx100: '✓ (~100%)',
+    adjustTo100: '⚠ Adjust to ~100%',
+    runAnalysis: '🔬 Run Analysis',
+    resultsLabel: 'Results',
+    adjustAndRun: 'Adjust weights and click "Run" to see impact',
+    recipientLabel: 'Recipient',
+    prevScore: 'Base Score',
+    newScore: 'New Score',
+    changeLabel: 'Change',
+    smsLogTitle: 'SMS Log',
+    smsLogDesc: 'All notification attempts — real & simulated',
+    refreshLoad: '🔄 Refresh',
+    apiError: '⚠ Cannot fetch from Flask API. Showing sample data.',
+    realSmsSent: 'Real SMS Sent',
+    simulated: 'Simulated',
+    failedError: 'Failed / Error',
+    filterLabel: 'Filter',
+    allLabel: 'All',
+    sentLabel: 'Sent',
+    failedLabel: 'Failed',
+    showingLast50: 'Showing last 50 entries',
+    loadingSms: 'Loading SMS logs...',
+    timeLabel: 'Time',
+    mobileLabel: 'Mobile',
+    msgPreview: 'Message Preview',
+    noSmsLog: '📭 No SMS logs yet. Run event_listener.py to generate logs.',
+    noFilterEntry: 'No entries found for this filter.',
+    analyticsTitle: 'Analytics & Statistics',
+    analyticsDesc: 'Overall picture of fund allocation & verification process',
+    fundSplit: 'Fund Split Ratio',
+    recipients100: 'Recipients 100%',
+    verificationPipeline: 'Verification Pipeline',
+    fuzzyWeights: 'Fuzzy AHP Weights',
+    submittedLabel: 'Submitted',
+    verifiedLabel: 'Verified',
+    rejectedLabel: 'Rejected',
+    registeredLabel: 'Registered',
+    donorPortal: 'Donor Portal',
+    donorPortalDesc: 'Connect your MetaMask wallet to donate ETH and track your impact on the ground.',
+    connectWallet: 'Connect Wallet',
+    donorPanel: 'Donor Panel',
+    sideDonate: 'Donate',
+    sideTrack: 'Track Fund',
+    sideImpact: 'My Impact',
+    myWallet: 'My Wallet',
+    donorId: 'Donor',
+    makeDonation: 'Make a Donation',
+    donationDesc: 'Transparent, verifiable and stored on blockchain',
+    donateETH: '💎 Donate ETH',
+    distCompletedNoDonation: 'Distribution completed. No more donations accepted.',
+    amountLabel: 'Amount (ETH)',
+    amountPlaceholder: 'e.g. 0.1',
+    approxBDT: 'Approx.',
+    donating: 'Donating...',
+    donateNowAction: '💎 Donate Now',
+    targetReachedReserve: '🎯 Target reached — extra donations go to reserve pool',
+    donationGoesToFund: 'Your donation goes to the victim relief fund. Excess goes to reserve pool.',
+    fundCurrentStatus: '📊 Current Fund Status',
+    totalRaised: 'Total Raised',
+    reserveFund: 'Reserve Fund',
+    totalDonors: 'Total Donors',
+    registeredRecip: 'Registered Recipients',
+    distCompleted: 'Distribution Completed',
+    collecting: 'Collecting',
+    myTransactions: 'My Transactions',
+    txHash: 'TX Hash',
+    amountCol: 'Amount',
+    blockCol: 'Block',
+    fundFlow: 'Fund Flow Tracking',
+    fundFlowDesc: 'See how your donation flows through the system',
+    fundFlowTitle: 'Fund Flow',
+    donationPool: 'Donation Pool',
+    victimAllocation: 'Victim Allocation',
+    contractVerify: 'Contract Verification',
+    contractVerifyInfo: 'Verify the contract address below on Ganache or any tool.',
+    contractAddr: 'Contract Address',
+    networkLabel: 'Network',
+    distStatusLabel: 'Distribution Status',
+    myImpact: 'My Impact',
+    myImpactDesc: 'How my contribution affected flood relief',
+    noDonationFound: 'No donation found for this wallet.',
+    goToDonate: 'Go to "Donate" tab to make your first donation.',
+    myContribution: 'My Contribution',
+    totalDonatedLabel: 'Total Donated',
+    inBDT: 'In BDT',
+    donorIdLabel: 'Donor ID',
+    donatedAtLabel: 'Donated At',
+    mySharePool: 'My Share of Pool',
+    contributionPct: 'Contribution %',
+    helpedPeople: 'Est. People Helped',
+    peopleSuffix: ' people',
+    paidList: 'Distribution — Paid Recipients',
+    paidListDesc: 'Based on blockchain data showing who received aid',
+    recipientId: 'Recipient ID',
+    showingOfSuffix: ' paid victims (showing first 20)',
+    loadingPaid: 'Loading paid recipients from blockchain...',
+    distNotTriggered: 'Distribution not yet triggered by admin. List will appear after distribution.',
+    victimPortalTitle: 'Recipient Information Center',
+    victimPortalDesc: 'Check your application, verification & expected aid status.',
+    checkStatusTab: '🔍 Check Status',
+    nidLabel: '🪪 National ID (NID)',
+    nidPlaceholder: 'e.g. NID00091',
+    phoneLabel: '📱 Phone Number (optional)',
+    phonePlaceholder: 'e.g. +8801XXXXXXXXX',
+    searching: 'Searching...',
+    checkStatusAction: '🔍 Check Status',
+    notFound: 'Not Found',
+    notFoundDesc: 'This NID was not found in our system. You may not be registered yet, or your application has not been verified. Please contact your nearest relief center.',
+    appStages: 'Application Stages',
+    stagePending: 'Received',
+    stageVerified: 'Verified',
+    stageApproved: 'Approved',
+    stageDisbursed: 'Disbursed',
+    stageRejected: 'Rejected',
+    applicantInfo: 'Applicant Information',
+    nameLabel: 'Name',
+    upazilaLabel: 'Upazila',
+    mfsAccount: 'MFS Account',
+    houseTypeLabel: 'House Type',
+    povertyIdx: 'Poverty Index',
+    floodInfo: 'Flood Situation Data',
+    waterDepthFt: 'Water Depth',
+    durationDays: 'Flood Duration',
+    distanceKm: 'Shelter Distance',
+    daysSuffix: ' days',
+    reliefAllocation: 'Expected Relief Allocation',
+    vulnScore: 'Vulnerability Score',
+    vulnCalc: 'Calculated via Fuzzy AHP (0-100)',
+    yourAllocation: 'Your Expected Aid',
+    vsEqualShare: 'Equal share would be',
+    vulnExplain: 'Higher vulnerability score means higher priority. This score is based on water depth, poverty, house type, flood duration and shelter distance.',
+    paymentReceipt: '🧾 Payment Receipt',
+    receiptId: 'Receipt ID',
+    txHashLabel: 'Transaction Hash',
+    paymentConfirmed: 'Payment Confirmed',
+    enterNid: 'Please enter your NID',
+    distTxSent: 'Distribution transaction sent...',
+    distSuccess: '✓ All funds distributed successfully',
+    targetUpdating: 'Updating target...',
+    targetUpdated: '✓ New target saved',
+    reserveTxSent: 'Reserve withdrawal transaction sent...',
+    reserveWithdrawn: '✓ Reserve funds sent to admin wallet',
+    donationTxSent: 'Donation transaction sent...',
+    donatedSuccessSuffix: ' ETH donated successfully',
+    dataLoadError: 'Error loading data: ',
+    mmNotFound: 'MetaMask not found. Please install MetaMask.',
+  }
+};
+
+// ============================================================
+//  LANGUAGE CONTEXT
+// ============================================================
+const LangContext = createContext();
+function useLang() {
+  return useContext(LangContext);
+}
+
+// ============================================================
+//  CONFIG
+// ============================================================
+const CONFIG = {
+  GANACHE_URL: "http://127.0.0.1:7545",
+  CHAIN_ID: 1337,
+  CONTRACT_ADDRESS: "0x12d63E12BF3bdAfb9D61c48126397DB253219f4D",
+  PYTHON_API: "http://127.0.0.1:5000",
+  ETH_TO_BDT: 100000,
+};
+
+// ============================================================
+//  ABI
+// ============================================================
+const ABI = [
+  {
+    "inputs": [{"internalType": "uint256","name": "targetFundInWei","type": "uint256"}],
+    "stateMutability": "nonpayable","type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{"indexed": false,"internalType": "uint256","name": "totalDistributed","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "recipients","type": "uint256"}],
+    "name": "AllFundsDistributed","type": "event"
+  },
+  {"inputs": [],"name": "autoDistribute","outputs": [],"stateMutability": "nonpayable","type": "function"},
+  {
+    "anonymous": false,
+    "inputs": [{"indexed": false,"internalType": "uint256","name": "fromId","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "toId","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "batchWeiPaid","type": "uint256"}],
+    "name": "BatchDistributed","type": "event"
+  },
+  {
+    "inputs": [{"internalType": "uint256","name": "fromIndex","type": "uint256"},{"internalType": "uint256","name": "toIndex","type": "uint256"}],
+    "name": "distributeBatch","outputs": [],"stateMutability": "nonpayable","type": "function"
+  },
+  {"inputs": [],"name": "donate","outputs": [],"stateMutability": "payable","type": "function"},
+  {
+    "anonymous": false,
+    "inputs": [{"indexed": true,"internalType": "address","name": "donor","type": "address"},{"indexed": false,"internalType": "uint256","name": "amount","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "ticketNumber","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "totalDonated","type": "uint256"}],
+    "name": "DonationReceived","type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{"indexed": true,"internalType": "uint256","name": "victimId","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "amount","type": "uint256"},{"indexed": false,"internalType": "address","name": "wallet","type": "address"}],
+    "name": "FundReleased","type": "event"
+  },
+  {
+    "inputs": [{"internalType": "bytes32","name": "identityHash","type": "bytes32"},{"internalType": "uint256","name": "score","type": "uint256"},{"internalType": "address","name": "wallet","type": "address"}],
+    "name": "registerVictim","outputs": [],"stateMutability": "nonpayable","type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{"indexed": true,"internalType": "address","name": "receiver","type": "address"},{"indexed": false,"internalType": "uint256","name": "amount","type": "uint256"}],
+    "name": "ReserveWithdrawn","type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{"indexed": false,"internalType": "uint256","name": "newTarget","type": "uint256"}],
+    "name": "TargetFundUpdated","type": "event"
+  },
+  {
+    "inputs": [{"internalType": "uint256","name": "newTargetInWei","type": "uint256"}],
+    "name": "updateTargetFund","outputs": [],"stateMutability": "nonpayable","type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{"indexed": true,"internalType": "uint256","name": "victimId","type": "uint256"},{"indexed": false,"internalType": "bytes32","name": "identityHash","type": "bytes32"},{"indexed": false,"internalType": "uint256","name": "score","type": "uint256"},{"indexed": false,"internalType": "address","name": "wallet","type": "address"}],
+    "name": "VictimRegistered","type": "event"
+  },
+  {
+    "inputs": [{"internalType": "address payable","name": "receiver","type": "address"}],
+    "name": "withdrawReserve","outputs": [],"stateMutability": "nonpayable","type": "function"
+  },
+  {"stateMutability": "payable","type": "receive"},
+  {"inputs": [],"name": "admin","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},
+  {"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "donorIndex","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [{"internalType": "uint256","name": "","type": "uint256"}],"name": "donors","outputs": [{"internalType": "address","name": "donorAddress","type": "address"},{"internalType": "uint256","name": "totalAmount","type": "uint256"},{"internalType": "uint256","name": "ticketNumber","type": "uint256"},{"internalType": "uint256","name": "donatedAt","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "getContractBalance","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "getDistributionProgress","outputs": [{"internalType": "uint256","name": "paidVictims","type": "uint256"},{"internalType": "uint256","name": "totalVictims","type": "uint256"},{"internalType": "uint256","name": "weiDistributed","type": "uint256"},{"internalType": "bool","name": "allDone","type": "bool"}],"stateMutability": "view","type": "function"},
+  {"inputs": [{"internalType": "uint256","name": "index","type": "uint256"}],"name": "getDonor","outputs": [{"internalType": "address","name": "donorAddress","type": "address"},{"internalType": "uint256","name": "totalAmount","type": "uint256"},{"internalType": "uint256","name": "ticketNumber","type": "uint256"},{"internalType": "uint256","name": "donatedAt","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "getDonorCount","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "getFundProgress","outputs": [{"internalType": "uint256","name": "collected","type": "uint256"},{"internalType": "uint256","name": "target","type": "uint256"},{"internalType": "uint256","name": "percent","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "getMyTicket","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "getReserveBalance","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [{"internalType": "uint256","name": "id","type": "uint256"}],"name": "getVictim","outputs": [{"internalType": "uint256","name": "vid","type": "uint256"},{"internalType": "bytes32","name": "identityHash","type": "bytes32"},{"internalType": "uint256","name": "score","type": "uint256"},{"internalType": "uint256","name": "reliefAmount","type": "uint256"},{"internalType": "address","name": "wallet","type": "address"},{"internalType": "bool","name": "isPaid","type": "bool"}],"stateMutability": "view","type": "function"},
+  {"inputs": [{"internalType": "address","name": "user","type": "address"}],"name": "isAdmin","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "isDistributed","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "lastDistributedId","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "reservePool","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "targetFund","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "totalDistributed","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "totalDonated","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "totalScore","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "victimCount","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "victimPayoutDone","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},
+  {"inputs": [],"name": "victimPool","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
+  {"inputs": [{"internalType": "uint256","name": "","type": "uint256"}],"name": "victims","outputs": [{"internalType": "uint256","name": "id","type": "uint256"},{"internalType": "bytes32","name": "identityHash","type": "bytes32"},{"internalType": "uint256","name": "score","type": "uint256"},{"internalType": "uint256","name": "reliefAmount","type": "uint256"},{"internalType": "address","name": "walletAddress","type": "address"},{"internalType": "bool","name": "isRegistered","type": "bool"},{"internalType": "bool","name": "isPaid","type": "bool"}],"stateMutability": "view","type": "function"}
+];
+
+// ============================================================
+//  UTILS
+// ============================================================
+function fmtETH(wei) {
+  if (!wei) return "0.0000";
+  return (parseFloat(ethers.utils.formatEther(wei))).toFixed(4);
+}
+function fmtBDT(wei) {
+  if (!wei) return "0";
+  const eth = parseFloat(ethers.utils.formatEther(wei));
+  return Math.round(eth * CONFIG.ETH_TO_BDT).toLocaleString("en-BD");
+}
+function shortAddr(addr) {
+  if (!addr) return "—";
+  return addr.slice(0, 6) + "..." + addr.slice(-4);
+}
+function shortHash(hash) {
+  if (!hash) return "—";
+  return hash.slice(0, 12) + "...";
+}
+
+// ============================================================
+//  HOOKS
+// ============================================================
+function useContract() {
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [account, setAccount] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
+
+  const connect = async () => {
+    if (!window.ethereum) throw new Error("MetaMask not found! Please install MetaMask.");
+    const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+    await web3Provider.send("eth_requestAccounts", []);
+
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: "0x539" }],
+      });
+    } catch (switchError) {
+      // ignore if already on correct chain
+    }
+
+    const web3Signer = web3Provider.getSigner();
+    const addr = await web3Signer.getAddress();
+    const ct = new ethers.Contract(CONFIG.CONTRACT_ADDRESS, ABI, web3Signer);
+
+    setProvider(web3Provider);
+    setSigner(web3Signer);
+    setContract(ct);
+    setAccount(addr);
+    setIsConnected(true);
+    return { provider: web3Provider, signer: web3Signer, contract: ct, account: addr };
+  };
+
+  return { provider, signer, contract, account, isConnected, connect };
+}
+
+// ============================================================
+//  TOAST
+// ============================================================
+function Toast({ msg, type, onClose }) {
+  useEffect(() => {
+    const t = setTimeout(onClose, 4000);
+    return () => clearTimeout(t);
+  }, []);
+  const icon = type === "success" ? "✓" : type === "error" ? "✕" : "ℹ";
+  return (
+    <div className={`toast toast-${type}`}>
+      <span>{icon}</span> {msg}
+    </div>
+  );
+}
+
+// ============================================================
+//  NAVBAR (with Language Toggle)
+// ============================================================
+function Navbar({ page, account, onBack }) {
+  const { lang, setLang, t } = useLang();
+  return (
+    <div className="navbar">
+      <div className="navbar-brand">
+        ⛓ Block<span>-Relief</span>
+      </div>
+      <div className="flex gap-12" style={{alignItems:'center'}}>
+        <button className="btn-lang" onClick={() => setLang(lang === 'bn' ? 'en' : 'bn')}>
+          🌐 {t.langLabel}
+        </button>
+        {account && (
+          <div className="badge badge-green" style={{fontSize:'12px'}}>
+            {shortAddr(account)}
+          </div>
+        )}
+        {page !== 'landing' && (
+          <button className="btn btn-outline btn-sm" onClick={onBack}>{t.backToHome}</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+//  LANDING PAGE
+// ============================================================
+function LandingPage({ onNavigate }) {
+    const { t } = useLang();
+
+  const portals = [
+    {
+      id: 'admin',
+      icon: '🔐',
+      title: t.portalAdmin,
+      desc: t.portalAdminDesc,
+      color: '#93c5fd',
+    },
+    {
+      id: 'donor',
+      icon: '💎',
+      title: t.portalDonor,
+      desc: t.portalDonorDesc,
+      color: '#5eead4',
+    },
+    {
+      id: 'victim',
+      icon: '🆘',
+      title: t.portalVictim,
+      desc: t.portalVictimDesc,
+      color: '#fde68a',
+    },
+  ];
+
+  return (
+    <div className="landing">
+      <div className="hero fade-in">
+        <div style={{
+          fontFamily: 'var(--mono)', fontSize: '12px', color: 'var(--accent2)',
+          letterSpacing: '0.12em', marginBottom: '18px',
+          padding: '6px 14px', border: '1px solid var(--border2)', borderRadius: '20px',
+          display: 'inline-block', background:'rgba(255,255,255,0.03)'
+        }}>
+          {t.heroTagline}
+        </div>
+
+        <h1 className="hero-title">
+          {t.heroTitle1}<span>{t.heroHighlight}</span>{t.heroTitle2}
+        </h1>
+
+        <p className="hero-sub">{t.heroSub}</p>
+
+        <div className="hero-note">{t.heroNote}</div>
+
+        <div className="hero-mini-stats">
+          <div className="hero-mini-stat">
+            <div className="num">{t.miniStat1Title}</div>
+            <div className="lbl">{t.miniStat1Desc}</div>
+          </div>
+          <div className="hero-mini-stat">
+            <div className="num">{t.miniStat2Title}</div>
+            <div className="lbl">{t.miniStat2Desc}</div>
+          </div>
+          <div className="hero-mini-stat">
+            <div className="num">{t.miniStat3Title}</div>
+            <div className="lbl">{t.miniStat3Desc}</div>
+          </div>
+        </div>
+
+        <div style={{display:'flex', gap:'12px', justifyContent:'center', marginBottom:26, flexWrap:'wrap'}}>
+          <button className="btn btn-primary" onClick={() => onNavigate('donor')}>{t.donateNowBtn}</button>
+          <button className="btn btn-outline" onClick={() => onNavigate('victim')}>{t.checkStatusBtn}</button>
+        </div>
+
+        <div className="portal-grid">
+          {portals.map(p => (
+            <div key={p.id} className="portal-card" onClick={() => onNavigate(p.id)}>
+              <div className="portal-icon">{p.icon}</div>
+              <div className="portal-title" style={{color: p.color}}>{p.title}</div>
+              <div className="portal-desc">{p.desc}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{maxWidth:920, margin:'36px auto 0', width:'100%'}}>
+          <div className="grid-2" style={{gap:20}}>
+            <div className="portal-card" style={{textAlign:'left'}}>
+              <div className="section-title">{t.whereHelp}</div>
+              <div className="section-sub" style={{marginTop:8}}>{t.whereHelpDesc}</div>
+            </div>
+
+            <div className="portal-card" style={{textAlign:'left'}}>
+              <div className="section-title">{t.ourGoal}</div>
+              <div className="section-sub" style={{marginTop:8}}>{t.ourGoalDesc}</div>
+            </div>
+          </div>
+
+          <div className="grid-2 mt-16" style={{gap:20}}>
+            <div className="portal-card" style={{textAlign:'left'}}>
+              <div className="section-title">{t.whyImportant}</div>
+              <ul style={{marginTop:10, paddingLeft:18, color:'var(--text2)', lineHeight:'1.9'}}>
+                {t.whyList.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+            </div>
+
+            <div className="portal-card" style={{textAlign:'left'}}>
+              <div className="section-title">{t.fieldReality}</div>
+              <div className="section-sub" style={{marginTop:8}}>{t.fieldRealityDesc}</div>
+            </div>
+          </div>
+
+          <div className="quote-strip">
+            <div className="quote-item">
+              {t.quote1}
+              <small>{t.quote1sub}</small>
+            </div>
+            <div className="quote-item">
+              {t.quote2}
+              <small>{t.quote2sub}</small>
+            </div>
+            <div className="quote-item">
+              {t.quote3}
+              <small>{t.quote3sub}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+// ============================================================
+//  ADMIN DASHBOARD
+// ============================================================
+function AdminDashboard({ showToast }) {
+  const { t } = useLang();
+  const { contract, account, isConnected, connect } = useContract();
+  const [tab, setTab] = useState('overview');
+  const [loading, setLoading] = useState(false);
+  const [stats, setStats] = useState(null);
+  const [victims, setVictims] = useState([]);
+  const [donors, setDonors] = useState([]);
+  const [donorCount, setDonorCount] = useState(0);
+  const [backendData, setBackendData] = useState(null);
+  const [distributing, setDistributing] = useState(false);
+  const [withdrawingReserve, setWithdrawingReserve] = useState(false);
+  const [newTarget, setNewTarget] = useState('');
+
+  const loadStats = useCallback(async () => {
+    if (!contract) return;
+    try {
+      const [collected, target, pct] = await contract.getFundProgress();
+      const balance = await contract.getContractBalance();
+      const reserve = await contract.getReserveBalance();
+      const vCount = await contract.victimCount();
+      const dCount = await contract.getDonorCount();
+      const isDist = await contract.isDistributed();
+      const adminAddr = await contract.admin();
+
+      setStats({ collected, target, pct: pct.toNumber(), balance, reserve, vCount: vCount.toNumber(), isDist, adminAddr });
+      setDonorCount(dCount.toNumber());
+
+      const vs = [];
+      for (let i = 1; i <= Math.min(vCount.toNumber(), 20); i++) {
+        try {
+          const [vid, hash, score, relief, wallet, isPaid] = await contract.getVictim(i);
+          vs.push({ vid: vid.toNumber(), hash, score: score.toNumber() / 100, relief, wallet, isPaid });
+        } catch {}
+      }
+      setVictims(vs);
+
+      const ds = [];
+      for (let i = 0; i < Math.min(dCount.toNumber(), 10); i++) {
+        try {
+          const [addr, amt, ticket, donatedAt] = await contract.getDonor(i);
+          ds.push({ addr, amt, ticket: ticket.toNumber(), donatedAt: donatedAt.toNumber() });
+        } catch {}
+      }
+      setDonors(ds);
+    } catch (e) {
+      showToast(t.dataLoadError + e.message, "error");
+    }
+  }, [contract]);
+
+  const loadBackendData = useCallback(async () => {
+    try {
+      const res = await fetch(`${CONFIG.PYTHON_API}/api/summary`);
+      if (res.ok) setBackendData(await res.json());
+    } catch {
+      setBackendData({
+        total_victims: 100,
+        verified: 100,
+        rejected: 10,
+        total_submissions: 110,
+        verification_rate: 90.9,
+        total_allocated_bdt: 1000000,
+        avg_score: 53.2,
+        receipts: 0,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isConnected) { loadStats(); loadBackendData(); }
+  }, [isConnected]);
+
+  const handleDistribute = async () => {
+    if (!contract) return;
+    setDistributing(true);
+    try {
+      const tx = await contract.autoDistribute();
+      showToast(t.distTxSent, "info");
+      await tx.wait();
+      showToast(t.distSuccess, "success");
+      loadStats();
+    } catch (e) {
+      showToast(e.reason || e.message, "error");
+    }
+    setDistributing(false);
+  };
+
+  const handleUpdateTarget = async () => {
+    if (!contract || !newTarget) return;
+    try {
+      const wei = ethers.utils.parseEther(newTarget);
+      const tx = await contract.updateTargetFund(wei);
+      showToast(t.targetUpdating, "info");
+      await tx.wait();
+      showToast(t.targetUpdated, "success");
+      setNewTarget('');
+      loadStats();
+    } catch (e) {
+      showToast(e.reason || e.message, "error");
+    }
+  };
+
+  const handleWithdrawReserve = async () => {
+    if (!contract || !account) return;
+    setWithdrawingReserve(true);
+    try {
+      const tx = await contract.withdrawReserve(account);
+      showToast(t.reserveTxSent, "info");
+      await tx.wait();
+      showToast(t.reserveWithdrawn, "success");
+      loadStats();
+    } catch (e) {
+      showToast(e.reason || e.message, "error");
+    }
+    setWithdrawingReserve(false);
+  };
+
+  const sidebarItems = [
+    { id: 'overview',    icon: '📊', label: t.sideOverview },
+    { id: 'victims',     icon: '👥', label: t.sideVictims },
+    { id: 'donors',      icon: '💰', label: t.sideDonors },
+    { id: 'distribute',  icon: '⚡', label: t.sideDistribute },
+    { id: 'sensitivity', icon: '🎛️', label: t.sideSensitivity },
+    { id: 'sms',         icon: '📱', label: t.sideSms },
+    { id: 'analytics',   icon: '📈', label: t.sideAnalytics },
+  ];
+
+  if (!isConnected) {
+    return (
+      <div style={{display:'flex', alignItems:'center', justifyContent:'center', minHeight:'60vh'}}>
+        <div className="card fade-in" style={{maxWidth:'400px', textAlign:'center', padding:'40px'}}>
+          <div style={{fontSize:'48px', marginBottom:'16px'}}>🔐</div>
+          <h2 style={{fontSize:'20px', marginBottom:'8px'}}>{t.adminPanel}</h2>
+          <p className="text-muted text-sm" style={{marginBottom:'24px', lineHeight:'1.8'}}>
+            {t.adminPanelDesc}
+          </p>
+          <button className="btn btn-primary" style={{width:'100%'}} onClick={async () => {
+            try { await connect(); showToast(t.walletConnected, "success"); }
+            catch(e) { showToast(e.message, "error"); }
+          }}>
+            {t.connectMM}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const isAdminWallet = stats && account && stats.adminAddr &&
+    account.toLowerCase() === stats.adminAddr.toLowerCase();
+
+  return (
+    <div className="layout">
+      <div className="sidebar">
+        <div style={{padding:'0 16px 16px', marginBottom:'8px'}}>
+          <div className="text-xs text-dim" style={{textTransform:'uppercase', letterSpacing:'0.1em'}}>{t.adminControl}</div>
+        </div>
+        {sidebarItems.map(item => (
+          <div
+            key={item.id}
+            className={`sidebar-item ${tab === item.id ? 'active' : ''}`}
+            onClick={() => setTab(item.id)}
+          >
+            <span className="sidebar-icon">{item.icon}</span>
+            <span>{item.label}</span>
+          </div>
+        ))}
+        <div className="divider" style={{margin:'16px 0'}}/>
+        <div style={{padding:'0 16px'}}>
+          <div className="text-xs text-dim mb-8">{t.walletLabel}</div>
+          <div className="hash" style={{fontSize:'10px'}}>{account}</div>
+          {isAdminWallet
+            ? <div className="badge badge-green mt-8">{t.adminVerified}</div>
+            : <div className="badge badge-red mt-8">{t.notAdmin}</div>
+          }
+        </div>
+      </div>
+
+      <div className="main-content fade-in">
+
+        {/* ===== OVERVIEW TAB ===== */}
+        {tab === 'overview' && (
+          <div>
+            <div className="section-header">
+              <div className="section-title">{t.systemSummary}</div>
+              <div className="section-sub">{t.systemSummaryDesc}</div>
+            </div>
+
+            {!isAdminWallet && (
+              <div className="alert alert-warning mb-16">{t.notAdminWarn}</div>
+            )}
+
+            <div className="grid-4 mb-24">
+              {[
+                { label: t.contractBalance, value: fmtETH(stats?.balance) + ' ETH', sub: fmtBDT(stats?.balance) + ' BDT' },
+                { label: t.totalDonated, value: fmtETH(stats?.collected) + ' ETH', sub: t.cumFund },
+                { label: t.registeredRecipients, value: stats?.vCount ?? '—', sub: t.onBlockchain },
+                { label: t.fundProgress, value: (stats?.pct ?? 0) + '%', sub: t.vsTarget },
+              ].map(s => (
+                <div key={s.label} className="stat-card">
+                  <div className="stat-label">{s.label}</div>
+                  <div className="stat-value text-accent">{s.value}</div>
+                  <div className="stat-sub">{s.sub}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid-2">
+              <div className="card">
+                <div className="flex-between mb-16">
+                  <div style={{fontWeight:600}}>{t.fundCollectionStatus}</div>
+                  <div className="badge badge-blue">{stats?.pct ?? 0}%</div>
+                </div>
+                <div className="progress-bar">
+                  <div className="progress-fill" style={{width: `${Math.min(stats?.pct ?? 0, 100)}%`}} />
+                </div>
+                <div className="flex-between mt-8">
+                  <span className="text-xs text-dim">{fmtETH(stats?.collected)} {t.ethRaised}</span>
+                  <span className="text-xs text-dim">{t.targetLabel}: {fmtETH(stats?.target)} ETH</span>
+                </div>
+              </div>
+
+              <div className="card">
+                <div style={{fontWeight:600, marginBottom:'16px'}}>{t.systemStatus}</div>
+                {[
+                  { label: t.distribution, val: stats?.isDist ? t.completed : t.pending, ok: stats?.isDist },
+                  { label: t.verificationRate, val: (backendData?.verification_rate ?? 90.9) + '%', ok: true },
+                  { label: t.fraudDetected, val: (backendData?.rejected ?? 10) + t.entries, ok: false },
+                ].map(item => (
+                  <div key={item.label} className="flex-between" style={{padding:'8px 0', borderBottom:'1px solid var(--border)'}}>
+                    <span className="text-sm text-muted">{item.label}</span>
+                    <span className={`text-sm ${item.ok ? 'text-green' : 'text-amber'}`}>{item.val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {backendData && (
+              <div className="grid-4 mt-16">
+                {[
+                  { label: t.totalSubmissions, value: backendData.total_submissions },
+                  { label: t.verifiedRecipients, value: backendData.verified },
+                  { label: t.rejectedApps, value: backendData.rejected },
+                  { label: t.avgRiskScore, value: backendData.avg_score?.toFixed(1) },
+                ].map(s => (
+                  <div key={s.label} className="stat-card">
+                    <div className="stat-label">{s.label}</div>
+                    <div className="stat-value" style={{fontSize:'22px'}}>{s.value}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ===== VICTIMS TAB ===== */}
+        {tab === 'victims' && (
+          <div>
+            <div className="section-header">
+              <div className="section-title">{t.recipientList}</div>
+              <div className="section-sub">{t.recipientListDesc}</div>
+            </div>
+            <div className="card">
+              <div className="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>{t.idLabel}</th>
+                      <th>{t.identityHash}</th>
+                      <th>{t.ahpScore}</th>
+                      <th>{t.reliefETH}</th>
+                      <th>{t.reliefBDT}</th>
+                      <th>{t.walletAddr}</th>
+                      <th>{t.statusLabel}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {victims.map(v => (
+                      <tr key={v.vid}>
+                        <td className="text-mono" style={{color:'var(--accent2)'}}>#{v.vid}</td>
+                        <td><span className="hash">{v.hash.slice(0,14)}...</span></td>
+                        <td className="text-mono">{v.score.toFixed(2)}</td>
+                        <td className="text-mono">{fmtETH(v.relief)}</td>
+                        <td className="text-mono text-teal">{fmtBDT(v.relief)}</td>
+                        <td className="text-mono">{shortAddr(v.wallet)}</td>
+                        <td>
+                          {v.isPaid
+                            ? <span className="badge badge-green">{t.paidLabel}</span>
+                            : <span className="badge badge-amber">{t.pending}</span>
+                          }
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {victims.length === 0 && (
+                  <div style={{padding:'40px', textAlign:'center', color:'var(--text3)'}}>
+                    {t.noRecipientsYet}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ===== DONORS TAB ===== */}
+        {tab === 'donors' && (
+          <div>
+            <div className="section-header">
+              <div className="section-title">{t.donorList}</div>
+              <div className="section-sub">{donorCount}{t.donorBlockchainSuffix}</div>
+            </div>
+            <div className="card">
+              <div className="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>{t.donorNo}</th>
+                      <th>{t.walletAddress}</th>
+                      <th>{t.amountETH}</th>
+                      <th>{t.amountBDT}</th>
+                      <th>{t.donatedAt}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {donors.map((d, i) => (
+                      <tr key={i}>
+                        <td>
+                          <span className="badge badge-blue">#{d.ticket}</span>
+                        </td>
+                        <td className="text-mono text-sm">{shortAddr(d.addr)}</td>
+                        <td className="text-mono">{fmtETH(d.amt)}</td>
+                        <td className="text-mono text-teal">{fmtBDT(d.amt)}</td>
+                        <td className="text-sm text-muted">
+                          {d.donatedAt ? new Date(d.donatedAt * 1000).toLocaleString() : '—'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {donors.length === 0 && (
+                  <div style={{padding:'40px', textAlign:'center', color:'var(--text3)'}}>
+                    {t.noDonorsYet}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ===== DISTRIBUTE TAB ===== */}
+        {tab === 'distribute' && (
+          <div>
+            <div className="section-header">
+              <div className="section-title">{t.fundDistribution}</div>
+              <div className="section-sub">{t.fundDistDesc}</div>
+            </div>
+
+            <div className="grid-2">
+              <div className="card">
+                <div style={{fontWeight:600, marginBottom:'16px'}}>{t.triggerDist}</div>
+                <div className="alert alert-info mb-16">
+                  <strong>{t.distLogic}</strong><br/>
+                  {t.distLogicDesc}
+                </div>
+                {stats?.isDist ? (
+                  <div className="alert alert-success">{t.distAlreadyDone}</div>
+                ) : (
+                  <>
+                    {stats && parseInt(stats.pct) < 100 && (
+                      <div className="alert alert-warning mb-16">
+                        {t.targetNotReached} ({stats.pct}%){t.distMayFail}
+                      </div>
+                    )}
+                    <button
+                      className="btn btn-primary"
+                      style={{width:'100%'}}
+                      disabled={distributing || !isAdminWallet}
+                      onClick={handleDistribute}
+                    >
+                      {distributing ? <><span className="spinner"/> {t.distributing}</> : t.startDistribution}
+                    </button>
+                  </>
+                )}
+              </div>
+
+              <div className="card">
+                <div style={{fontWeight:600, marginBottom:'16px'}}>{t.updateTarget}</div>
+                <div className="alert alert-info mb-16" style={{fontSize:'12px'}}>
+                  <strong>{t.howToSet}</strong><br/>
+                  {t.howToSetDesc}
+                </div>
+                <div className="form-group">
+                  <label className="form-label">{t.newTargetETH}</label>
+                  <input
+                    className="form-input"
+                    type="number" step="0.01"
+                    placeholder={t.newTargetPlaceholder}
+                    value={newTarget}
+                    onChange={e => setNewTarget(e.target.value)}
+                  />
+                </div>
+                <button
+                  className="btn btn-outline"
+                  style={{width:'100%'}}
+                  disabled={!newTarget || !isAdminWallet}
+                  onClick={handleUpdateTarget}
+                >
+                  {t.saveNewTarget}
+                </button>
+                <div className="text-xs text-dim mt-8">
+                  {t.currentTarget}: {fmtETH(stats?.target)} ETH
+                </div>
+              </div>
+
+              <div className="card">
+                <div style={{fontWeight:600, marginBottom:'16px'}}>{t.reservePool}</div>
+                <div className="alert alert-info mb-16" style={{fontSize:'12px'}}>
+                  {t.reserveDesc}
+                </div>
+                <div className="text-sm text-muted mb-12">
+                  {t.currentReserve}: <strong>{fmtETH(stats?.reserve)} ETH</strong>
+                </div>
+                <button
+                  className="btn btn-primary"
+                  style={{width:'100%'}}
+                  disabled={!isAdminWallet || withdrawingReserve || !stats?.reserve || stats.reserve.isZero?.()}
+                  onClick={handleWithdrawReserve}
+                >
+                  {withdrawingReserve ? <><span className="spinner"/> {t.withdrawing}</> : t.withdrawReserve}
+                </button>
+                <div className="text-xs text-dim mt-8">
+                  {t.withdrawNote}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ===== SENSITIVITY TAB ===== */}
+        {tab === 'sensitivity' && (
+          <AdminSensitivity backendData={backendData} />
+        )}
+
+        {/* ===== SMS TAB ===== */}
+        {tab === 'sms' && (
+          <AdminSmsLog />
+        )}
+
+        {/* ===== ANALYTICS TAB ===== */}
+        {tab === 'analytics' && (
+          <AdminAnalytics backendData={backendData} stats={stats} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+//  ADMIN — Sensitivity Analysis
+// ============================================================
+function AdminSensitivity({ backendData }) {
+  const { t } = useLang();
+  const baseWeights = { [t.povertyIndex]:38.2, [t.waterDepth]:24.5, [t.shelterDist]:17.8, [t.houseType]:11.3, [t.floodDuration]:8.2 };
+  const [weights, setWeights] = useState({...baseWeights});
+  const [results, setResults] = useState(null);
+  const totalWeight = Object.values(weights).reduce((a,b)=>a+b,0);
+
+  const keys = Object.keys(baseWeights);
+
+  const runAnalysis = () => {
+    const victims = Array.from({length:10}, (_,i) => ({
+      id: i+1,
+      name: `${t.recipientLabel} #${i+1}`,
+      normDepth: Math.random(),
+      normHouse: Math.random(),
+      normDuration: Math.random(),
+      normPoverty: 0.4 + Math.random()*0.6,
+      normDistance: Math.random(),
+    }));
+    const w = weights;
+    const sum = totalWeight;
+    const scored = victims.map(v => ({
+      ...v,
+      baseScore: (v.normDepth*baseWeights[keys[1]] + v.normHouse*baseWeights[keys[3]] +
+        v.normDuration*baseWeights[keys[4]] + v.normPoverty*baseWeights[keys[0]] +
+        v.normDistance*baseWeights[keys[2]]) / 100,
+      newScore: (v.normDepth*w[keys[1]] + v.normHouse*w[keys[3]] +
+        v.normDuration*w[keys[4]] + v.normPoverty*w[keys[0]] +
+        v.normDistance*w[keys[2]]) / sum,
+    }));
+    setResults(scored);
+  };
+
+  const resetWeights = () => setWeights({...baseWeights});
+
+  return (
+    <div>
+      <div className="section-header">
+        <div className="section-title">{t.sensitivityTitle}</div>
+        <div className="section-sub">{t.sensitivityDesc}</div>
+      </div>
+      <div className="alert alert-info mb-16">
+        {t.sensitivityInfo}
+      </div>
+      <div className="grid-2">
+        <div className="card">
+          <div className="flex-between mb-16">
+            <div style={{fontWeight:600}}>{t.adjustWeights}</div>
+            <button className="btn btn-outline btn-sm" onClick={resetWeights}>{t.resetBtn}</button>
+          </div>
+          {Object.entries(weights).map(([key, val]) => (
+            <div key={key} style={{marginBottom:'16px'}}>
+              <div className="flex-between mb-8">
+                <span className="text-sm">{key}</span>
+                <span className="text-sm text-mono text-accent">{val.toFixed(1)}%</span>
+              </div>
+              <input type="range" min="1" max="60" step="0.5" value={val}
+                onChange={e => setWeights(p => ({...p, [key]: parseFloat(e.target.value)}))}
+                style={{width:'100%', accentColor:'var(--accent)'}} />
+            </div>
+          ))}
+          <div className={`alert ${Math.abs(totalWeight-100) < 5 ? 'alert-success' : 'alert-warning'} mt-8`}>
+            {t.totalLabel}: {totalWeight.toFixed(1)}% {Math.abs(totalWeight-100) < 5 ? t.approx100 : t.adjustTo100}
+          </div>
+          <button className="btn btn-primary mt-16" style={{width:'100%'}} onClick={runAnalysis}>
+            {t.runAnalysis}
+          </button>
+        </div>
+        <div className="card">
+          <div style={{fontWeight:600, marginBottom:'16px'}}>{t.resultsLabel}</div>
+          {!results ? (
+            <div style={{padding:'40px', textAlign:'center', color:'var(--text3)'}}>
+              {t.adjustAndRun}
+            </div>
+          ) : (
+            <div className="table-wrap">
+              <table>
+                <thead><tr><th>{t.recipientLabel}</th><th>{t.prevScore}</th><th>{t.newScore}</th><th>{t.changeLabel}</th></tr></thead>
+                <tbody>
+                  {results.sort((a,b)=>b.newScore-a.newScore).map(v => {
+                    const diff = ((v.newScore - v.baseScore) * 100).toFixed(1);
+                    const isUp = diff > 0;
+                    return (
+                      <tr key={v.id}>
+                        <td>{v.name}</td>
+                        <td className="text-mono">{(v.baseScore*100).toFixed(1)}</td>
+                        <td className="text-mono text-accent">{(v.newScore*100).toFixed(1)}</td>
+                        <td className={isUp ? 'text-green' : 'text-red'}>
+                          {isUp ? '↑' : '↓'} {Math.abs(diff)}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+//  ADMIN — SMS Log Viewer
+// ============================================================
+function AdminSmsLog() {
+  const { t } = useLang();
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('all');
+  const [error, setError] = useState(null);
+
+  const loadLogs = () => {
+    setLoading(true);
+    setError(null);
+
+    fetch(`${CONFIG.PYTHON_API}/api/sms_log`)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setLogs(data);
+        } else if (Array.isArray(data) && data.length === 0) {
+          setLogs([]);
+        } else {
+          throw new Error('Invalid data format');
+        }
+      })
+      .catch(err => {
+        setError(err.message);
+        setLogs([
+          { Timestamp:'2026-05-27 10:00:01', Mobile:'8801301581457', Status:'SENT',
+            Message:'Block-Relief\nপ্রিয় সুবিধাভোগী,\nআপনার ত্রাণ তহবিল নিশ্চিত হয়েছে।\nপরিমাণ: 5,000 BDT' },
+          { Timestamp:'2026-05-27 10:00:02', Mobile:'8801712636928', Status:'SIMULATED',
+            Message:'Block-Relief\nপ্রিয় সুবিধাভোগী,\nআপনার ত্রাণ তহবিল নিশ্চিত হয়েছে।\nপরিমাণ: 8,500 BDT' },
+          { Timestamp:'2026-05-27 10:00:03', Mobile:'8801710966841', Status:'SIMULATED_WHITELIST',
+            Message:'Block-Relief\nপ্রিয় সুবিধাভোগী...' },
+        ]);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => { loadLogs(); }, []);
+
+  const filtered = filter === 'all' ? logs : logs.filter(l => {
+    if (filter === 'SIMULATED') return l.Status?.startsWith('SIMULATED');
+    if (filter === 'FAILED') return l.Status === 'FAILED' || l.Status === 'ERROR';
+    return l.Status === filter;
+  });
+
+  const statusColor = s => ({
+    SENT:                'badge-green',
+    SIMULATED:           'badge-blue',
+    SIMULATED_WHITELIST: 'badge-amber',
+    FAILED:              'badge-red',
+    ERROR:               'badge-red',
+    NO_NUMBER:           'badge-red',
+  }[s] || 'badge-blue');
+
+  const counts = {
+    SENT:      logs.filter(l => l.Status === 'SENT').length,
+    SIMULATED: logs.filter(l => l.Status?.startsWith('SIMULATED')).length,
+    FAILED:    logs.filter(l => l.Status === 'FAILED' || l.Status === 'ERROR').length,
+  };
+
+  const filterButtons = [
+    { id: 'all', label: t.allLabel },
+    { id: 'SENT', label: t.sentLabel },
+    { id: 'SIMULATED', label: t.simulated },
+    { id: 'FAILED', label: t.failedLabel },
+  ];
+
+  return (
+    <div>
+      <div className="section-header">
+        <div className="flex-between">
+          <div>
+            <div className="section-title">{t.smsLogTitle}</div>
+            <div className="section-sub">{t.smsLogDesc}</div>
+          </div>
+          <button className="btn btn-outline btn-sm" onClick={loadLogs}>
+            {t.refreshLoad}
+          </button>
+        </div>
+      </div>
+
+      {error && (
+        <div className="alert alert-warning mb-16" style={{fontSize:'12px'}}>
+          {t.apiError}
+        </div>
+      )}
+
+      <div className="grid-3 mb-16">
+        {[
+          { label: t.realSmsSent,  val: counts.SENT,      color: 'var(--green)'   },
+          { label: t.simulated,    val: counts.SIMULATED, color: 'var(--accent2)' },
+          { label: t.failedError,  val: counts.FAILED,    color: 'var(--red)'     },
+        ].map(s => (
+          <div key={s.label} className="stat-card" style={{textAlign:'center'}}>
+            <div className="stat-label">{s.label}</div>
+            <div className="stat-value" style={{color: s.color, fontSize:'24px'}}>{s.val}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="card">
+        <div className="flex gap-8 mb-16" style={{flexWrap:'wrap', alignItems:'center'}}>
+          <span className="text-xs text-dim">{t.filterLabel}:</span>
+          {filterButtons.map(f => (
+            <button key={f.id}
+              className={`btn btn-sm ${filter === f.id ? 'btn-primary' : 'btn-outline'}`}
+              onClick={() => setFilter(f.id)}>
+              {f.label} {f.id === 'all' ? `(${logs.length})` : ''}
+            </button>
+          ))}
+          <span className="text-xs text-dim" style={{marginLeft:'auto'}}>
+            {t.showingLast50}
+          </span>
+        </div>
+
+        {loading ? (
+          <div style={{padding:'32px', textAlign:'center'}}>
+            <span className="spinner"/> {t.loadingSms}
+          </div>
+        ) : (
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>{t.timeLabel}</th>
+                  <th>{t.mobileLabel}</th>
+                  <th>{t.statusLabel}</th>
+                  <th>{t.msgPreview}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.slice(-50).reverse().map((l, i) => (
+                  <tr key={i}>
+                    <td className="text-mono text-xs">{l.Timestamp}</td>
+                    <td className="text-mono text-sm">
+                      +{String(l.Mobile || '').replace(/^\+/, '')}
+                    </td>
+                    <td>
+                      <span className={`badge ${statusColor(l.Status)}`}>
+                        {l.Status}
+                      </span>
+                    </td>
+                    <td className="text-xs text-muted">
+                      {String(l.Message || '')
+                        .split('\n')
+                        .filter(x => x.trim())
+                        .slice(0, 2)
+                        .join(' | ')
+                        .slice(0, 65)}...
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {filtered.length === 0 && (
+              <div style={{padding:'32px', textAlign:'center', color:'var(--text3)'}}>
+                {filter === 'all' ? t.noSmsLog : t.noFilterEntry}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+//  ADMIN ANALYTICS (Charts)
+// ============================================================
+function AdminAnalytics({ backendData, stats }) {
+  const { t } = useLang();
+  const chartRef = useRef(null);
+  const chartRef2 = useRef(null);
+  const chartInst = useRef(null);
+  const chartInst2 = useRef(null);
+
+  useEffect(() => {
+    if (chartRef.current) {
+      if (chartInst.current) chartInst.current.destroy();
+      chartInst.current = new Chart(chartRef.current, {
+        type: 'doughnut',
+        data: {
+          labels: [t.recipients100],
+          datasets: [{
+            data: [100],
+            backgroundColor: ['#60a5fa'],
+            borderWidth: 0,
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+    if (chartRef2.current) {
+      if (chartInst2.current) chartInst2.current.destroy();
+      chartInst2.current = new Chart(chartRef2.current, {
+        type: 'bar',
+        data: {
+          labels: [t.submittedLabel, t.verifiedLabel, t.rejectedLabel, t.registeredLabel],
+          datasets: [{
+            data: [
+              backendData?.total_submissions ?? 110,
+              backendData?.verified ?? 100,
+              backendData?.rejected ?? 10,
+              stats?.vCount ?? 0,
+            ],
+            backgroundColor: ['#475569', '#60a5fa', '#ef4444', '#2dd4bf'],
+            borderRadius: 6, borderWidth: 0,
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#b6c7e0' } },
+            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#b6c7e0' } }
+          }
+        }
+      });
+    }
+    return () => {
+      if (chartInst.current) chartInst.current.destroy();
+      if (chartInst2.current) chartInst2.current.destroy();
+    };
+  }, [backendData, stats]);
+
+  return (
+    <div>
+      <div className="section-header">
+        <div className="section-title">{t.analyticsTitle}</div>
+        <div className="section-sub">{t.analyticsDesc}</div>
+      </div>
+      <div className="grid-2">
+        <div className="card">
+          <div style={{fontWeight:600, marginBottom:'12px'}}>{t.fundSplit}</div>
+          <div style={{display:'flex', gap:'12px', marginBottom:'12px'}}>
+            <span style={{display:'flex', alignItems:'center', gap:'6px', fontSize:'12px', color:'var(--text2)'}}>
+              <span style={{width:'10px', height:'10px', borderRadius:'2px', background:'#60a5fa', display:'inline-block'}}></span> {t.recipients100}
+            </span>
+          </div>
+          <div style={{position:'relative', height:'280px'}}>
+            <canvas ref={chartRef} role="img" aria-label="Fund split chart">chart</canvas>
+          </div>
+        </div>
+        <div className="card">
+          <div style={{fontWeight:600, marginBottom:'12px'}}>{t.verificationPipeline}</div>
+          <div style={{position:'relative', height:'300px'}}>
+            <canvas ref={chartRef2} role="img" aria-label="Pipeline chart">chart</canvas>
+          </div>
+        </div>
+      </div>
+
+      <div className="card mt-16">
+        <div style={{fontWeight:600, marginBottom:'16px'}}>{t.fuzzyWeights}</div>
+        <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+          {[
+            { name: t.povertyIndex, weight: 38.2, color: '#60a5fa' },
+            { name: t.waterDepth, weight: 24.5, color: '#2dd4bf' },
+            { name: t.shelterDist, weight: 17.8, color: '#f59e0b' },
+            { name: t.houseType, weight: 11.3, color: '#a78bfa' },
+            { name: t.floodDuration, weight: 8.2, color: '#f87171' },
+          ].map(c => (
+            <div key={c.name}>
+              <div className="flex-between mb-8">
+                <span className="text-sm">{c.name}</span>
+                <span className="text-sm text-mono" style={{color:c.color}}>{c.weight}%</span>
+              </div>
+              <div className="progress-bar">
+                <div style={{height:'100%', width:`${c.weight}%`, background:c.color, borderRadius:'999px', transition:'width 1s ease'}} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+// ============================================================
+//  DONOR DASHBOARD
+// ============================================================
+function DonorDashboard({ showToast }) {
+  const { t } = useLang();
+  const { contract, account, isConnected, connect } = useContract();
+  const [tab, setTab] = useState('donate');
+  const [donateAmt, setDonateAmt] = useState('');
+  const [donating, setDonating] = useState(false);
+  const [stats, setStats] = useState(null);
+  const [myTicket, setMyTicket] = useState(null);
+  const [myDonation, setMyDonation] = useState(null);
+  const [txHistory, setTxHistory] = useState([]);
+  const [paidVictims, setPaidVictims] = useState([]);
+
+  useEffect(() => {
+    if (account) {
+      try {
+        const saved = localStorage.getItem(`br_tx_history_${account.toLowerCase()}`);
+        setTxHistory(saved ? JSON.parse(saved) : []);
+      } catch {
+        setTxHistory([]);
+      }
+    } else {
+      setTxHistory([]);
+    }
+  }, [account]);
+
+  const loadStats = useCallback(async () => {
+    if (!contract) return;
+    try {
+      const [collected, target, pct] = await contract.getFundProgress();
+      const balance = await contract.getContractBalance();
+      const reserve = await contract.getReserveBalance();
+      const dCount = await contract.getDonorCount();
+      const vCount = await contract.victimCount();
+      const isDist = await contract.isDistributed();
+      setStats({ collected, target, pct: pct.toNumber(), balance, reserve, dCount: dCount.toNumber(), vCount: vCount.toNumber(), isDist });
+
+      try {
+        const ticket = await contract.getMyTicket();
+        setMyTicket(ticket.toNumber());
+      } catch {}
+
+      try {
+        const dIndex = await contract.donorIndex(account);
+        const idx = dIndex.toNumber();
+        if (idx > 0) {
+          const [addr, amt, tick, donAt] = await contract.getDonor(idx - 1);
+          setMyDonation({ addr, amt, tick: tick.toNumber(), donAt: donAt.toNumber() });
+        } else {
+          const dCount2 = await contract.getDonorCount();
+          for (let i = 0; i < dCount2.toNumber(); i++) {
+            const [addr, amt, tick, donAt] = await contract.getDonor(i);
+            if (addr.toLowerCase() === account.toLowerCase()) {
+              setMyDonation({ addr, amt, tick: tick.toNumber(), donAt: donAt.toNumber() });
+              break;
+            }
+          }
+        }
+      } catch {}
+
+      if (isDist) {
+        try {
+          const vCount2 = await contract.victimCount();
+          const pvs = [];
+          for (let i = 1; i <= vCount2.toNumber(); i++) {
+            try {
+              const [vid, hash, score, relief, wallet, isPaid] = await contract.getVictim(i);
+              if (isPaid) {
+                pvs.push({
+                  vid: vid.toNumber(),
+                  score: score.toNumber() / 100,
+                  relief,
+                  wallet,
+                });
+              }
+            } catch {}
+          }
+          setPaidVictims(pvs);
+        } catch {}
+      }
+
+    } catch(e) {
+      console.error(e);
+    }
+  }, [contract, account]);
+
+  useEffect(() => {
+    if (isConnected) loadStats();
+  }, [isConnected]);
+
+  const handleDonate = async () => {
+    if (!contract || !donateAmt) return;
+    setDonating(true);
+    try {
+      const wei = ethers.utils.parseEther(donateAmt);
+      const tx = await contract.donate({ value: wei });
+      showToast(t.donationTxSent, "info");
+      const receipt = await tx.wait();
+      showToast(`✓ ${donateAmt}${t.donatedSuccessSuffix}`, "success");
+      const newEntry = {
+        hash: receipt.transactionHash,
+        amount: donateAmt,
+        time: new Date().toLocaleString(),
+        block: receipt.blockNumber
+      };
+      setTxHistory(prev => {
+        const updated = [newEntry, ...prev];
+        try { localStorage.setItem(`br_tx_history_${account.toLowerCase()}`, JSON.stringify(updated)); } catch {}
+        return updated;
+      });
+      setDonateAmt('');
+      loadStats();
+    } catch(e) {
+      showToast(e.reason || e.message, "error");
+    }
+    setDonating(false);
+  };
+
+  const sidebarItems = [
+    { id: 'donate', icon: '💎', label: t.sideDonate },
+    { id: 'track',  icon: '📡', label: t.sideTrack },
+    { id: 'impact', icon: '🌊', label: t.sideImpact },
+  ];
+
+  if (!isConnected) {
+    return (
+      <div style={{display:'flex', alignItems:'center', justifyContent:'center', minHeight:'60vh'}}>
+        <div className="card fade-in" style={{maxWidth:'390px', textAlign:'center', padding:'40px'}}>
+          <div style={{fontSize:'48px', marginBottom:'16px'}}>💎</div>
+          <h2 style={{fontSize:'20px', marginBottom:'8px'}}>{t.donorPortal}</h2>
+          <p className="text-muted text-sm" style={{marginBottom:'24px', lineHeight:'1.8'}}>
+            {t.donorPortalDesc}
+          </p>
+          <button className="btn btn-teal" style={{width:'100%'}} onClick={async () => {
+            try { await connect(); showToast(t.walletConnected, "success"); }
+            catch(e) { showToast(e.message, "error"); }
+          }}>
+            {t.connectWallet}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="layout">
+      <div className="sidebar">
+        <div style={{padding:'0 16px 16px', marginBottom:'8px'}}>
+          <div className="text-xs text-dim" style={{textTransform:'uppercase', letterSpacing:'0.1em'}}>{t.donorPanel}</div>
+        </div>
+        {sidebarItems.map(item => (
+          <div key={item.id} className={`sidebar-item ${tab === item.id ? 'active' : ''}`}
+            onClick={() => setTab(item.id)}>
+            <span className="sidebar-icon">{item.icon}</span>
+            <span>{item.label}</span>
+          </div>
+        ))}
+        <div className="divider" style={{margin:'16px 0'}}/>
+        <div style={{padding:'0 16px'}}>
+          <div className="text-xs text-dim mb-8">{t.myWallet}</div>
+          <div className="hash" style={{fontSize:'10px'}}>{account}</div>
+          {myTicket > 0 && <div className="badge badge-blue mt-8">{t.donorId} #{myTicket}</div>}
+        </div>
+      </div>
+
+      <div className="main-content fade-in">
+
+        {/* ===== DONATE TAB ===== */}
+        {tab === 'donate' && (
+          <div>
+            <div className="section-header">
+              <div className="section-title">{t.makeDonation}</div>
+              <div className="section-sub">{t.donationDesc}</div>
+            </div>
+
+            <div className="grid-2">
+              <div className="card card-glow">
+                <div style={{fontWeight:600, marginBottom:'16px', color:'var(--teal2)'}}>{t.donateETH}</div>
+
+                {stats?.isDist ? (
+                  <div className="alert alert-warning">{t.distCompletedNoDonation}</div>
+                ) : (
+                  <>
+                    <div className="form-group">
+                      <label className="form-label">{t.amountLabel}</label>
+                      <input
+                        className="form-input"
+                        type="number" step="0.001" min="0.001"
+                        placeholder={t.amountPlaceholder}
+                        value={donateAmt}
+                        onChange={e => setDonateAmt(e.target.value)}
+                      />
+                      {donateAmt && (
+                        <div className="text-xs text-muted mt-8">
+                          {t.approxBDT} {Math.round(parseFloat(donateAmt || 0) * CONFIG.ETH_TO_BDT).toLocaleString()} BDT
+                        </div>
+                      )}
+                    </div>
+                    <div style={{display:'flex', gap:'8px', marginBottom:'16px', flexWrap:'wrap'}}>
+                      {['0.01','0.05','0.1','0.5'].map(amt => (
+                        <button key={amt} className="btn btn-outline btn-sm" onClick={() => setDonateAmt(amt)}>
+                          {amt} ETH
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      className="btn btn-teal" style={{width:'100%'}}
+                      disabled={donating || !donateAmt}
+                      onClick={handleDonate}
+                    >
+                      {donating ? <><span className="spinner"/> {t.donating}</> : t.donateNowAction}
+                    </button>
+                    {stats?.reserve && !stats.reserve.isZero?.() ? (
+                      <div className="alert alert-info mt-16">
+                        {t.targetReachedReserve}: {fmtETH(stats.reserve)} ETH
+                      </div>
+                    ) : (
+                      <div className="alert alert-info mt-16">
+                        {t.donationGoesToFund}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+
+              <div className="card">
+                <div style={{fontWeight:600, marginBottom:'16px'}}>{t.fundCurrentStatus}</div>
+                <div style={{marginBottom:'12px'}}>
+                  <div className="progress-bar">
+                    <div className="progress-fill" style={{width:`${Math.min(stats?.pct ?? 0, 100)}%`}} />
+                  </div>
+                  <div className="flex-between mt-8">
+                    <span className="text-xs text-dim">{fmtETH(stats?.collected)} {t.ethRaised}</span>
+                    <span className="text-xs text-dim">{stats?.pct ?? 0}%</span>
+                  </div>
+                </div>
+                <div className="divider"/>
+                {[
+                  [t.totalRaised, fmtETH(stats?.collected) + ' ETH'],
+                  [t.targetLabel, fmtETH(stats?.target) + ' ETH'],
+                  [t.reserveFund, fmtETH(stats?.reserve) + ' ETH'],
+                  [t.totalDonors, stats?.dCount ?? 0],
+                  [t.registeredRecip, stats?.vCount ?? 0],
+                  [t.statusLabel, stats?.isDist ? t.distCompleted : t.collecting],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex-between" style={{padding:'7px 0', borderBottom:'1px solid var(--border)'}}>
+                    <span className="text-sm text-muted">{k}</span>
+                    <span className="text-sm text-mono">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {txHistory.length > 0 && (
+              <div className="card mt-16">
+                <div style={{fontWeight:600, marginBottom:'12px'}}>{t.myTransactions}</div>
+                <div className="table-wrap">
+                  <table>
+                    <thead><tr><th>{t.txHash}</th><th>{t.amountCol}</th><th>{t.blockCol}</th><th>{t.timeLabel}</th></tr></thead>
+                    <tbody>
+                      {txHistory.map((tx, i) => (
+                        <tr key={i}>
+                          <td><span className="hash">{shortHash(tx.hash)}</span></td>
+                          <td className="text-mono text-teal">{tx.amount} ETH</td>
+                          <td className="text-mono">#{tx.block}</td>
+                          <td className="text-sm text-muted">{tx.time}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ===== TRACK TAB ===== */}
+        {tab === 'track' && (
+          <div>
+            <div className="section-header">
+              <div className="section-title">{t.fundFlow}</div>
+              <div className="section-sub">{t.fundFlowDesc}</div>
+            </div>
+
+            <div className="card mb-16">
+              <div style={{fontWeight:600, marginBottom:'20px'}}>{t.fundFlowTitle}</div>
+              <div style={{display:'flex', alignItems:'center', gap:'0', flexWrap:'wrap'}}>
+                {[
+                  { label: t.donationPool, val: fmtETH(stats?.collected) + ' ETH', color: '#60a5fa' },
+                  { label: '→', val: '', color: 'transparent' },
+                  { label: t.victimAllocation, val: fmtETH(stats?.collected) + ' ETH', color: '#2dd4bf' },
+                ].map((step, i) => (
+                  <div key={i} style={{
+                    flex: step.label === '→' ? '0 0 auto' : 1,
+                    textAlign: 'center', padding: '12px 8px',
+                    background: step.color === 'transparent' ? 'none' : `${step.color}1c`,
+                    borderRadius: '10px', margin: step.label === '→' ? '0 4px' : '0 4px',
+                    color: step.color === 'transparent' ? 'var(--text3)' : step.color,
+                    fontSize: step.label === '→' ? '20px' : '13px',
+                  }}>
+                    {step.label !== '→' && <div style={{fontWeight:600, marginBottom:'4px'}}>{step.label}</div>}
+                    {step.label === '→' ? '→' : <div className="text-mono" style={{fontSize:'15px'}}>{step.val}</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="card">
+              <div style={{fontWeight:600, marginBottom:'16px'}}>{t.contractVerify}</div>
+              <div className="alert alert-info mb-16">
+                {t.contractVerifyInfo}
+              </div>
+              {[
+                { label: t.contractAddr, val: CONFIG.CONTRACT_ADDRESS },
+                { label: t.networkLabel, val: 'Ganache Local (Chain ID: 1337)' },
+                { label: t.distStatusLabel, val: stats?.isDist ? t.completed : t.pending },
+              ].map(item => (
+                <div key={item.label} style={{marginBottom:'12px'}}>
+                  <div className="text-xs text-dim mb-8">{item.label}</div>
+                  <div className="hash">{item.val}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ===== IMPACT TAB ===== */}
+        {tab === 'impact' && (
+          <div>
+            <div className="section-header">
+              <div className="section-title">{t.myImpact}</div>
+              <div className="section-sub">{t.myImpactDesc}</div>
+            </div>
+
+            {!myDonation ? (
+              <div className="card" style={{textAlign:'center', padding:'48px'}}>
+                <div style={{fontSize:'48px', marginBottom:'16px'}}>💎</div>
+                <div style={{color:'var(--text3)', marginBottom:'12px'}}>{t.noDonationFound}</div>
+                <div className="text-xs text-dim">{t.goToDonate}</div>
+              </div>
+            ) : (
+              <div>
+                <div className="grid-2 mb-16">
+                  <div className="card">
+                    <div style={{fontWeight:600, marginBottom:'16px', color:'var(--teal2)'}}>{t.myContribution}</div>
+                    {[
+                      [t.totalDonatedLabel, fmtETH(myDonation.amt) + ' ETH'],
+                      [t.inBDT, fmtBDT(myDonation.amt) + ' BDT'],
+                      [t.donorIdLabel, '#' + myDonation.tick],
+                      [t.donatedAtLabel, myDonation.donAt ? new Date(myDonation.donAt * 1000).toLocaleString() : '—'],
+                    ].map(([k, v]) => (
+                      <div key={k} className="flex-between" style={{padding:'9px 0', borderBottom:'1px solid var(--border)'}}>
+                        <span className="text-sm text-muted">{k}</span>
+                        <span className="text-sm text-mono text-teal">{v}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="card">
+                    <div style={{fontWeight:600, marginBottom:'16px'}}>{t.mySharePool}</div>
+                    {stats && myDonation && (
+                      <>
+                        <div className="stat-card mb-16">
+                          <div className="stat-label">{t.contributionPct}</div>
+                          <div className="stat-value text-accent">
+                            {stats.collected && myDonation.amt
+                              ? ((parseFloat(ethers.utils.formatEther(myDonation.amt)) /
+                                 parseFloat(ethers.utils.formatEther(stats.collected))) * 100).toFixed(2) + '%'
+                              : '0%'}
+                          </div>
+                        </div>
+                        <div className="progress-bar mb-16">
+                          <div className="progress-fill" style={{
+                            width: stats.collected && myDonation.amt
+                              ? Math.min(((parseFloat(ethers.utils.formatEther(myDonation.amt)) /
+                                 parseFloat(ethers.utils.formatEther(stats.collected))) * 100), 100) + '%'
+                              : '0%'
+                          }} />
+                        </div>
+                        <div className="flex-between" style={{padding:'8px 0', borderBottom:'1px solid var(--border)'}}>
+                          <span className="text-sm text-muted">{t.totalDonors}</span>
+                          <span className="text-sm text-mono">{stats.dCount}</span>
+                        </div>
+                        <div className="flex-between" style={{padding:'8px 0', borderBottom:'1px solid var(--border)'}}>
+                          <span className="text-sm text-muted">{t.helpedPeople}</span>
+                          <span className="text-sm text-mono text-green">
+                            ~{Math.ceil((stats?.vCount ?? 100) *
+                              (myDonation.amt && stats.collected
+                                ? parseFloat(ethers.utils.formatEther(myDonation.amt)) /
+                                  parseFloat(ethers.utils.formatEther(stats.collected))
+                                : 0))}{t.peopleSuffix}
+                          </span>
+                        </div>
+                        <div className="flex-between" style={{padding:'8px 0'}}>
+                          <span className="text-sm text-muted">{t.distStatusLabel}</span>
+                          <span className={`text-sm ${stats.isDist ? 'text-green' : 'text-amber'}`}>
+                            {stats.isDist ? t.completed : t.pending}
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {paidVictims.length > 0 && (
+                  <div className="card">
+                    <div style={{fontWeight:600, marginBottom:'4px'}}>{t.paidList}</div>
+                    <div className="text-xs text-dim mb-16">{t.paidListDesc}</div>
+                    <div className="table-wrap">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>{t.recipientId}</th>
+                            <th>{t.ahpScore}</th>
+                            <th>{t.reliefETH}</th>
+                            <th>{t.reliefBDT}</th>
+                            <th>{t.walletAddr}</th>
+                            <th>{t.statusLabel}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {paidVictims.slice(0, 20).map(v => (
+                            <tr key={v.vid}>
+                              <td className="text-mono text-accent">#{v.vid}</td>
+                              <td className="text-mono">{v.score.toFixed(2)}</td>
+                              <td className="text-mono">{fmtETH(v.relief)}</td>
+                              <td className="text-mono text-teal">{fmtBDT(v.relief)}</td>
+                              <td className="text-mono text-sm">{shortAddr(v.wallet)}</td>
+                              <td><span className="badge badge-green">{t.paidLabel}</span></td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {paidVictims.length > 20 && (
+                        <div className="text-xs text-dim" style={{padding:'12px', textAlign:'center'}}>
+                          {paidVictims.length}{t.showingOfSuffix}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {stats?.isDist && paidVictims.length === 0 && (
+                  <div className="card" style={{textAlign:'center', padding:'32px', color:'var(--text3)'}}>
+                    {t.loadingPaid}
+                  </div>
+                )}
+
+                {!stats?.isDist && (
+                  <div className="alert alert-info mt-0">
+                    {t.distNotTriggered}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+}
+// ============================================================
+//  VICTIM PORTAL
+// ============================================================
+function VictimPortal({ showToast }) {
+  const { t } = useLang();
+  const [tab, setTab] = useState('status');
+  const [nid, setNid] = useState('');
+  const [phone, setPhone] = useState('');
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [readContract, setReadContract] = useState(null);
+
+  useEffect(() => {
+    try {
+      const provider = new ethers.providers.JsonRpcProvider(CONFIG.GANACHE_URL);
+      const ct = new ethers.Contract(CONFIG.CONTRACT_ADDRESS, ABI, provider);
+      setReadContract(ct);
+    } catch {}
+  }, []);
+
+  const lookup = async () => {
+    if (!nid.trim()) { showToast(t.enterNid, "error"); return; }
+    setLoading(true);
+    setChecked(false);
+    let data = null;
+    try {
+      const res = await fetch(`${CONFIG.PYTHON_API}/api/victim?nid=${encodeURIComponent(nid.trim().toUpperCase())}`);
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch {}
+
+    if (!data) data = mockData(nid.trim());
+
+    if (data && data.found && readContract) {
+      try {
+        const isDist = await readContract.isDistributed();
+        if (isDist) {
+          data.stage = data.verification_status === 'Verified' ? 'Disbursed' : 'Rejected';
+        } else {
+          const statusMap = { 'Verified': 'Approved', 'Pending': 'Pending' };
+          data.stage = statusMap[data.verification_status] || 'Pending';
+          data.receipt_id = null;
+          data.tx_hash = null;
+        }
+      } catch {}
+    }
+
+    setResult(data);
+    setChecked(true);
+    setLoading(false);
+  };
+
+  const mockData = (searchNid) => {
+    if (!searchNid.toUpperCase().startsWith('NID')) return { found: false };
+    const num = parseInt(searchNid.replace(/\D/g,'')) || 91;
+    return {
+      found: true,
+      nid: searchNid.toUpperCase(),
+      name: "Babul Khatun",
+      upazila: "Zakiganj",
+      mfs_account: `bKash-${String(num).padStart(5,'0')}`,
+      verification_status: "Verified",
+      vulnerability_score: 69.18,
+      allocated_fund_bdt: 11572,
+      traditional_equal_bdt: 10000,
+      water_depth_ft: 10.0,
+      duration_days: 9,
+      distance_km: 11.0,
+      house_type: "Kutcha (Type 1)",
+      poverty_index: 0.76,
+      stage: "Approved",
+      receipt_id: null,
+      tx_hash: null,
+    };
+  };
+
+  const stageColor = (stage) => {
+    const map = { Pending:'badge-amber', Verified:'badge-blue', Approved:'badge-blue', Disbursed:'badge-green', Rejected:'badge-red' };
+    return map[stage] || 'badge-amber';
+  };
+  const stages = ['Pending', 'Verified', 'Approved', 'Disbursed'];
+  const stageLabels = {
+    Pending: t.stagePending,
+    Verified: t.stageVerified,
+    Approved: t.stageApproved,
+    Disbursed: t.stageDisbursed,
+    Rejected: t.stageRejected,
+  };
+
+  return (
+    <div style={{maxWidth:'760px', margin:'0 auto', padding:'32px 24px'}}>
+      <div className="fade-in">
+        <div style={{textAlign:'center', marginBottom:'28px'}}>
+          <div style={{fontSize:'44px', marginBottom:'10px'}}>🆘</div>
+          <h1 style={{fontSize:'24px', fontWeight:'600', marginBottom:'8px'}}>{t.victimPortalTitle}</h1>
+          <p className="text-muted text-sm">{t.victimPortalDesc}</p>
+        </div>
+
+        <div style={{display:'flex', gap:'8px', marginBottom:'24px', background:'rgba(255,255,255,0.03)', padding:'6px', borderRadius:'12px', border:'1px solid var(--border)'}}>
+          {[
+            { id:'status', label: t.checkStatusTab },
+          ].map(tabItem => (
+            <button key={tabItem.id} onClick={() => setTab(tabItem.id)} style={{
+              flex:1, padding:'10px', border:'none', borderRadius:'8px', cursor:'pointer',
+              background: tab===tabItem.id ? 'var(--accent)' : 'transparent',
+              color: tab===tabItem.id ? '#fff' : 'var(--text2)',
+              fontFamily:'var(--sans)', fontSize:'14px', fontWeight: tab===tabItem.id ? 600 : 400,
+              transition:'all 0.2s',
+            }}>
+              {tabItem.label}
+            </button>
+          ))}
+        </div>
+
+        {tab === 'status' && (
+          <div>
+            <div className="card mb-16">
+              <div className="form-group">
+                <label className="form-label">{t.nidLabel}</label>
+                <input className="form-input" placeholder={t.nidPlaceholder}
+                  value={nid} onChange={e => setNid(e.target.value)}
+                  onKeyDown={e => e.key==='Enter' && lookup()}
+                  style={{fontSize:'16px', padding:'14px'}} />
+              </div>
+              <div className="form-group">
+                <label className="form-label">{t.phoneLabel}</label>
+                <input className="form-input" placeholder={t.phonePlaceholder}
+                  value={phone} onChange={e => setPhone(e.target.value)} />
+              </div>
+              <button className="btn btn-teal" style={{width:'100%', padding:'14px', fontSize:'16px'}}
+                disabled={loading} onClick={lookup}>
+                {loading ? <><span className="spinner"/> {t.searching}</> : t.checkStatusAction}
+              </button>
+            </div>
+
+            {checked && result && (
+              <div className="fade-in">
+                {!result.found ? (
+                  <div className="card" style={{textAlign:'center', padding:'40px'}}>
+                    <div style={{fontSize:'40px', marginBottom:'12px'}}>❌</div>
+                    <div style={{fontWeight:600, marginBottom:'8px'}}>{t.notFound}</div>
+                    <div className="text-muted text-sm" style={{lineHeight:'1.8'}}>
+                      {t.notFoundDesc}
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    {/* ===== Application Stages ===== */}
+                    <div className="card mb-16">
+                      <div style={{fontWeight:600, marginBottom:'20px'}}>{t.appStages}</div>
+                      <div style={{display:'flex', alignItems:'center'}}>
+                        {stages.map((stage, i) => {
+                          const currentIdx = stages.indexOf(result.stage);
+                          const isDone = i <= currentIdx;
+                          const isCurrent = i === currentIdx;
+                          return (
+                            <React.Fragment key={stage}>
+                              <div style={{flex:1, textAlign:'center'}}>
+                                <div style={{
+                                  width:'38px', height:'38px', borderRadius:'50%', margin:'0 auto 8px',
+                                  background: isDone ? 'var(--teal)' : 'rgba(255,255,255,0.06)',
+                                  border:`2px solid ${isDone ? 'var(--teal)' : 'var(--border)'}`,
+                                  display:'flex', alignItems:'center', justifyContent:'center',
+                                  fontSize:'14px', fontWeight:'600', color: isDone ? '#fff' : 'var(--text3)',
+                                  boxShadow: isCurrent ? '0 0 12px rgba(45,212,191,0.45)' : 'none',
+                                }}>
+                                  {isDone ? '✓' : i+1}
+                                </div>
+                                <div style={{fontSize:'11px', color: isDone ? 'var(--teal2)' : 'var(--text3)', fontWeight: isCurrent ? 600 : 400}}>
+                                  {stageLabels[stage]}
+                                </div>
+                              </div>
+                              {i < stages.length-1 && (
+                                <div style={{flex:'0 0 16px', height:'2px', background: i<currentIdx ? 'var(--teal)' : 'var(--border)', marginBottom:'20px'}} />
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* ===== Applicant Info ===== */}
+                    <div className="card mb-16">
+                      <div className="flex-between mb-16">
+                        <div style={{fontWeight:600}}>{t.applicantInfo}</div>
+                        <span className={`badge ${stageColor(result.stage)}`}>{stageLabels[result.stage]}</span>
+                      </div>
+                      <div className="grid-2">
+                        {[
+                          [t.nameLabel, result.name],
+                          ['NID', result.nid],
+                          [t.upazilaLabel, result.upazila],
+                          [t.mfsAccount, result.mfs_account],
+                          [t.houseTypeLabel, result.house_type],
+                          [t.povertyIdx, result.poverty_index],
+                        ].map(([k,v]) => (
+                          <div key={k} style={{padding:'8px 0', borderBottom:'1px solid var(--border)'}}>
+                            <div className="text-xs text-dim">{k}</div>
+                            <div className="text-sm mt-8" style={{fontWeight:500}}>{v}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* ===== Flood Info ===== */}
+                    <div className="card mb-16">
+                      <div style={{fontWeight:600, marginBottom:'16px'}}>{t.floodInfo}</div>
+                      <div className="grid-3">
+                        {[
+                          [t.waterDepthFt, result.water_depth_ft+' ft'],
+                          [t.durationDays, result.duration_days + t.daysSuffix],
+                          [t.distanceKm, result.distance_km+' km'],
+                        ].map(([k,v]) => (
+                          <div key={k} className="stat-card" style={{textAlign:'center'}}>
+                            <div className="stat-label">{k}</div>
+                            <div className="stat-value text-accent" style={{fontSize:'20px'}}>{v}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* ===== Relief Allocation ===== */}
+                    <div className="card mb-16">
+                      <div style={{fontWeight:600, marginBottom:'16px'}}>{t.reliefAllocation}</div>
+                      <div className="grid-2">
+                        <div className="stat-card">
+                          <div className="stat-label">{t.vulnScore}</div>
+                          <div className="stat-value text-accent">{result.vulnerability_score}</div>
+                          <div className="stat-sub">{t.vulnCalc}</div>
+                        </div>
+                        <div className="stat-card">
+                          <div className="stat-label">{t.yourAllocation}</div>
+                          <div className="stat-value text-teal">৳{result.allocated_fund_bdt?.toLocaleString()}</div>
+                          <div className="stat-sub">{t.vsEqualShare}: ৳{result.traditional_equal_bdt?.toLocaleString()}</div>
+                        </div>
+                      </div>
+                      <div className="alert alert-info mt-16" style={{fontSize:'12px'}}>
+                        {t.vulnExplain}
+                      </div>
+                    </div>
+
+                    {/* ===== Payment Receipt ===== */}
+                    {result.receipt_id && (
+                      <div className="card">
+                        <div style={{fontWeight:600, marginBottom:'16px'}}>{t.paymentReceipt}</div>
+                        {[[t.receiptId, result.receipt_id], [t.txHashLabel, result.tx_hash]].map(([k,v]) => (
+                          <div key={k} style={{marginBottom:'12px'}}>
+                            <div className="text-xs text-dim mb-8">{k}</div>
+                            <div className="hash">{v}</div>
+                          </div>
+                        ))}
+                        <div className="badge badge-green mt-8">{t.paymentConfirmed}</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+//  APP ROOT
+// ============================================================
+function App() {
+  const [page, setPage] = useState('landing');
+  const [toast, setToast] = useState(null);
+  const [lang, setLang] = useState('bn');
+
+  const t = TRANSLATIONS[lang];
+
+  const showToast = (msg, type='info') => {
+    setToast({ msg, type, id: Date.now() });
+  };
+
+  return (
+    <LangContext.Provider value={{ lang, setLang, t }}>
+      <div>
+        <Navbar page={page} onBack={() => setPage('landing')} />
+
+        {page === 'landing' && <LandingPage onNavigate={setPage} />}
+        {page === 'admin'   && <AdminDashboard showToast={showToast} />}
+        {page === 'donor'   && <DonorDashboard showToast={showToast} />}
+        {page === 'victim'  && <VictimPortal showToast={showToast} />}
+
+        {toast && (
+          <Toast
+            key={toast.id}
+            msg={toast.msg}
+            type={toast.type}
+            onClose={() => setToast(null)}
+          />
+        )}
+      </div>
+    </LangContext.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

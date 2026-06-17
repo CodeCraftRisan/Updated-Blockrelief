@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0065
+  Victim ID       : 65
+  NID             : NID00012
+  Account Holder  : Fatema Ahmed
+  Account Number  : ACC00012
+  MFS Linked      : bKash-00012
+  Mobile          : +8801342425301
+
+  Amount Paid     : 74.14 BDT
+                    (0.000741 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf0e688ca12f1d2c28f82586047fa0cebb56dca68aef63794b27161974c6b79c7
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0219
+  Victim ID       : 19
+  NID             : NID00071
+  Account Holder  : Halima Uddin
+  Account Number  : ACC00071
+  MFS Linked      : bKash-00071
+  Mobile          : +8801949521538
+
+  Amount Paid     : 1,040.33 BDT
+                    (0.010403 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:25
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf9cc083a18d2a53f40dcf6cb633dc81f320a26a2b8686b6951513ce8290cc0d4
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

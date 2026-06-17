@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0036
+  Victim ID       : 36
+  NID             : NID00084
+  Account Holder  : Rahim Sultana
+  Account Number  : ACC00084
+  MFS Linked      : bKash-00084
+  Mobile          : +8801737345820
+
+  Amount Paid     : 71.38 BDT
+                    (0.000714 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xbf920224f35b8cc1240bd10140a79cfe2d0ddc9b1a1c9be97ae0d3b0a4169d1b
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

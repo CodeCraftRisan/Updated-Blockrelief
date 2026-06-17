@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0002
+  Victim ID       : 2
+  NID             : NID00088
+  Account Holder  : Amina Chowdhury
+  Account Number  : ACC00088
+  MFS Linked      : bKash-00088
+  Mobile          : +8801639933823
+
+  Amount Paid     : 64.23 BDT
+                    (0.000642 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x0777dae9b11e9492a11057a9bb9030f6df59c0d874efcf397f5117d4e941e65a
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

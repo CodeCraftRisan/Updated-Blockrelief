@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0395
+  Victim ID       : 95
+  NID             : NID00092
+  Account Holder  : Mokbul Khatun
+  Account Number  : ACC00092
+  MFS Linked      : bKash-00092
+  Mobile          : +8801597350522
+
+  Amount Paid     : 857.13 BDT
+                    (0.008571 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:48
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xe22bd93558a0f64a43bb6eee0c397be238a4a959f9205490ba8fc63ab51c1f67
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

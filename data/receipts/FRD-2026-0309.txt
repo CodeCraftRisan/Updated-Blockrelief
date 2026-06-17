@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0309
+  Victim ID       : 9
+  NID             : NID00035
+  Account Holder  : Babul Islam
+  Account Number  : ACC00035
+  MFS Linked      : bKash-00035
+  Mobile          : +8801995218477
+
+  Amount Paid     : 635.92 BDT
+                    (0.006359 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x2843ed1718cc96b2812e991fbb0a64176bcde1e0b615d0fad03994647e4b7962
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

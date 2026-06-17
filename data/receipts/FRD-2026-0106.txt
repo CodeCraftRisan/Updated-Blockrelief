@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0106
+  Victim ID       : 6
+  NID             : NID00048
+  Account Holder  : Parvin Chowdhury
+  Account Number  : ACC00048
+  MFS Linked      : bKash-00048
+  Mobile          : +8801985524262
+
+  Amount Paid     : 666.70 BDT
+                    (0.006667 ETH)
+
+  TX Hash         : dd7795566ae60ead84f96a75a456a913c3f00bc5cab2663dbb545749ad134b51
+  Timestamp       : 2026-05-25 21:48:17
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x83511a6d41294097c3dcb05ba54a06353e3e784a0346e5e2b9549e5b37043a23
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

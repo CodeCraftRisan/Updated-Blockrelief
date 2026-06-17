@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0484
+  Victim ID       : 84
+  NID             : NID00017
+  Account Holder  : Babul Rahman
+  Account Number  : ACC00017
+  MFS Linked      : bKash-00017
+  Mobile          : +8801757911176
+
+  Amount Paid     : 797.31 BDT
+                    (0.007973 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:12
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xa5ac2232508b0b0d1e27f856e7bf6db10560a54ade979b489efe43263f7dff70
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

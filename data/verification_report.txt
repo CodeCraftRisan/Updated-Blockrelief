@@ -1,0 +1,13 @@
+============================================================
+BLOCK-RELIEF VERIFICATION REPORT
+============================================================
+Total volunteer submissions:    110
+Duplicate NIDs removed:         0
+Range violations removed:       0
+Unverified NIDs (not in DB):    10
+Total rejected:                 10
+------------------------------------------------------------
+FINAL VERIFIED VICTIMS:         100
+Verification Rate:              90.9%
+Fraud Detection Rate:           9.1%
+============================================================

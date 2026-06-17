@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0464
+  Victim ID       : 64
+  NID             : NID00082
+  Account Holder  : Dilara Parveen
+  Account Number  : ACC00082
+  MFS Linked      : bKash-00082
+  Mobile          : +8801331288948
+
+  Amount Paid     : 1,033.50 BDT
+                    (0.010335 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:12
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x4fcf9f874eca2e26a9b2eb5e2713aa2924ddd0ea9b3d447d3d73dbb517ebd9eb
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

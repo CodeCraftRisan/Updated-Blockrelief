@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0630
+  Victim ID       : 30
+  NID             : NID00044
+  Account Holder  : Karim Begum
+  Account Number  : ACC00044
+  MFS Linked      : bKash-00044
+  Mobile          : +8801324509187
+
+  Amount Paid     : 632.75 BDT
+                    (0.006328 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:37
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x2d8c134f47c68aa0b3eb6007fb04a6db421f2cad43a025e2103596d697437271
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

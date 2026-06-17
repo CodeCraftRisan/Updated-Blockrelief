@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0135
+  Victim ID       : 35
+  NID             : NID00010
+  Account Holder  : Shafiq Uddin
+  Account Number  : ACC00010
+  MFS Linked      : bKash-00010
+  Mobile          : +8801323217648
+
+  Amount Paid     : 702.16 BDT
+                    (0.007022 ETH)
+
+  TX Hash         : dd7795566ae60ead84f96a75a456a913c3f00bc5cab2663dbb545749ad134b51
+  Timestamp       : 2026-05-25 21:48:18
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x7e74ff3dc47082664acff6196e851384843def701b216ac3f637694ea3d77d88
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

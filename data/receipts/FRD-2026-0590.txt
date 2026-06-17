@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0590
+  Victim ID       : 90
+  NID             : NID00003
+  Account Holder  : Halima Ahmed
+  Account Number  : ACC00003
+  MFS Linked      : bKash-00003
+  Mobile          : +8801335856919
+
+  Amount Paid     : 332.18 BDT
+                    (0.003322 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:33
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x53b9ddab07d04ec57e6f74c18ffcbb280b1695a7279dcbf41945cc9030bd7c65
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

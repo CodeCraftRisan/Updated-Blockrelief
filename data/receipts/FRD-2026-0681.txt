@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0681
+  Victim ID       : 81
+  NID             : NID00073
+  Account Holder  : Rahim Uddin
+  Account Number  : ACC00073
+  MFS Linked      : bKash-00073
+  Mobile          : +8801765454431
+
+  Amount Paid     : 625.80 BDT
+                    (0.006258 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:39
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf9a9e1b62b0c95068e8d05f95e113ef0789e9aea38b33344a0eb06e01f873458
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

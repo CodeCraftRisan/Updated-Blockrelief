@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0663
+  Victim ID       : 63
+  NID             : NID00075
+  Account Holder  : Amina Sarker
+  Account Number  : ACC00075
+  MFS Linked      : bKash-00075
+  Mobile          : +8801767681017
+
+  Amount Paid     : 479.78 BDT
+                    (0.004798 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:38
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x0b614ad2bdcba1b8735652f558816e02d93428e6ea5f850bcbae3a7bb81ad22f
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

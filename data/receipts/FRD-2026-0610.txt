@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0610
+  Victim ID       : 10
+  NID             : NID00094
+  Account Holder  : Roksana Chowdhury
+  Account Number  : ACC00094
+  MFS Linked      : bKash-00094
+  Mobile          : +8801359907857
+
+  Amount Paid     : 482.37 BDT
+                    (0.004824 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:36
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x0335dc330bcacf806b376026c9ef4be813415410aea149a4f5f7854f3390f491
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

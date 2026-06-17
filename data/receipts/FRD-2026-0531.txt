@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0531
+  Victim ID       : 31
+  NID             : NID00020
+  Account Holder  : Monira Khan
+  Account Number  : ACC00020
+  MFS Linked      : bKash-00020
+  Mobile          : +8801539365614
+
+  Amount Paid     : 318.42 BDT
+                    (0.003184 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:31
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf66d74be387c9e78959f36a14b4d5ebbf3212628d0325777d3928bfe38ed21be
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

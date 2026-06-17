@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0158
+  Victim ID       : 58
+  NID             : NID00096
+  Account Holder  : Sohel Ali
+  Account Number  : ACC00096
+  MFS Linked      : bKash-00096
+  Mobile          : +8801835301054
+
+  Amount Paid     : 711.80 BDT
+                    (0.007118 ETH)
+
+  TX Hash         : dd7795566ae60ead84f96a75a456a913c3f00bc5cab2663dbb545749ad134b51
+  Timestamp       : 2026-05-25 21:48:18
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xe229e066fb736d7e8661d01ae461769143e99387656fe7a39eb7af65610b82a2
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

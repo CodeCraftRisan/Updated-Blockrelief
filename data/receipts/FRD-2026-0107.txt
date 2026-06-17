@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0107
+  Victim ID       : 7
+  NID             : NID00031
+  Account Holder  : Anwar Akter
+  Account Number  : ACC00031
+  MFS Linked      : bKash-00031
+  Mobile          : +8801840773482
+
+  Amount Paid     : 604.34 BDT
+                    (0.006043 ETH)
+
+  TX Hash         : dd7795566ae60ead84f96a75a456a913c3f00bc5cab2663dbb545749ad134b51
+  Timestamp       : 2026-05-25 21:48:17
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x875a83f3c3f1b4610cd0d36419f1e1ba1bab3ffc60ed5294a962ddaa60c4eeca
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

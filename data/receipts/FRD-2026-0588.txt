@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0588
+  Victim ID       : 88
+  NID             : NID00023
+  Account Holder  : Aziz Parveen
+  Account Number  : ACC00023
+  MFS Linked      : bKash-00023
+  Mobile          : +8801779872506
+
+  Amount Paid     : 280.63 BDT
+                    (0.002806 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:33
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x8947e86fc74ba54a356ecd56cdfcc23ffb02a52ca29a6cdfd29a800d5b1b2c50
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

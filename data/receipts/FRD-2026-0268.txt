@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0268
+  Victim ID       : 68
+  NID             : NID00054
+  Account Holder  : Sumon Parveen
+  Account Number  : ACC00054
+  MFS Linked      : bKash-00054
+  Mobile          : +8801854196734
+
+  Amount Paid     : 523.91 BDT
+                    (0.005239 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:26
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xb2fa24b81ab7c164b3f5b9c6878f125ac9cbf2c5437f93c4966af9166fcd268e
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

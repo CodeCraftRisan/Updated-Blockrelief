@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0226
+  Victim ID       : 26
+  NID             : NID00042
+  Account Holder  : Kulsum Akter
+  Account Number  : ACC00042
+  MFS Linked      : bKash-00042
+  Mobile          : +8801833020885
+
+  Amount Paid     : 892.99 BDT
+                    (0.008930 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:25
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf1f7759083d8cb99bd1246033f361b2839395ca3dbb81c41d961c1e38b543259
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0485
+  Victim ID       : 85
+  NID             : NID00083
+  Account Holder  : Shafiq Islam
+  Account Number  : ACC00083
+  MFS Linked      : bKash-00083
+  Mobile          : +8801748791628
+
+  Amount Paid     : 629.50 BDT
+                    (0.006295 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:12
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x1c0ed0d24c534af7f32f867e83d9937f16e67e8665923d50aba3a4bad1dd0c4e
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

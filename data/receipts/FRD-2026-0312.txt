@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0312
+  Victim ID       : 12
+  NID             : NID00061
+  Account Holder  : Babul Mia
+  Account Number  : ACC00061
+  MFS Linked      : bKash-00061
+  Mobile          : +8801861152700
+
+  Amount Paid     : 543.98 BDT
+                    (0.005440 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x3b4e3844e37148e7d4d472981356cb02ac887c877b1b25b228f038e0a0250fa1
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

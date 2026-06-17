@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0589
+  Victim ID       : 89
+  NID             : NID00053
+  Account Holder  : Habib Chowdhury
+  Account Number  : ACC00053
+  MFS Linked      : bKash-00053
+  Mobile          : +8801583851335
+
+  Amount Paid     : 388.01 BDT
+                    (0.003880 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:33
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xb61900a7fb4cc107daa0c2ad71702dc04e39fb2449c882f0d16d62ac0f5170e2
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0342
+  Victim ID       : 42
+  NID             : NID00033
+  Account Holder  : Mokbul Begum
+  Account Number  : ACC00033
+  MFS Linked      : bKash-00033
+  Mobile          : +8801359437769
+
+  Amount Paid     : 703.50 BDT
+                    (0.007035 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x0983c2d2b10f64cd4c67f411ad63550ab6e9bb0261c916790c61502402759206
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

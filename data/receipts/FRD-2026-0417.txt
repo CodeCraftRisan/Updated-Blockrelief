@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0417
+  Victim ID       : 17
+  NID             : NID00028
+  Account Holder  : Amina Uddin
+  Account Number  : ACC00028
+  MFS Linked      : bKash-00028
+  Mobile          : +8801988507230
+
+  Amount Paid     : 582.12 BDT
+                    (0.005821 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:11
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x1673b7384afd1f6ec1b693e53542ea97253e8ec1144e91a417676dcdd8325ab3
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0692
+  Victim ID       : 92
+  NID             : NID00095
+  Account Holder  : Babul Sarker
+  Account Number  : ACC00095
+  MFS Linked      : bKash-00095
+  Mobile          : +8801317468810
+
+  Amount Paid     : 523.94 BDT
+                    (0.005239 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:39
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xe47db601092500f66978061b8309747339659027eac3e9231bb58be3835212cf
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

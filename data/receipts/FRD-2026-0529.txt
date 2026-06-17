@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0529
+  Victim ID       : 29
+  NID             : NID00040
+  Account Holder  : Sumon Chowdhury
+  Account Number  : ACC00040
+  MFS Linked      : bKash-00040
+  Mobile          : +8801872182821
+
+  Amount Paid     : 263.28 BDT
+                    (0.002633 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:31
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xf4727fe3c45a202c08dd548723fd2b7a7aa1e429083def2290cb4e4c9ae063be
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

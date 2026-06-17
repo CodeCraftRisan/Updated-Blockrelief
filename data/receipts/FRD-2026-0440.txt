@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0440
+  Victim ID       : 40
+  NID             : NID00049
+  Account Holder  : Anwar Sarker
+  Account Number  : ACC00049
+  MFS Linked      : bKash-00049
+  Mobile          : +8801610448345
+
+  Amount Paid     : 963.65 BDT
+                    (0.009636 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:11
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x4612338c911f92435234201679130b9c2758e99407fed6b59832cdf12b3072ec
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

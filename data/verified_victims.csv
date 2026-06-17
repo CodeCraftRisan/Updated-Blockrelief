@@ -1,0 +1,101 @@
+Victim_ID,NID,Water_Depth_ft,Duration_Days,Distance_km,Name,Upazila,House_Type,Poverty_Index,Phone,MFS_Account,Verification_Status
+1,NID00091,10.0,9,11.0,Babul Khatun,Zakiganj,1.0,0.76,8801517136029.0,bKash-00091,Verified
+2,NID00088,4.8,17,9.1,Amina Chowdhury,Osmaninagar,2.0,0.33,8801639933823.0,bKash-00088,Verified
+3,NID00079,4.8,9,2.0,Sumon Sultana,Jaintiapur,2.0,0.87,8801781275364.0,bKash-00079,Verified
+4,NID00068,1.3,11,13.8,Shafiq Hossain,Tahirpur,2.0,0.68,8801552801198.0,bKash-00068,Verified
+5,NID00007,7.0,15,12.0,Halima Khan,Tahirpur,3.0,0.48,8801713741196.0,bKash-00007,Verified
+6,NID00048,6.9,6,0.8,Parvin Chowdhury,Kanaighat,3.0,0.38,8801985524262.0,bKash-00048,Verified
+7,NID00031,4.9,3,9.9,Anwar Akter,Gowainghat,1.0,0.6,8801840773482.0,bKash-00031,Verified
+8,NID00058,10.8,17,11.7,Habib Ali,Gowainghat,2.0,0.54,8801330812709.0,bKash-00058,Verified
+9,NID00035,2.4,5,5.9,Babul Islam,Kanaighat,3.0,0.61,8801995218477.0,bKash-00035,Verified
+10,NID00094,4.6,12,1.5,Roksana Chowdhury,Companiganj,1.0,0.54,8801359907857.0,bKash-00094,Verified
+11,NID00009,4.5,18,1.6,Karim Ahmed,Balaganj,3.0,0.51,8801321720477.0,bKash-00009,Verified
+12,NID00061,2.0,14,2.0,Babul Mia,Balaganj,3.0,0.33,8801861152700.0,bKash-00061,Verified
+13,NID00086,6.3,11,12.7,Monira Uddin,Zakiganj,2.0,0.45,8801653109628.0,bKash-00086,Verified
+14,NID00066,8.6,9,13.7,Abdul Mia,Kanaighat,1.0,0.95,8801643978002.0,bKash-00066,Verified
+15,NID00046,6.6,2,2.3,Rafiq Sarker,Bishwamvarpur,2.0,0.7,8801765478034.0,bKash-00046,Verified
+16,NID00008,2.7,12,3.9,Shafiq Islam,Sunamganj Sadar,3.0,0.33,8801393692386.0,bKash-00008,Verified
+17,NID00028,5.2,3,2.9,Amina Uddin,Osmaninagar,2.0,0.48,8801988507230.0,bKash-00028,Verified
+18,NID00022,1.0,3,3.2,Sohel Chowdhury,Jaintiapur,2.0,0.98,8801779426200.0,bKash-00022,Verified
+19,NID00071,10.6,1,12.6,Halima Uddin,Jaintiapur,2.0,0.96,8801949521538.0,bKash-00071,Verified
+20,NID00043,1.9,8,5.3,Anwar Ahmed,Sunamganj Sadar,3.0,0.6,8801787031056.0,bKash-00043,Verified
+21,NID00019,7.6,8,5.0,Josna Hossain,Companiganj,3.0,0.79,8801756977874.0,bKash-00019,Verified
+22,NID00016,6.9,9,9.3,Abdul Sultana,Osmaninagar,3.0,0.89,8801824573458.0,bKash-00016,Verified
+23,NID00025,11.2,5,6.0,Salma Sultana,Zakiganj,2.0,0.58,8801854362902.0,bKash-00025,Verified
+24,NID00059,3.6,14,11.3,Anwar Chowdhury,Sunamganj Sadar,3.0,0.63,8801899589817.0,bKash-00059,Verified
+25,NID00013,9.4,3,3.5,Tariq Parveen,Jaintiapur,3.0,0.49,8801898146618.0,bKash-00013,Verified
+26,NID00042,6.8,5,11.9,Kulsum Akter,Zakiganj,3.0,0.76,8801833020885.0,bKash-00042,Verified
+27,NID00093,8.9,5,9.3,Monira Mia,Kanaighat,2.0,0.78,8801846869124.0,bKash-00093,Verified
+28,NID00060,2.6,14,6.5,Nurjahan Ahmed,Bishwamvarpur,3.0,0.75,8801749301804.0,bKash-00060,Verified
+29,NID00040,2.5,4,13.0,Sumon Chowdhury,Balaganj,3.0,0.75,8801872182821.0,bKash-00040,Verified
+30,NID00044,8.6,13,13.9,Karim Begum,Gowainghat,3.0,0.81,8801324509187.0,bKash-00044,Verified
+31,NID00020,10.3,10,7.3,Monira Khan,Osmaninagar,3.0,0.4,8801539365614.0,bKash-00020,Verified
+32,NID00036,9.2,18,7.5,Fatema Akter,Osmaninagar,3.0,0.47,8801826434343.0,bKash-00036,Verified
+33,NID00063,1.3,8,13.8,Sohel Ali,Zakiganj,3.0,0.92,8801988998740.0,bKash-00063,Verified
+34,NID00041,10.5,8,9.0,Rahim Parveen,Jaintiapur,2.0,0.66,8801690768647.0,bKash-00041,Verified
+35,NID00010,4.9,7,1.0,Shafiq Uddin,Osmaninagar,2.0,0.68,8801323217648.0,bKash-00010,Verified
+36,NID00084,5.4,8,13.7,Rahim Sultana,Gowainghat,3.0,0.44,8801737345820.0,bKash-00084,Verified
+37,NID00029,2.2,14,4.1,Rashida Islam,Bishwamvarpur,3.0,0.43,8801527310852.0,bKash-00029,Verified
+38,NID00067,3.0,6,2.9,Rashida Mia,Companiganj,2.0,0.65,8801765553464.0,bKash-00067,Verified
+39,NID00097,7.2,1,1.0,Salma Chowdhury,Sunamganj Sadar,3.0,0.79,8801315001045.0,bKash-00097,Verified
+40,NID00049,10.2,15,5.0,Anwar Sarker,Companiganj,3.0,0.54,8801610448345.0,bKash-00049,Verified
+41,NID00024,2.0,1,11.8,Roksana Parveen,Gowainghat,3.0,0.33,8801820198499.0,bKash-00024,Verified
+42,NID00033,6.9,17,4.5,Mokbul Begum,Kanaighat,2.0,0.34,8801359437769.0,bKash-00033,Verified
+43,NID00070,3.6,1,3.7,Shafiq Chowdhury,Bishwamvarpur,3.0,0.73,8801320986868.0,bKash-00070,Verified
+44,NID00052,4.8,15,3.6,Karim Parveen,Sunamganj Sadar,3.0,0.52,8801848538877.0,bKash-00052,Verified
+45,NID00027,6.2,2,8.0,Josna Uddin,Kanaighat,3.0,0.82,8801833614649.0,bKash-00027,Verified
+46,NID00064,4.9,14,14.6,Nasrin Ali,Jaintiapur,3.0,0.48,8801665257851.0,bKash-00064,Verified
+47,NID00030,8.1,8,7.2,Nasrin Khatun,Companiganj,2.0,0.36,8801664564054.0,bKash-00030,Verified
+48,NID00018,6.3,8,8.6,Parvin Sultana,Companiganj,3.0,0.59,8801763953229.0,bKash-00018,Verified
+49,NID00089,9.1,7,8.3,Mokbul Uddin,Companiganj,3.0,0.73,8801894461358.0,bKash-00089,Verified
+50,NID00056,7.1,19,3.2,Josna Parveen,Companiganj,3.0,0.83,8801748503931.0,bKash-00056,Verified
+51,NID00076,7.5,6,4.8,Rashida Sarker,Osmaninagar,2.0,0.77,8801766987271.0,bKash-00076,Verified
+52,NID00038,7.2,6,5.0,Sohel Khatun,Companiganj,3.0,0.43,8801690497273.0,bKash-00038,Verified
+53,NID00090,5.2,3,6.3,Abdul Islam,Kanaighat,1.0,0.54,8801361509697.0,bKash-00090,Verified
+54,NID00087,4.7,7,6.7,Abdul Uddin,Jaintiapur,2.0,0.56,8801962827729.0,bKash-00087,Verified
+55,NID00011,10.9,19,12.1,Rafiq Islam,Bishwamvarpur,2.0,0.53,8801969946863.0,bKash-00011,Verified
+56,NID00002,7.7,8,5.6,Parvin Chowdhury,Zakiganj,2.0,0.53,8801783963364.0,bKash-00002,Verified
+57,NID00014,3.7,10,7.3,Jamal Begum,Balaganj,3.0,0.98,8801670995760.0,bKash-00014,Verified
+58,NID00096,4.6,15,6.0,Sohel Ali,Osmaninagar,1.0,0.65,8801835301054.0,bKash-00096,Verified
+59,NID00015,11.3,1,12.6,Sohel Islam,Zakiganj,2.0,0.62,8801756547339.0,bKash-00015,Verified
+60,NID00098,1.1,7,9.0,Rashida Hossain,Zakiganj,1.0,0.54,8801638267184.0,bKash-00098,Verified
+61,NID00047,3.5,4,4.8,Karim Rahman,Companiganj,2.0,0.41,8801822831595.0,bKash-00047,Verified
+62,NID00057,6.4,1,8.2,Sumon Islam,Companiganj,3.0,0.86,8801397580056.0,bKash-00057,Verified
+63,NID00075,2.0,1,7.5,Amina Sarker,Companiganj,1.0,0.86,8801767681017.0,bKash-00075,Verified
+64,NID00082,9.9,4,7.7,Dilara Parveen,Balaganj,3.0,0.87,8801331288948.0,bKash-00082,Verified
+65,NID00012,1.6,2,11.6,Fatema Ahmed,Tahirpur,3.0,0.88,8801342425301.0,bKash-00012,Verified
+66,NID00050,10.3,10,2.0,Tariq Begum,Companiganj,3.0,0.36,8801684936358.0,bKash-00050,Verified
+67,NID00100,1.6,5,5.3,Karim Parveen,Gowainghat,2.0,0.33,8801533930984.0,bKash-00100,Verified
+68,NID00054,1.2,10,1.6,Sumon Parveen,Zakiganj,3.0,0.42,8801854196734.0,bKash-00054,Verified
+69,NID00080,8.7,1,11.4,Fatema Hossain,Jaintiapur,2.0,0.87,8801352734307.0,bKash-00080,Verified
+70,NID00026,12.0,6,4.4,Dilara Akter,Tahirpur,2.0,0.6,8801394673574.0,bKash-00026,Verified
+71,NID00039,10.9,13,13.5,Tariq Ali,Companiganj,3.0,0.95,8801590954884.0,bKash-00039,Verified
+72,NID00072,7.3,15,8.1,Kulsum Ahmed,Sunamganj Sadar,2.0,0.96,8801348673354.0,bKash-00072,Verified
+73,NID00034,11.1,4,12.1,Babul Mia,Tahirpur,2.0,0.94,8801541665404.0,bKash-00034,Verified
+74,NID00032,1.1,13,14.7,Josna Sultana,Balaganj,3.0,0.78,8801687273675.0,bKash-00032,Verified
+75,NID00065,11.7,15,12.7,Roksana Ali,Zakiganj,3.0,0.31,8801822842659.0,bKash-00065,Verified
+76,NID00062,6.4,8,13.1,Sohel Sultana,Tahirpur,2.0,0.96,8801862187215.0,bKash-00062,Verified
+77,NID00004,9.0,5,6.4,Parvin Islam,Jaintiapur,3.0,0.99,8801665395426.0,bKash-00004,Verified
+78,NID00077,10.0,15,8.5,Nasrin Sultana,Tahirpur,3.0,0.7,8801555718843.0,bKash-00077,Verified
+79,NID00045,8.9,4,4.2,Aziz Rahman,Companiganj,3.0,0.33,8801715409861.0,bKash-00045,Verified
+80,NID00051,6.9,12,3.3,Belal Parveen,Sunamganj Sadar,2.0,0.37,8801925814828.0,bKash-00051,Verified
+81,NID00073,10.2,2,9.1,Rahim Uddin,Tahirpur,3.0,0.91,8801765454431.0,bKash-00073,Verified
+82,NID00078,3.3,19,5.4,Rashida Mia,Gowainghat,2.0,0.39,8801578452891.0,bKash-00078,Verified
+83,NID00085,11.6,19,8.8,Sumon Rahman,Jaintiapur,3.0,0.49,8801830088365.0,bKash-00085,Verified
+84,NID00017,8.8,4,13.4,Babul Rahman,Zakiganj,3.0,0.44,8801757911176.0,bKash-00017,Verified
+85,NID00083,3.2,4,8.6,Shafiq Islam,Gowainghat,1.0,0.76,8801748791628.0,bKash-00083,Verified
+86,NID00074,6.8,5,12.2,Abdul Khan,Tahirpur,3.0,0.75,8801987982667.0,bKash-00074,Verified
+87,NID00037,8.8,11,14.8,Sohel Chowdhury,Jaintiapur,2.0,0.37,8801550201137.0,bKash-00037,Verified
+88,NID00023,2.0,8,12.2,Aziz Parveen,Osmaninagar,3.0,0.8,8801779872506.0,bKash-00023,Verified
+89,NID00053,6.6,6,14.5,Habib Chowdhury,Tahirpur,3.0,0.99,8801583851335.0,bKash-00053,Verified
+90,NID00003,11.3,6,14.2,Halima Ahmed,Zakiganj,3.0,0.41,8801335856919.0,bKash-00003,Verified
+91,NID00005,4.5,8,2.5,Rashida Sarker,Zakiganj,2.0,0.89,8801710070640.0,bKash-00005,Verified
+92,NID00095,7.5,15,6.4,Babul Sarker,Osmaninagar,2.0,0.48,8801317468810.0,bKash-00095,Verified
+93,NID00069,5.1,14,5.2,Tariq Ahmed,Kanaighat,2.0,0.78,8801345427853.0,bKash-00069,Verified
+94,NID00081,6.0,11,1.8,Habib Khatun,Gowainghat,2.0,0.74,8801655791733.0,bKash-00081,Verified
+95,NID00092,7.0,12,9.7,Mokbul Khatun,Sunamganj Sadar,3.0,0.57,8801597350522.0,bKash-00092,Verified
+96,NID00006,7.0,13,11.2,Salma Khatun,Gowainghat,3.0,0.9,8801972976036.0,bKash-00006,Verified
+97,NID00055,3.2,8,12.8,Dilara Sultana,Bishwamvarpur,1.0,0.31,8801399630668.0,bKash-00055,Verified
+98,NID00021,8.5,18,2.3,Belal Sultana,Osmaninagar,3.0,0.39,8801861371106.0,bKash-00021,Verified
+99,NID00001,2.0,1,13.2,Rashida Akter,Bishwamvarpur,2.0,0.77,8801313369720.0,bKash-00001,Verified
+100,NID00099,2.5,15,9.8,Mizan Ali,Balaganj,3.0,0.96,8801814345760.0,bKash-00099,Verified

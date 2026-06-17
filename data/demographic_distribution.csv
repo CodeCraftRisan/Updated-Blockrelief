@@ -1,0 +1,101 @@
+Victim_ID,NID,Name,Gender,Housing_Class,Poverty_Class,Upazila,Vulnerability_Score,Allocated_Fund_BDT,Traditional_Equal_BDT
+1,NID00091,Babul Khatun,Male,Kutcha,Moderately Poor (0.5 <= Poverty Index < 0.8),Zakiganj,77.64,13850.0,10000.0
+2,NID00088,Amina Chowdhury,Female,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Osmaninagar,48.0,8563.0,10000.0
+3,NID00079,Sumon Sultana,Male,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Jaintiapur,61.12,10903.0,10000.0
+4,NID00068,Shafiq Hossain,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Tahirpur,49.45,8821.0,10000.0
+5,NID00007,Halima Khan,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Tahirpur,54.86,9787.0,10000.0
+6,NID00048,Parvin Chowdhury,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Kanaighat,41.35,7376.0,10000.0
+7,NID00031,Anwar Akter,Male,Kutcha,Moderately Poor (0.5 <= Poverty Index < 0.8),Gowainghat,53.62,9565.0,10000.0
+8,NID00058,Habib Ali,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Gowainghat,72.73,12974.0,10000.0
+9,NID00035,Babul Islam,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Kanaighat,39.05,6966.0,10000.0
+10,NID00094,Roksana Chowdhury,Female,Kutcha,Moderately Poor (0.5 <= Poverty Index < 0.8),Companiganj,54.08,9647.0,10000.0
+11,NID00009,Karim Ahmed,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Balaganj,48.27,8611.0,10000.0
+12,NID00061,Babul Mia,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Balaganj,32.18,5741.0,10000.0
+13,NID00086,Monira Uddin,Female,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Zakiganj,53.6,9562.0,10000.0
+14,NID00066,Abdul Mia,Male,Kutcha,Extremely Poor (Poverty Index >= 0.8),Kanaighat,82.0,14628.0,10000.0
+15,NID00046,Rafiq Sarker,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Bishwamvarpur,54.77,9770.0,10000.0
+16,NID00008,Shafiq Islam,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Sunamganj Sadar,33.26,5933.0,10000.0
+17,NID00028,Amina Uddin,Female,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Osmaninagar,43.5,7760.0,10000.0
+18,NID00022,Sohel Chowdhury,Male,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Jaintiapur,51.55,9196.0,10000.0
+19,NID00071,Halima Uddin,Female,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Jaintiapur,77.74,13868.0,10000.0
+20,NID00043,Anwar Ahmed,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Sunamganj Sadar,39.18,6989.0,10000.0
+21,NID00019,Josna Hossain,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Companiganj,61.48,10968.0,10000.0
+22,NID00016,Abdul Sultana,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Osmaninagar,65.41,11669.0,10000.0
+23,NID00025,Salma Sultana,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Zakiganj,65.52,11688.0,10000.0
+24,NID00059,Anwar Chowdhury,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Sunamganj Sadar,50.68,9041.0,10000.0
+25,NID00013,Tariq Parveen,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Jaintiapur,50.98,9094.0,10000.0
+26,NID00042,Kulsum Akter,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Zakiganj,58.26,10393.0,10000.0
+27,NID00093,Monira Mia,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Kanaighat,68.05,12140.0,10000.0
+28,NID00060,Nurjahan Ahmed,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Bishwamvarpur,51.17,9128.0,10000.0
+29,NID00040,Sumon Chowdhury,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Balaganj,46.12,8227.0,10000.0
+30,NID00044,Karim Begum,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Gowainghat,70.94,12655.0,10000.0
+31,NID00020,Monira Khan,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Osmaninagar,55.78,9951.0,10000.0
+32,NID00036,Fatema Akter,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Osmaninagar,60.99,10880.0,10000.0
+33,NID00063,Sohel Ali,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Zakiganj,52.37,9342.0,10000.0
+34,NID00041,Rahim Parveen,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Jaintiapur,69.64,12423.0,10000.0
+35,NID00010,Shafiq Uddin,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Osmaninagar,52.47,9360.0,10000.0
+36,NID00084,Rahim Sultana,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Gowainghat,44.88,8006.0,10000.0
+37,NID00029,Rashida Islam,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Bishwamvarpur,37.16,6629.0,10000.0
+38,NID00067,Rashida Mia,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Companiganj,46.18,8238.0,10000.0
+39,NID00097,Salma Chowdhury,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Sunamganj Sadar,54.51,9724.0,10000.0
+40,NID00049,Anwar Sarker,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Companiganj,63.55,11337.0,10000.0
+41,NID00024,Roksana Parveen,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Gowainghat,26.36,4702.0,10000.0
+42,NID00033,Mokbul Begum,Male,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Kanaighat,52.57,9378.0,10000.0
+43,NID00070,Shafiq Chowdhury,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Bishwamvarpur,43.47,7755.0,10000.0
+44,NID00052,Karim Parveen,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Sunamganj Sadar,48.03,8568.0,10000.0
+45,NID00027,Josna Uddin,Female,Pucca,Extremely Poor (Poverty Index >= 0.8),Kanaighat,55.77,9949.0,10000.0
+46,NID00064,Nasrin Ali,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Jaintiapur,49.39,8811.0,10000.0
+47,NID00030,Nasrin Khatun,Female,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Companiganj,51.27,9146.0,10000.0
+48,NID00018,Parvin Sultana,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Companiganj,51.47,9182.0,10000.0
+49,NID00089,Mokbul Uddin,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Companiganj,63.49,11326.0,10000.0
+50,NID00056,Josna Parveen,Female,Pucca,Extremely Poor (Poverty Index >= 0.8),Companiganj,68.56,12231.0,10000.0
+51,NID00076,Rashida Sarker,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Osmaninagar,63.28,11289.0,10000.0
+52,NID00038,Sohel Khatun,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Companiganj,45.32,8085.0,10000.0
+53,NID00090,Abdul Islam,Male,Kutcha,Moderately Poor (0.5 <= Poverty Index < 0.8),Kanaighat,51.05,9107.0,10000.0
+54,NID00087,Abdul Uddin,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Jaintiapur,49.06,8752.0,10000.0
+55,NID00011,Rafiq Islam,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Bishwamvarpur,74.08,13215.0,10000.0
+56,NID00002,Parvin Chowdhury,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Zakiganj,56.23,10031.0,10000.0
+57,NID00014,Jamal Begum,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Balaganj,60.43,10780.0,10000.0
+58,NID00096,Sohel Ali,Male,Kutcha,Moderately Poor (0.5 <= Poverty Index < 0.8),Osmaninagar,61.65,10998.0,10000.0
+59,NID00015,Sohel Islam,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Zakiganj,66.6,11881.0,10000.0
+60,NID00098,Rashida Hossain,Female,Kutcha,Moderately Poor (0.5 <= Poverty Index < 0.8),Zakiganj,43.67,7790.0,10000.0
+61,NID00047,Karim Rahman,Male,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Companiganj,37.56,6700.0,10000.0
+62,NID00057,Sumon Islam,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Companiganj,57.22,10208.0,10000.0
+63,NID00075,Amina Sarker,Female,Kutcha,Extremely Poor (Poverty Index >= 0.8),Companiganj,53.79,9596.0,10000.0
+64,NID00082,Dilara Parveen,Female,Pucca,Extremely Poor (Poverty Index >= 0.8),Balaganj,68.76,12266.0,10000.0
+65,NID00012,Fatema Ahmed,Female,Pucca,Extremely Poor (Poverty Index >= 0.8),Tahirpur,46.93,8372.0,10000.0
+66,NID00050,Tariq Begum,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Companiganj,52.67,9396.0,10000.0
+67,NID00100,Karim Parveen,Male,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Gowainghat,30.28,5402.0,10000.0
+68,NID00054,Sumon Parveen,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Zakiganj,30.68,5473.0,10000.0
+69,NID00080,Fatema Hossain,Female,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Jaintiapur,68.9,12291.0,10000.0
+70,NID00026,Dilara Akter,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Tahirpur,68.61,12239.0,10000.0
+71,NID00039,Tariq Ali,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Companiganj,82.27,14676.0,10000.0
+72,NID00072,Kulsum Ahmed,Female,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Sunamganj Sadar,77.06,13747.0,10000.0
+73,NID00034,Babul Mia,Male,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Tahirpur,80.17,14302.0,10000.0
+74,NID00032,Josna Sultana,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Balaganj,50.12,8941.0,10000.0
+75,NID00065,Roksana Ali,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Zakiganj,61.05,10891.0,10000.0
+76,NID00062,Sohel Sultana,Male,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Tahirpur,71.46,12748.0,10000.0
+77,NID00004,Parvin Islam,Female,Pucca,Extremely Poor (Poverty Index >= 0.8),Jaintiapur,71.24,12709.0,10000.0
+78,NID00077,Nasrin Sultana,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Tahirpur,70.18,12520.0,10000.0
+79,NID00045,Aziz Rahman,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Companiganj,44.42,7924.0,10000.0
+80,NID00051,Belal Parveen,Male,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Sunamganj Sadar,49.99,8918.0,10000.0
+81,NID00073,Rahim Uddin,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Tahirpur,70.16,12516.0,10000.0
+82,NID00078,Rashida Mia,Female,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Gowainghat,46.55,8304.0,10000.0
+83,NID00085,Sumon Rahman,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Jaintiapur,69.18,12341.0,10000.0
+84,NID00017,Babul Rahman,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Zakiganj,51.12,9119.0,10000.0
+85,NID00083,Shafiq Islam,Male,Kutcha,Moderately Poor (0.5 <= Poverty Index < 0.8),Gowainghat,55.51,9903.0,10000.0
+86,NID00074,Abdul Khan,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Tahirpur,57.97,10341.0,10000.0
+87,NID00037,Sohel Chowdhury,Male,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Jaintiapur,57.81,10313.0,10000.0
+88,NID00023,Aziz Parveen,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Osmaninagar,49.16,8770.0,10000.0
+89,NID00053,Habib Chowdhury,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Tahirpur,67.97,12125.0,10000.0
+90,NID00003,Halima Ahmed,Female,Pucca,Relatively Better-off (Poverty Index < 0.5),Zakiganj,58.19,10381.0,10000.0
+91,NID00005,Rashida Sarker,Female,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Zakiganj,60.56,10803.0,10000.0
+92,NID00095,Babul Sarker,Male,Semi-pucca,Relatively Better-off (Poverty Index < 0.5),Osmaninagar,58.74,10479.0,10000.0
+93,NID00069,Tariq Ahmed,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Kanaighat,62.8,11203.0,10000.0
+94,NID00081,Habib Khatun,Male,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Gowainghat,60.62,10814.0,10000.0
+95,NID00092,Mokbul Khatun,Male,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Sunamganj Sadar,55.59,9917.0,10000.0
+96,NID00006,Salma Khatun,Female,Pucca,Extremely Poor (Poverty Index >= 0.8),Gowainghat,69.32,12366.0,10000.0
+97,NID00055,Dilara Sultana,Female,Kutcha,Relatively Better-off (Poverty Index < 0.5),Bishwamvarpur,42.26,7539.0,10000.0
+98,NID00021,Belal Sultana,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Osmaninagar,54.51,9724.0,10000.0
+99,NID00001,Rashida Akter,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Bishwamvarpur,47.83,8532.0,10000.0
+100,NID00099,Mizan Ali,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Balaganj,60.6,10811.0,10000.0

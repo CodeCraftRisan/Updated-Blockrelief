@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0445
+  Victim ID       : 45
+  NID             : NID00027
+  Account Holder  : Josna Uddin
+  Account Number  : ACC00027
+  MFS Linked      : bKash-00027
+  Mobile          : +8801833614649
+
+  Amount Paid     : 859.67 BDT
+                    (0.008597 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:11
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xe143cba81619ccb35694c01aeb6b61159858834b726bd04c9d18260d7302423a
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

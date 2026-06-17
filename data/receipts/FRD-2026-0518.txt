@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0518
+  Victim ID       : 18
+  NID             : NID00022
+  Account Holder  : Sohel Chowdhury
+  Account Number  : ACC00022
+  MFS Linked      : bKash-00022
+  Mobile          : +8801779426200
+
+  Amount Paid     : 294.27 BDT
+                    (0.002943 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:31
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x3824122e9887c6d1debbf5fb4cc39a9fdddfbeea215cc213a0476ec55df12aad
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

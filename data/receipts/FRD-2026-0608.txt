@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0608
+  Victim ID       : 8
+  NID             : NID00058
+  Account Holder  : Habib Ali
+  Account Number  : ACC00058
+  MFS Linked      : bKash-00058
+  Mobile          : +8801330812709
+
+  Amount Paid     : 648.72 BDT
+                    (0.006487 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:36
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x8fd7f0e08cad271a9f74309c93b98562226c0ce6bdfbc6f25bee409f4c6803d1
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

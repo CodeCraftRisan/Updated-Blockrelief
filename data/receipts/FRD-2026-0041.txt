@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0041
+  Victim ID       : 41
+  NID             : NID00024
+  Account Holder  : Roksana Parveen
+  Account Number  : ACC00024
+  MFS Linked      : bKash-00024
+  Mobile          : +8801820198499
+
+  Amount Paid     : 46.61 BDT
+                    (0.000466 ETH)
+
+  TX Hash         : cb34722f69573ef484c3208219dbce837c96012c4251252eab8dbe11c5f89db0
+  Timestamp       : 2026-05-23 13:05:46
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x19ec5369fb6b794b57fec475bbc0293373856604714da1e98f1e4e15066ab217
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

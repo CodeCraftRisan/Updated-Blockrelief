@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0425
+  Victim ID       : 25
+  NID             : NID00013
+  Account Holder  : Tariq Parveen
+  Account Number  : ACC00013
+  MFS Linked      : bKash-00013
+  Mobile          : +8801898146618
+
+  Amount Paid     : 795.44 BDT
+                    (0.007954 ETH)
+
+  TX Hash         : 689bca40b12f32cc556944018db20c6fd4f6b2d309bbfa6338350e54ef3d6408
+  Timestamp       : 2026-06-02 18:56:11
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xe98e0bca9055e75524ea82b1a58ed66fa3f1f568769f34009c8fe83ec6609d6b
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

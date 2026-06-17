@@ -1,0 +1,6 @@
+Network,Gas_Price_Gwei,Deploy_Gas,Deploy_Cost_Token,Register100_Cost,Distribute_Cost,Total_Token,Currency,Note
+Ganache (Local),20.0,1923440,0.0384688,0.29032202,0.044,0.37279082,ETH (fake),Free — local simulation
+Sepolia (L1 Testnet),14.58957046,1923440,0.0280621634,0.2117836783,0.032097055,0.2719428968,SepoliaETH (free),Actual deploy: 0.028062 ETH
+Polygon Amoy (L2 Testnet),29.100000063,1924280,0.0559965481,0.42241854,0.0640200001,0.5424350883,POL (free testnet),Actual deploy: 0.055997 POL
+Ethereum (L1 Mainnet) [Estimated],30.0,1923440,0.0577032,0.43548303,0.066,0.55918623,ETH,Estimated (not deployed)
+Polygon (L2 Mainnet) [Estimated],50.0,1924280,0.096214,0.72580505,0.11,0.93201905,POL/MATIC,Estimated (not deployed)

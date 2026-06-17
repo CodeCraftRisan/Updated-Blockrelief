@@ -1,0 +1,101 @@
+NID,Name,Upazila,House_Type,Poverty_Index,Phone,MFS_Account
+NID00001,Rashida Akter,Bishwamvarpur,2,0.77,+8801313369720,bKash-00001
+NID00002,Parvin Chowdhury,Zakiganj,2,0.53,+8801783963364,bKash-00002
+NID00003,Halima Ahmed,Zakiganj,3,0.41,+8801335856919,bKash-00003
+NID00004,Parvin Islam,Jaintiapur,3,0.99,+8801665395426,bKash-00004
+NID00005,Rashida Sarker,Zakiganj,2,0.89,+8801710070640,bKash-00005
+NID00006,Salma Khatun,Gowainghat,3,0.9,+8801972976036,bKash-00006
+NID00007,Halima Khan,Tahirpur,3,0.48,+8801713741196,bKash-00007
+NID00008,Shafiq Islam,Sunamganj Sadar,3,0.33,+8801393692386,bKash-00008
+NID00009,Karim Ahmed,Balaganj,3,0.51,+8801321720477,bKash-00009
+NID00010,Shafiq Uddin,Osmaninagar,2,0.68,+8801323217648,bKash-00010
+NID00011,Rafiq Islam,Bishwamvarpur,2,0.53,+8801969946863,bKash-00011
+NID00012,Fatema Ahmed,Tahirpur,3,0.88,+8801342425301,bKash-00012
+NID00013,Tariq Parveen,Jaintiapur,3,0.49,+8801898146618,bKash-00013
+NID00014,Jamal Begum,Balaganj,3,0.98,+8801670995760,bKash-00014
+NID00015,Sohel Islam,Zakiganj,2,0.62,+8801756547339,bKash-00015
+NID00016,Abdul Sultana,Osmaninagar,3,0.89,+8801824573458,bKash-00016
+NID00017,Babul Rahman,Zakiganj,3,0.44,+8801757911176,bKash-00017
+NID00018,Parvin Sultana,Companiganj,3,0.59,+8801763953229,bKash-00018
+NID00019,Josna Hossain,Companiganj,3,0.79,+8801756977874,bKash-00019
+NID00020,Monira Khan,Osmaninagar,3,0.4,+8801539365614,bKash-00020
+NID00021,Belal Sultana,Osmaninagar,3,0.39,+8801861371106,bKash-00021
+NID00022,Sohel Chowdhury,Jaintiapur,2,0.98,+8801779426200,bKash-00022
+NID00023,Aziz Parveen,Osmaninagar,3,0.8,+8801779872506,bKash-00023
+NID00024,Roksana Parveen,Gowainghat,3,0.33,+8801820198499,bKash-00024
+NID00025,Salma Sultana,Zakiganj,2,0.58,+8801854362902,bKash-00025
+NID00026,Dilara Akter,Tahirpur,2,0.6,+8801394673574,bKash-00026
+NID00027,Josna Uddin,Kanaighat,3,0.82,+8801833614649,bKash-00027
+NID00028,Amina Uddin,Osmaninagar,2,0.48,+8801988507230,bKash-00028
+NID00029,Rashida Islam,Bishwamvarpur,3,0.43,+8801527310852,bKash-00029
+NID00030,Nasrin Khatun,Companiganj,2,0.36,+8801664564054,bKash-00030
+NID00031,Anwar Akter,Gowainghat,1,0.6,+8801840773482,bKash-00031
+NID00032,Josna Sultana,Balaganj,3,0.78,+8801687273675,bKash-00032
+NID00033,Mokbul Begum,Kanaighat,2,0.34,+8801359437769,bKash-00033
+NID00034,Babul Mia,Tahirpur,2,0.94,+8801541665404,bKash-00034
+NID00035,Babul Islam,Kanaighat,3,0.61,+8801995218477,bKash-00035
+NID00036,Fatema Akter,Osmaninagar,3,0.47,+8801826434343,bKash-00036
+NID00037,Sohel Chowdhury,Jaintiapur,2,0.37,+8801550201137,bKash-00037
+NID00038,Sohel Khatun,Companiganj,3,0.43,+8801690497273,bKash-00038
+NID00039,Tariq Ali,Companiganj,3,0.95,+8801590954884,bKash-00039
+NID00040,Sumon Chowdhury,Balaganj,3,0.75,+8801872182821,bKash-00040
+NID00041,Rahim Parveen,Jaintiapur,2,0.66,+8801690768647,bKash-00041
+NID00042,Kulsum Akter,Zakiganj,3,0.76,+8801833020885,bKash-00042
+NID00043,Anwar Ahmed,Sunamganj Sadar,3,0.6,+8801787031056,bKash-00043
+NID00044,Karim Begum,Gowainghat,3,0.81,+8801324509187,bKash-00044
+NID00045,Aziz Rahman,Companiganj,3,0.33,+8801715409861,bKash-00045
+NID00046,Rafiq Sarker,Bishwamvarpur,2,0.7,+8801765478034,bKash-00046
+NID00047,Karim Rahman,Companiganj,2,0.41,+8801822831595,bKash-00047
+NID00048,Parvin Chowdhury,Kanaighat,3,0.38,+8801985524262,bKash-00048
+NID00049,Anwar Sarker,Companiganj,3,0.54,+8801610448345,bKash-00049
+NID00050,Tariq Begum,Companiganj,3,0.36,+8801684936358,bKash-00050
+NID00051,Belal Parveen,Sunamganj Sadar,2,0.37,+8801925814828,bKash-00051
+NID00052,Karim Parveen,Sunamganj Sadar,3,0.52,+8801848538877,bKash-00052
+NID00053,Habib Chowdhury,Tahirpur,3,0.99,+8801583851335,bKash-00053
+NID00054,Sumon Parveen,Zakiganj,3,0.42,+8801854196734,bKash-00054
+NID00055,Dilara Sultana,Bishwamvarpur,1,0.31,+8801399630668,bKash-00055
+NID00056,Josna Parveen,Companiganj,3,0.83,+8801748503931,bKash-00056
+NID00057,Sumon Islam,Companiganj,3,0.86,+8801397580056,bKash-00057
+NID00058,Habib Ali,Gowainghat,2,0.54,+8801330812709,bKash-00058
+NID00059,Anwar Chowdhury,Sunamganj Sadar,3,0.63,+8801899589817,bKash-00059
+NID00060,Nurjahan Ahmed,Bishwamvarpur,3,0.75,+8801749301804,bKash-00060
+NID00061,Babul Mia,Balaganj,3,0.33,+8801861152700,bKash-00061
+NID00062,Sohel Sultana,Tahirpur,2,0.96,+8801862187215,bKash-00062
+NID00063,Sohel Ali,Zakiganj,3,0.92,+8801988998740,bKash-00063
+NID00064,Nasrin Ali,Jaintiapur,3,0.48,+8801665257851,bKash-00064
+NID00065,Roksana Ali,Zakiganj,3,0.31,+8801822842659,bKash-00065
+NID00066,Abdul Mia,Kanaighat,1,0.95,+8801643978002,bKash-00066
+NID00067,Rashida Mia,Companiganj,2,0.65,+8801765553464,bKash-00067
+NID00068,Shafiq Hossain,Tahirpur,2,0.68,+8801552801198,bKash-00068
+NID00069,Tariq Ahmed,Kanaighat,2,0.78,+8801345427853,bKash-00069
+NID00070,Shafiq Chowdhury,Bishwamvarpur,3,0.73,+8801320986868,bKash-00070
+NID00071,Halima Uddin,Jaintiapur,2,0.96,+8801949521538,bKash-00071
+NID00072,Kulsum Ahmed,Sunamganj Sadar,2,0.96,+8801348673354,bKash-00072
+NID00073,Rahim Uddin,Tahirpur,3,0.91,+8801765454431,bKash-00073
+NID00074,Abdul Khan,Tahirpur,3,0.75,+8801987982667,bKash-00074
+NID00075,Amina Sarker,Companiganj,1,0.86,+8801767681017,bKash-00075
+NID00076,Rashida Sarker,Osmaninagar,2,0.77,+8801766987271,bKash-00076
+NID00077,Nasrin Sultana,Tahirpur,3,0.7,+8801555718843,bKash-00077
+NID00078,Rashida Mia,Gowainghat,2,0.39,+8801578452891,bKash-00078
+NID00079,Sumon Sultana,Jaintiapur,2,0.87,+8801781275364,bKash-00079
+NID00080,Fatema Hossain,Jaintiapur,2,0.87,+8801352734307,bKash-00080
+NID00081,Habib Khatun,Gowainghat,2,0.74,+8801655791733,bKash-00081
+NID00082,Dilara Parveen,Balaganj,3,0.87,+8801331288948,bKash-00082
+NID00083,Shafiq Islam,Gowainghat,1,0.76,+8801748791628,bKash-00083
+NID00084,Rahim Sultana,Gowainghat,3,0.44,+8801737345820,bKash-00084
+NID00085,Sumon Rahman,Jaintiapur,3,0.49,+8801830088365,bKash-00085
+NID00086,Monira Uddin,Zakiganj,2,0.45,+8801653109628,bKash-00086
+NID00087,Abdul Uddin,Jaintiapur,2,0.56,+8801962827729,bKash-00087
+NID00088,Amina Chowdhury,Osmaninagar,2,0.33,+8801639933823,bKash-00088
+NID00089,Mokbul Uddin,Companiganj,3,0.73,+8801894461358,bKash-00089
+NID00090,Abdul Islam,Kanaighat,1,0.54,+8801361509697,bKash-00090
+NID00091,Babul Khatun,Zakiganj,1,0.76,+8801517136029,bKash-00091
+NID00092,Mokbul Khatun,Sunamganj Sadar,3,0.57,+8801597350522,bKash-00092
+NID00093,Monira Mia,Kanaighat,2,0.78,+8801846869124,bKash-00093
+NID00094,Roksana Chowdhury,Companiganj,1,0.54,+8801359907857,bKash-00094
+NID00095,Babul Sarker,Osmaninagar,2,0.48,+8801317468810,bKash-00095
+NID00096,Sohel Ali,Osmaninagar,1,0.65,+8801835301054,bKash-00096
+NID00097,Salma Chowdhury,Sunamganj Sadar,3,0.79,+8801315001045,bKash-00097
+NID00098,Rashida Hossain,Zakiganj,1,0.54,+8801638267184,bKash-00098
+NID00099,Mizan Ali,Balaganj,3,0.96,+8801814345760,bKash-00099
+NID00100,Karim Parveen,Gowainghat,2,0.33,+8801533930984,bKash-00100

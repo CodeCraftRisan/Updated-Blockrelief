@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0298
+  Victim ID       : 98
+  NID             : NID00021
+  Account Holder  : Belal Sultana
+  Account Number  : ACC00021
+  MFS Linked      : bKash-00021
+  Mobile          : +8801861371106
+
+  Amount Paid     : 842.81 BDT
+                    (0.008428 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:27
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xa75be92a16eea3b81cf7cd63ea2577ce93ae09c942eeea22d92cec6e32aae4c0
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

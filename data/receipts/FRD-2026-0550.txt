@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0550
+  Victim ID       : 50
+  NID             : NID00056
+  Account Holder  : Josna Parveen
+  Account Number  : ACC00056
+  MFS Linked      : bKash-00056
+  Mobile          : +8801748503931
+
+  Amount Paid     : 391.38 BDT
+                    (0.003914 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x2b080d713817d5c1ff68c9a82975492c85e93e8e69746efa7216257df5634007
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

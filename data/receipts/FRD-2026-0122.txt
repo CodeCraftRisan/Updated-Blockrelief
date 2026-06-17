@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0122
+  Victim ID       : 22
+  NID             : NID00016
+  Account Holder  : Abdul Sultana
+  Account Number  : ACC00016
+  MFS Linked      : bKash-00016
+  Mobile          : +8801824573458
+
+  Amount Paid     : 988.54 BDT
+                    (0.009885 ETH)
+
+  TX Hash         : dd7795566ae60ead84f96a75a456a913c3f00bc5cab2663dbb545749ad134b51
+  Timestamp       : 2026-05-25 21:48:18
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xbb30d17927905315be003e2d428f5eaefb63dab1a3def05f480b045bd58300f4
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

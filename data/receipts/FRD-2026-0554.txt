@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0554
+  Victim ID       : 54
+  NID             : NID00087
+  Account Holder  : Abdul Uddin
+  Account Number  : ACC00087
+  MFS Linked      : bKash-00087
+  Mobile          : +8801962827729
+
+  Amount Paid     : 280.06 BDT
+                    (0.002801 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x80d857ca23bc7d18cb39668bd6c0a5f42011e08bc5c536c73674870e13907463
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

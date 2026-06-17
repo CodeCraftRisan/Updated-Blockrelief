@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0693
+  Victim ID       : 93
+  NID             : NID00069
+  Account Holder  : Tariq Ahmed
+  Account Number  : ACC00069
+  MFS Linked      : bKash-00069
+  Mobile          : +8801345427853
+
+  Amount Paid     : 560.15 BDT
+                    (0.005601 ETH)
+
+  TX Hash         : aaef8556c4247362a943a39a3e163072a125ccf8c07f29fcc4b684e02cdd6b9c
+  Timestamp       : 2026-06-05 21:51:39
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xe4d8b5ed3d55e6c5c4a235b74adb051ac2d19b609bfe168008faa3a79329b197
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

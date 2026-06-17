@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0333
+  Victim ID       : 33
+  NID             : NID00063
+  Account Holder  : Sohel Ali
+  Account Number  : ACC00063
+  MFS Linked      : bKash-00063
+  Mobile          : +8801988998740
+
+  Amount Paid     : 814.04 BDT
+                    (0.008140 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xeda4371bfeec1897a2945601746f84c3974ac58c7ca455d69ce408d1b0f52ef5
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

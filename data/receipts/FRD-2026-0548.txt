@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0548
+  Victim ID       : 48
+  NID             : NID00018
+  Account Holder  : Parvin Sultana
+  Account Number  : ACC00018
+  MFS Linked      : bKash-00018
+  Mobile          : +8801763953229
+
+  Amount Paid     : 293.82 BDT
+                    (0.002938 ETH)
+
+  TX Hash         : 535914c72a00f7460d3a354f1acbf6b16c14a0ce41ed3755a10eff4e6e396fec
+  Timestamp       : 2026-06-03 21:22:32
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0xbf893592cf94455c894626ecab233ed370361e8d120db5efaf71d7e7085c4d91
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0299
+  Victim ID       : 99
+  NID             : NID00001
+  Account Holder  : Rashida Akter
+  Account Number  : ACC00001
+  MFS Linked      : bKash-00001
+  Mobile          : +8801313369720
+
+  Amount Paid     : 640.07 BDT
+                    (0.006401 ETH)
+
+  TX Hash         : 621a9c682aa6000c6cb014f56365787de4971d68763efc54010c12ffd2d168e9
+  Timestamp       : 2026-05-26 08:56:27
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x7eb00502adaac128c8a525b41bf14dc5c79bb3676995712af8ee2a06491c6759
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================

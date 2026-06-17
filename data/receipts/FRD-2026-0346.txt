@@ -1,0 +1,27 @@
+
+==============================================
+       BLOCK-RELIEF PAYMENT RECEIPT
+==============================================
+
+  Receipt ID      : FRD-2026-0346
+  Victim ID       : 46
+  NID             : NID00064
+  Account Holder  : Nasrin Ali
+  Account Number  : ACC00064
+  MFS Linked      : bKash-00064
+  Mobile          : +8801665257851
+
+  Amount Paid     : 774.16 BDT
+                    (0.007742 ETH)
+
+  TX Hash         : e868697ff3a46ca3eed07eaa2d53e5fd5aecd113ddeb28bc9d3b6dbf54d30975
+  Timestamp       : 2026-06-01 15:50:47
+
+  ----------------------------------------------
+  Receipt Hash (SHA-256):
+  0x7bc08e585a0fda6172664f21addd557c5f591bb16b332920d8d2f1801885b877
+  ----------------------------------------------
+
+  This receipt is cryptographically signed and
+  cannot be altered without detection.
+==============================================
