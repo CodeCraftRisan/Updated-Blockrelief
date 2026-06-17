@@ -321,4 +321,6 @@ if __name__ == '__main__':
     print("  Block-Relief Flask API")
     print("  http://127.0.0.1:5000")
     print("=" * 50)
-    app.run(debug=True, port=5000)
+
+    debug_mode = os.getenv("DEBUG_MODE", "false").lower() == "true"
+    app.run(debug=debug_mode, port=5000)

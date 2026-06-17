@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+flask
+flask-cors
+web3
+python-dotenv
+eth-account
+pytest
+scipy

@@ -1,0 +1,5 @@
+Scenario,Gini,Mean Score,Max Score
+Original Fuzzy AHP,0.1199,56.06,82.27
+Equal Weights,0.1154,53.64,81.32
+Poverty Priority (+10%),0.1206,57.07,83.97
+Flood Severity Priority (+10%),0.1351,55.44,83.39
