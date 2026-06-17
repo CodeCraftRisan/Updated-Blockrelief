@@ -19,19 +19,23 @@ import pandas as pd
 import numpy as np
 import os
 import sys
+import logging
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent))
 import config
+from utils.logging_utils import get_logger
+
+logger = get_logger("allocate_funds")
 
 # --- File Paths ---
 SCORED_VICTIMS_PATH  = config.SCORED_CSV
 FUND_ALLOCATION_PATH = config.ALLOCATION_CSV
 
 # --- Configuration ---
-TOTAL_FUND_POOL_BDT = 1_000_000   # 10 Lakh BDT
-MIN_RELIEF_BDT      = 2_000       # Minimum floor
-MAX_RELIEF_BDT      = 25_000      # Maximum cap
+TOTAL_FUND_POOL_BDT = config.TOTAL_FUND_POOL_BDT
+MIN_RELIEF_BDT      = config.MIN_RELIEF_BDT
+MAX_RELIEF_BDT      = config.MAX_RELIEF_BDT
 
 
 def allocate_proportional_funds():
@@ -50,21 +54,21 @@ def allocate_proportional_funds():
       Traditional_Equal_BDT = TotalFund / N  (flat equal share baseline)
       Used in Gini coefficient analysis to show fairness improvement.
     """
-    print("=" * 60)
-    print("DYNAMIC FUND ALLOCATION  (Fixed v2)")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("DYNAMIC FUND ALLOCATION  (Fixed v2)")
+    logger.info("=" * 60)
 
     try:
         scored_df = pd.read_csv(SCORED_VICTIMS_PATH)
-        print(f"Scored victims loaded: {len(scored_df)} records")
+        logger.info(f"Scored victims loaded: {len(scored_df)} records")
     except FileNotFoundError:
-        print(f"ERROR: File not found → '{SCORED_VICTIMS_PATH}'")
-        print("  Run fuzzy_ahp.py first to generate scored_victims.csv")
+        logger.error(f"ERROR: File not found → '{SCORED_VICTIMS_PATH}'")
+        logger.info("  Run fuzzy_ahp.py first to generate scored_victims.csv")
         return
 
     total_score = scored_df['Vulnerability_Score'].sum()
     if total_score == 0:
-        print("ERROR: Total vulnerability score is zero. Cannot allocate.")
+        logger.error("ERROR: Total vulnerability score is zero. Cannot allocate.")
         return
 
     n = len(scored_df)
@@ -105,6 +109,14 @@ def allocate_proportional_funds():
 
     scored_df['Allocated_Fund_BDT'] = scored_df['Allocated_Fund_BDT'].round(0)
 
+    # [FIX-RESEARCH] Exact fund conservation (rounding fix)
+    total_allocated = scored_df['Allocated_Fund_BDT'].sum()
+    diff = TOTAL_FUND_POOL_BDT - total_allocated
+    if diff != 0 and not scored_df.empty:
+        # Adjust the highest scoring victim's allocation to match total pool
+        idx = scored_df['Vulnerability_Score'].idxmax()
+        scored_df.loc[idx, 'Allocated_Fund_BDT'] += diff
+
     # ---- Step 5: Traditional baseline (equal distribution) ----
     equal_amount = TOTAL_FUND_POOL_BDT / n
     scored_df['Traditional_Equal_BDT'] = round(equal_amount, 0)
@@ -129,35 +141,25 @@ def allocate_proportional_funds():
     final_cols = existing_priority + remaining
 
     scored_df[final_cols].to_csv(FUND_ALLOCATION_PATH, index=False)
-    print(f"\nAllocation saved -> '{FUND_ALLOCATION_PATH}'")
+    logger.info(f"Allocation saved -> '{FUND_ALLOCATION_PATH}'")
 
     # ---- Summary ----
     floored  = (scored_df['Raw_Allocation_BDT'] < MIN_RELIEF_BDT).sum()
     capped   = (scored_df['Raw_Allocation_BDT'] > MAX_RELIEF_BDT).sum()
     uncapped = truly_uncapped_mask.sum()
 
-    print("\n--- Allocation Summary ---")
-    print(f"Total Fund Pool:          {TOTAL_FUND_POOL_BDT:>12,.0f} BDT")
-    print(f"Total Allocated:          {scored_df['Allocated_Fund_BDT'].sum():>12,.0f} BDT")
-    print(f"Difference (rounding):    {TOTAL_FUND_POOL_BDT - scored_df['Allocated_Fund_BDT'].sum():>12,.0f} BDT")
-    print(f"Min Allocation:           {scored_df['Allocated_Fund_BDT'].min():>12,.0f} BDT")
-    print(f"Max Allocation:           {scored_df['Allocated_Fund_BDT'].max():>12,.0f} BDT")
-    print(f"Mean Allocation:          {scored_df['Allocated_Fund_BDT'].mean():>12,.0f} BDT")
-    print(f"Traditional Equal Share:  {equal_amount:>12,.0f} BDT")
-    print(f"\nClipping breakdown:")
-    print(f"  Floor-capped  (< {MIN_RELIEF_BDT:,} BDT): {floored:>4} victims")
-    print(f"  Cap-limited   (> {MAX_RELIEF_BDT:,} BDT): {capped:>4} victims")
-    print(f"  Truly uncapped (proportional):  {uncapped:>4} victims")
-
-    print("\n--- Top 5 Recipients ---")
-    display_cols = [c for c in ['Victim_ID', 'NID', 'Vulnerability_Score',
-                                 'Allocated_Fund_BDT'] if c in scored_df.columns]
-    print(scored_df[display_cols].sort_values(
-        'Allocated_Fund_BDT', ascending=False).head().to_string(index=False))
-
-    print("\n--- Bottom 5 Recipients ---")
-    print(scored_df[display_cols].sort_values(
-        'Allocated_Fund_BDT', ascending=True).head().to_string(index=False))
+    logger.info("\n--- Allocation Summary ---")
+    logger.info(f"Total Fund Pool:          {TOTAL_FUND_POOL_BDT:>12,.0f} BDT")
+    logger.info(f"Total Allocated:          {scored_df['Allocated_Fund_BDT'].sum():>12,.0f} BDT")
+    logger.info(f"Difference (rounding):    {TOTAL_FUND_POOL_BDT - scored_df['Allocated_Fund_BDT'].sum():>12,.0f} BDT")
+    logger.info(f"Min Allocation:           {scored_df['Allocated_Fund_BDT'].min():>12,.0f} BDT")
+    logger.info(f"Max Allocation:           {scored_df['Allocated_Fund_BDT'].max():>12,.0f} BDT")
+    logger.info(f"Mean Allocation:          {scored_df['Allocated_Fund_BDT'].mean():>12,.0f} BDT")
+    logger.info(f"Traditional Equal Share:  {equal_amount:>12,.0f} BDT")
+    logger.info(f"\nClipping breakdown:")
+    logger.info(f"  Floor-capped  (< {MIN_RELIEF_BDT:,} BDT): {floored:>4} victims")
+    logger.info(f"  Cap-limited   (> {MAX_RELIEF_BDT:,} BDT): {capped:>4} victims")
+    logger.info(f"  Truly uncapped (proportional):  {uncapped:>4} victims")
 
     return scored_df
 

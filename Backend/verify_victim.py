@@ -6,6 +6,9 @@ from pathlib import Path
 # Add script directory to sys.path to resolve config import from any working directory
 sys.path.append(str(Path(__file__).resolve().parent))
 import config
+from utils.logging_utils import get_logger
+
+logger = get_logger("verify_victim")
 
 # --- File Paths ---
 BASELINE_DB_PATH = config.NID_DB_CSV
@@ -31,18 +34,18 @@ def verify_victims():
     5. Flags and logs all rejected entries.
     6. Outputs verified victims and a verification report.
     """
-    print("=" * 60)
-    print("BLOCK-RELIEF: ANTI-FRAUD VERIFICATION LAYER")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("BLOCK-RELIEF: ANTI-FRAUD VERIFICATION LAYER")
+    logger.info("=" * 60)
 
     # ========== 1. Load Datasets ==========
     try:
         baseline_df = pd.read_csv(BASELINE_DB_PATH)
         volunteer_df = pd.read_csv(VOLUNTEER_INPUT_PATH)
-        print(f"Baseline database loaded: {len(baseline_df)} records")
-        print(f"Volunteer input loaded:   {len(volunteer_df)} records")
+        logger.info(f"Baseline database loaded: {len(baseline_df)} records")
+        logger.info(f"Volunteer input loaded:   {len(volunteer_df)} records")
     except FileNotFoundError as e:
-        print(f"Error: {e}. Make sure CSV files are in the 'data' folder.")
+        logger.error(f"Error: {e}. Make sure CSV files are in the 'data' folder.")
         return
 
     # ========== 2. Detect Duplicate NIDs ==========
@@ -52,7 +55,7 @@ def verify_victims():
     
     # Keep only first occurrence of each NID
     volunteer_clean = volunteer_df.drop_duplicates(subset='NID', keep='first').copy()
-    print(f"\nDuplicate NIDs found and removed: {len(duplicates_df)}")
+    logger.info(f"Duplicate NIDs found and removed: {len(duplicates_df)}")
 
     # ========== 3. Range Validation ==========
     range_violations = pd.DataFrame()
@@ -67,7 +70,7 @@ def verify_victims():
             # Remove invalid entries from clean data
             volunteer_clean = volunteer_clean[~invalid_mask]
     
-    print(f"Range violations found and removed: {len(range_violations)}")
+    logger.info(f"Range violations found and removed: {len(range_violations)}")
 
     # ========== 4. NID Verification Against Baseline ==========
     # Using indicator=True for robust merge detection
@@ -88,7 +91,7 @@ def verify_victims():
     verified_df = merged_df[verified_mask].copy()
     verified_df.drop(columns=['_merge'], inplace=True)
 
-    print(f"NID verification - Verified: {len(verified_df)}, Unverified: {len(unverified_df)}")
+    logger.info(f"NID verification - Verified: {len(verified_df)}, Unverified: {len(unverified_df)}")
 
     # ========== 5. Add Victim ID and Status ==========
     verified_df.insert(0, 'Victim_ID', range(1, 1 + len(verified_df)))
@@ -96,7 +99,7 @@ def verify_victims():
 
     # ========== 6. Save Verified Victims ==========
     verified_df.to_csv(VERIFIED_OUTPUT_PATH, index=False)
-    print(f"\nVerified victims saved to: '{VERIFIED_OUTPUT_PATH}'")
+    logger.info(f"Verified victims saved to: '{VERIFIED_OUTPUT_PATH}'")
 
     # ========== 7. Save All Rejected Entries ==========
     all_rejected = pd.concat([
@@ -106,7 +109,7 @@ def verify_victims():
     ], ignore_index=True)
     
     all_rejected.to_csv(REJECTED_OUTPUT_PATH, index=False)
-    print(f"Rejected entries saved to: '{REJECTED_OUTPUT_PATH}'")
+    logger.info(f"Rejected entries saved to: '{REJECTED_OUTPUT_PATH}'")
 
     # ========== 8. Generate Verification Report ==========
     report_lines = [
@@ -126,11 +129,11 @@ def verify_victims():
     ]
     
     report_text = '\n'.join(report_lines)
-    print(f"\n{report_text}")
+    logger.info(f"\n{report_text}")
 
     with open(VERIFICATION_REPORT_PATH, 'w') as f:
         f.write(report_text)
-    print(f"\nReport saved to: '{VERIFICATION_REPORT_PATH}'")
+    logger.info(f"Report saved to: '{VERIFICATION_REPORT_PATH}'")
 
     # ========== 9. Preview Output ==========
     print("\n--- Verified Victims (First 5) ---")

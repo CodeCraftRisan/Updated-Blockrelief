@@ -69,7 +69,7 @@ Victim_ID,NID,Name,Gender,Housing_Class,Poverty_Class,Upazila,Vulnerability_Scor
 68,NID00054,Sumon Parveen,Male,Pucca,Relatively Better-off (Poverty Index < 0.5),Zakiganj,30.68,5473.0,10000.0
 69,NID00080,Fatema Hossain,Female,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Jaintiapur,68.9,12291.0,10000.0
 70,NID00026,Dilara Akter,Female,Semi-pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Tahirpur,68.61,12239.0,10000.0
-71,NID00039,Tariq Ali,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Companiganj,82.27,14676.0,10000.0
+71,NID00039,Tariq Ali,Male,Pucca,Extremely Poor (Poverty Index >= 0.8),Companiganj,82.27,14677.0,10000.0
 72,NID00072,Kulsum Ahmed,Female,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Sunamganj Sadar,77.06,13747.0,10000.0
 73,NID00034,Babul Mia,Male,Semi-pucca,Extremely Poor (Poverty Index >= 0.8),Tahirpur,80.17,14302.0,10000.0
 74,NID00032,Josna Sultana,Female,Pucca,Moderately Poor (0.5 <= Poverty Index < 0.8),Balaganj,50.12,8941.0,10000.0

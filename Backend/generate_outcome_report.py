@@ -27,6 +27,9 @@ from pathlib import Path
 # Add script directory to sys.path
 sys.path.append(str(Path(__file__).resolve().parent))
 import config
+from utils.logging_utils import get_logger
+
+logger = get_logger("outcome_report")
 
 # Inputs / Outputs
 ALLOCATION_CSV = config.ALLOCATION_CSV
@@ -50,22 +53,22 @@ def get_gender(name: str) -> str:
     return "Unknown"
 
 def generate_report():
-    print("=" * 60)
-    print("BLOCK-RELIEF : OUTCOME REPORT GENERATOR")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("BLOCK-RELIEF : OUTCOME REPORT GENERATOR")
+    logger.info("=" * 60)
 
     # 1. Load fund allocation CSV
     try:
         df = pd.read_csv(ALLOCATION_CSV)
-        print(f"Loaded: {len(df)} victims from '{ALLOCATION_CSV}'")
+        logger.info(f"Loaded: {len(df)} victims from '{ALLOCATION_CSV}'")
     except FileNotFoundError:
-        print(f"ERROR: '{ALLOCATION_CSV}' not found. Run allocate_funds.py first.")
+        logger.error(f"ERROR: '{ALLOCATION_CSV}' not found. Run allocate_funds.py first.")
         return False
 
     required = ['Name', 'Allocated_Fund_BDT', 'Traditional_Equal_BDT', 'Vulnerability_Score', 'House_Type', 'Poverty_Index', 'Upazila']
     for col in required:
         if col not in df.columns:
-            print(f"ERROR: Missing column '{col}' in fund allocation CSV.")
+            logger.error(f"ERROR: Missing column '{col}' in fund allocation CSV.")
             return False
 
     # 2. Derive columns
@@ -229,7 +232,7 @@ def generate_report():
         f.write("3. **Anti-Bias Verification:** The distribution is based entirely on objective variables (survey and field measurements processed through Fuzzy AHP matrices). This eliminates political bias, corruption, or nepotism, which are prevalent issues in paper-based relief distribution in developing countries.\n\n")
         f.write("Report generated automatically on completion of smart contract payments.\n")
 
-    print(f"Outcome markdown report saved -> '{OUTCOME_MD}'")
+    logger.info(f"Outcome markdown report saved -> '{OUTCOME_MD}'")
 
     # ============================================================
     #  4. GENERATE MULTI-PANEL VISUALIZATION (distribution_outcome_report.png)
@@ -309,8 +312,8 @@ def generate_report():
     plt.tight_layout()
     plt.savefig(OUTCOME_PNG, dpi=150, bbox_inches='tight')
     plt.close()
-    print(f"Outcome visualization image saved -> '{OUTCOME_PNG}'")
-    print("[SUCCESS] All outcomes analyzed and reports generated successfully.")
+    logger.info(f"Outcome visualization image saved -> '{OUTCOME_PNG}'")
+    logger.info("[SUCCESS] All outcomes analyzed and reports generated successfully.")
     return True
 
 if __name__ == "__main__":

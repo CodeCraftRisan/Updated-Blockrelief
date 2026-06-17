@@ -6,9 +6,9 @@ This report provides a socio-economic and demographic analysis of the **Block-Re
 By analyzing the final outcome, this report evaluates how the algorithm shifts financial resources to those who need them most, verifying the real-world humanitarian fairness and utility of the blockchain-based distribution.
 
 ### Key Parameters & Settings
-- **Total Fund Pool:** 999,999 BDT
+- **Total Fund Pool:** 1,000,000 BDT
 - **Total Recipients:** 100 victims
-- **Fuzzy AHP Min/Max Limits:** 4,702 BDT to 14,676 BDT
+- **Fuzzy AHP Min/Max Limits:** 4,702 BDT to 14,677 BDT
 - **Traditional Baseline Share:** 10,000 BDT (Equal flat rate for all)
 
 ## 1. Gender-Based Fund Distribution
@@ -51,7 +51,7 @@ Floods impact regions unequally depending on elevation and proximity to rivers. 
 | **Kanaighat** | 8 | 56.6 | 10,093 BDT | 80,747 BDT | 8.1% |
 | **Zakiganj** | 13 | 56.6 | 10,093 BDT | 131,204 BDT | 13.1% |
 | **Osmaninagar** | 11 | 55.8 | 9,949 BDT | 109,443 BDT | 10.9% |
-| **Companiganj** | 15 | 55.6 | 9,911 BDT | 148,660 BDT | 14.9% |
+| **Companiganj** | 15 | 55.6 | 9,911 BDT | 148,661 BDT | 14.9% |
 | **Gowainghat** | 10 | 53.1 | 9,469 BDT | 94,691 BDT | 9.5% |
 | **Balaganj** | 7 | 52.4 | 9,340 BDT | 65,377 BDT | 6.5% |
 | **Sunamganj Sadar** | 8 | 51.0 | 9,105 BDT | 72,837 BDT | 7.3% |

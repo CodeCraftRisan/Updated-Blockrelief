@@ -7,6 +7,9 @@ from pathlib import Path
 # Add script directory to sys.path to resolve config import from any working directory
 sys.path.append(str(Path(__file__).resolve().parent))
 import config
+from utils.logging_utils import get_logger
+
+logger = get_logger("generate_datasets")
 
 def generate_large_scale_datasets(num_victims=100, num_volunteers=110):
     """
@@ -15,7 +18,7 @@ def generate_large_scale_datasets(num_victims=100, num_volunteers=110):
     2. volunteer_input.csv (Field Data with intentional errors for anti-fraud testing)
     3. bank_accounts.csv (Dummy E-Banking accounts)
     """
-    print(f"Generating large-scale datasets for {num_victims} victims...")
+    logger.info(f"Generating large-scale datasets for {num_victims} victims...")
     
     np.random.seed(42)
     
@@ -78,16 +81,10 @@ def generate_large_scale_datasets(num_victims=100, num_volunteers=110):
     volunteer_df.to_csv(config.VOLUNTEER_CSV, index=False)
     bank_df.to_csv(config.BANK_ACCOUNTS_CSV, index=False)
 
-    print(f"Successfully generated 3 files in '{config.DATA_DIR}' folder:")
-    print(f"   - {config.NID_DB_CSV.name} ({len(baseline_df)} rows)")
-    print(f"   - {config.VOLUNTEER_CSV.name} ({len(volunteer_df)} rows, {num_fake} fake NIDs)")
-    print(f"   - {config.BANK_ACCOUNTS_CSV.name} ({len(bank_df)} rows)")
-    
-    # --- 5. Print Sample for Verification ---
-    print("\n--- Sample: National_ID_Database (first 3 rows) ---")
-    print(baseline_df.head(3).to_string(index=False))
-    print("\n--- Sample: volunteer_input (first 3 rows) ---")
-    print(volunteer_df.head(3).to_string(index=False))
+    logger.info(f"Successfully generated 3 files in '{config.DATA_DIR}' folder:")
+    logger.info(f"   - {config.NID_DB_CSV.name} ({len(baseline_df)} rows)")
+    logger.info(f"   - {config.VOLUNTEER_CSV.name} ({len(volunteer_df)} rows, {num_fake} fake NIDs)")
+    logger.info(f"   - {config.BANK_ACCOUNTS_CSV.name} ({len(bank_df)} rows)")
 
 if __name__ == "__main__":
     generate_large_scale_datasets(num_victims=100, num_volunteers=110)

@@ -47,7 +47,6 @@ contract FloodRelief {
 
     uint256 public targetFund;
     uint256 public totalDonated;
-    uint256 public totalScore;
     uint256 public victimCount;
     bool    public isDistributed;
     bool    private locked;
@@ -155,7 +154,6 @@ contract FloodRelief {
             isPaid:          false
         });
 
-        totalScore += score;
         emit VictimRegistered(victimCount, identityHash, score, allocatedAmount, wallet);
     }
 
@@ -221,7 +219,6 @@ contract FloodRelief {
         require(totalDonated >= targetFund,          "Target fund not reached");
         require(!victimPayoutDone,                   "Already paid all victims");
         require(victimCount > 0,                     "No victims registered");
-        require(totalScore  > 0,                     "Total score is zero");
         require(fromIndex == lastDistributedId,      "Must continue from last batch");
         require(toIndex   <= victimCount,            "toIndex exceeds victim count");
         require(toIndex   >  fromIndex,              "toIndex must be > fromIndex");
@@ -231,8 +228,7 @@ contract FloodRelief {
             isDistributed = true;
             uint256 bal  = address(this).balance;
             reservePool  = bal > targetFund ? bal - targetFund : 0;
-            uint256 allocated = bal - reservePool;
-            victimPool   = allocated;
+            victimPool   = bal - reservePool;
         }
 
         // [FIX-SYNTAX] Declared batchPaid and added the missing for-loop
@@ -242,7 +238,7 @@ contract FloodRelief {
             Victim storage v = victims[i];
             if (!v.isRegistered || v.isPaid) continue;
 
-            // [FIX-RESEARCH] Use stored allocatedAmount
+            // [FIX-RESEARCH] Use stored allocatedAmount (pre-calculated off-chain)
             uint256 share = v.allocatedAmount;
 
             // [FIX-HIGH] Checks-Effects-Interactions:
@@ -280,15 +276,13 @@ contract FloodRelief {
         require(totalDonated >= targetFund, "Target fund not reached");
         require(!isDistributed,             "Already distributed");
         require(victimCount > 0,            "No victims registered");
-        require(totalScore  > 0,            "Total score is zero");
 
         isDistributed    = true;
         victimPayoutDone = true;
 
         uint256 bal  = address(this).balance;
         reservePool  = bal > targetFund ? bal - targetFund : 0;
-        uint256 allocated = bal - reservePool;
-        victimPool   = allocated;
+        victimPool   = bal - reservePool;
 
         uint256 distributed = 0;
 
@@ -296,10 +290,10 @@ contract FloodRelief {
             Victim storage v = victims[i];
             if (!v.isRegistered || v.isPaid) continue;
 
-            // [FIX-RESEARCH] Use stored allocatedAmount
+            // [FIX-RESEARCH] Use stored allocatedAmount (pre-calculated off-chain)
             uint256 share = v.allocatedAmount;
 
-            // [FIX-HIGH] State BEFORE external call
+            // [FIX-HIGH] Checks-Effects-Interactions
             v.reliefAmount    = share;
             v.isPaid          = true;
             distributed      += share;
