@@ -86,14 +86,14 @@ def handle_fund_released(event):
     sms_alert.send_relief_confirmation(mobile, receipt)
 
 
-def handle_all_distributed(event):
+def handle_distribution_finalized(event):
     args       = event["args"]
-    total      = int(args["totalDistributed"]) / 10**18
-    recipients = int(args["recipients"])
+    v_pool     = int(args["victimPool"]) / 10**18
+    r_pool     = int(args["reservePool"]) / 10**18
     print("\n" + "=" * 60)
-    print(f"🏁 ALL FUNDS DISTRIBUTED")
-    print(f"   Total to Victims : {total:.6f} ETH")
-    print(f"   Recipients       : {recipients}")
+    print(f"🏁 DISTRIBUTION FINALIZED")
+    print(f"   Victim Pool  : {v_pool:.6f} ETH")
+    print(f"   Reserve Pool : {r_pool:.6f} ETH")
     print("=" * 60 + "\n")
 
 
@@ -143,7 +143,7 @@ def main():
 
     donation_filter = contract.events.DonationReceived.create_filter(from_block=from_block)
     fund_filter     = contract.events.FundReleased.create_filter(from_block=from_block)
-    final_filter    = contract.events.AllFundsDistributed.create_filter(from_block=from_block)
+    final_filter    = contract.events.DistributionFinalized.create_filter(from_block=from_block)
 
     try:
         while True:
@@ -152,7 +152,7 @@ def main():
             for ev in fund_filter.get_new_entries():
                 handle_fund_released(ev)
             for ev in final_filter.get_new_entries():
-                handle_all_distributed(ev)
+                handle_distribution_finalized(ev)
 
             # Update state checkpoint
             current_block = w3.eth.block_number

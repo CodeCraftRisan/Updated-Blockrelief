@@ -1008,7 +1008,6 @@ explanation.
 **1) HIGH --- Reentrancy Vulnerabilities (reentrancy-eth)**
 
 Slither identified three reentrancy-eth findings in functions
-distributeBatch(), autoDistribute(), and \_pickLotteryWinners(). In the
 v2 contract, state variable updates occurred after external ETH transfer
 calls in certain code paths, creating a theoretical window for
 reentrancy attacks where a malicious contract recipient could re-enter
@@ -1028,7 +1027,6 @@ distribution loops. Specifically:
     and totalDistributed are all updated before the external payable
     call.
 
--   In \_pickLotteryWinners(): lotteryWinners.push() is called with
     claimed: true before the ETH transfer, so the winner record exists
     in state before any external call executes.
 
@@ -1044,18 +1042,14 @@ remains true throughout the entire transaction.
 **2) HIGH --- Weak Pseudo-Random Number Generation (weak-prng)**
 
 Slither flagged two instances of weak PRNG usage in the
-\_pickLotteryWinners() internal function, which selects three donor
-lottery winners. The random seed is derived from block.timestamp,
 block.prevrandao, totalDonated, donors.length, and address(this).balance
 using keccak256 hashing.
 
 This approach is acknowledged as a known limitation of the current
 implementation. In theory, a block validator on a Proof-of-Stake network
-could marginally influence block.prevrandao to bias the lottery outcome.
 However, for the following reasons, this is acceptable within the
 Block-Relief thesis evaluation scope:
 
--   The lottery pool represents only 20% of total donations, and is
     split among 3 winners --- making manipulation economically
     unattractive relative to the cost of validator influence.
 
@@ -1091,7 +1085,6 @@ as a false positive for this implementation.
 
 Slither flagged external ETH transfer calls (.call{value}()) inside
 for-loops in distributeBatch(), autoDistribute(), and
-\_pickLotteryWinners(). This pattern is generally discouraged because a
 failing call in one iteration could theoretically affect subsequent
 iterations.
 
@@ -1126,9 +1119,7 @@ acknowledged:
                                                                                   admin, saving gas on every
                                                                                   onlyAdmin check
 
-  **constable-states**    lotteryPrizePercent is assigned a constant value (20)   FIXED in v3: declared as
                           but not declared constant, wasting storage              uint256 public constant
-                                                                                  lotteryPrizePercent = 20
 
   **naming-convention**   Function parameters with underscore prefix              FIXED in v3: all
                           (\_identityHash, \_score, \_wallet) do not follow       parameters renamed to
@@ -1142,7 +1133,6 @@ acknowledged:
                                                                                   wallets. Acknowledged in
                                                                                   source comments
 
-  **timestamp**           block.timestamp used for donation recording and lottery ACCEPTABLE: timestamp is
                           seed generation                                         used for recording (not
                                                                                   critical logic). Lottery
                                                                                   seed combines 5 inputs.
@@ -1174,8 +1164,6 @@ Solidity modification applied in each case.
                                                                       totalDistributed) →
                                                                       then ETH transfer
 
-  **CEI Pattern**    \_pickLotteryWinners()   ETH transfer → then     push() with
-                                              lotteryWinners.push()   claimed:true → ETH
                                                                       transfer → if failed:
                                                                       claimed=false
 
@@ -1186,8 +1174,6 @@ Solidity modification applied in each case.
                                                                       immutable admin
 
   **Constant**       State variable:          uint256 public          uint256 public
-                     lotteryPrizePercent      lotteryPrizePercent =   constant
-                                              20                      lotteryPrizePercent =
                                                                       20
 
   **Naming**         registerVictim()         \_identityHash,         identityHash, score,
@@ -1313,7 +1299,6 @@ In real-life relief campaigns, donations often exceed the planned target. Withou
 The Block-Relief contract now tracks excess donations separately using a `reservePool`:
 
 - The contract still uses `targetFund` as the campaign goal.
-- When total donations exceed this target, the surplus is not immediately used in the current victim and lottery distribution.
 - Instead, the extra amount is held in `reservePool` for future NGO support, contingency spending, or additional relief tasks.
 
 ### 3.3 Reserve Pool Behavior
@@ -1322,8 +1307,6 @@ At distribution time, the contract computes:
 
 - `reserved = max(contractBalance - targetFund, 0)`
 - `allocated = contractBalance - reserved`
-- `lotteryPool = allocated * 20%`
-- `victimPool = allocated - lotteryPool`
 
 This ensures the original distribution target remains stable and the donated reserve is preserved separately.
 
@@ -1343,7 +1326,6 @@ The purpose of this button is not to send funds to an arbitrary external address
 
 This approach models a real-world relief operation where:
 
-- core campaign funding is used immediately for flood victims and lottery incentives,
 - surplus donations are preserved for future emergency support,
 - the administrator can later allocate the reserve for additional overhead, logistics, or follow-up relief.
 
