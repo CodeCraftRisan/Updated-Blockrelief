@@ -15,7 +15,7 @@ Block-Relief is a prototype framework for transparent, priority-aware flood reli
 The project consists of three main components:
 1. **Smart Contract:** Located in `contracts/FloodRelief.sol`. Handles donations, victim registration, and fund distribution.
 2. **Backend (Python):** Located in `Backend/`. Handles data generation, verification, scoring, and analysis.
-3. **Frontend (Web):** A lightweight HTML dashboard served through the Flask API bridge in `frontend/api_server.py` and rendered from `frontend/index.html` for administrators, donors, and recipients.
+3. **Frontend (Web):** A React-based dashboard (demo in `frontend/index.html` via `api_server.py`) for administrators, donors, and recipients.
 
 ## Installation
 
@@ -65,11 +65,6 @@ solc --combined-json abi,bin contracts/FloodRelief.sol > contracts/FloodRelief_c
 Run the Python-based test suite:
 ```bash
 python -m pytest tests/test_flood_relief.py
-```
-
-The contract tests compile `contracts/FloodRelief.sol` with `solc 0.8.20`. If your local compiler is still set to `0.8.19`, switch it first:
-```bash
-solc-select use 0.8.20
 ```
 
 ### Security Analysis
