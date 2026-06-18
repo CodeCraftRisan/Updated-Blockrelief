@@ -7,6 +7,4 @@ web3
 python-dotenv
 eth-account
 pytest
-eth-tester
-py-evm
 scipy
