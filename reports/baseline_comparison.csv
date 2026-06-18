@@ -1,5 +1,5 @@
 Model,Gini,Min,Max,Std Dev
-Fuzzy AHP (Proposed),0.1199,4702.0,14676.0,2134.09
+Fuzzy AHP (Proposed),0.1199,4702.0,14677.0,2134.11
 Equal Distribution,0.0,10000.0,10000.0,0.0
 Poverty-Only,0.1867,4842.0,15464.0,3256.64
 Flood-Depth-Only,0.2878,1591.0,19093.0,5025.01

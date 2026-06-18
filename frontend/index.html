@@ -1036,19 +1036,11 @@ const ABI = [
   },
   {
     "anonymous": false,
-    "inputs": [{"indexed": false,"internalType": "uint256","name": "totalDistributed","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "recipients","type": "uint256"}],
-    "name": "AllFundsDistributed","type": "event"
+    "inputs": [{"indexed": false,"internalType": "uint256","name": "victimPool","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "reservePool","type": "uint256"}],
+    "name": "DistributionFinalized","type": "event"
   },
-  {"inputs": [],"name": "autoDistribute","outputs": [],"stateMutability": "nonpayable","type": "function"},
-  {
-    "anonymous": false,
-    "inputs": [{"indexed": false,"internalType": "uint256","name": "fromId","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "toId","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "batchWeiPaid","type": "uint256"}],
-    "name": "BatchDistributed","type": "event"
-  },
-  {
-    "inputs": [{"internalType": "uint256","name": "fromIndex","type": "uint256"},{"internalType": "uint256","name": "toIndex","type": "uint256"}],
-    "name": "distributeBatch","outputs": [],"stateMutability": "nonpayable","type": "function"
-  },
+  {"inputs": [],"name": "finalizeDistribution","outputs": [],"stateMutability": "nonpayable","type": "function"},
+  {"inputs": [{"internalType": "uint256","name": "victimId","type": "uint256"}],"name": "claimRelief","outputs": [],"stateMutability": "nonpayable","type": "function"},
   {"inputs": [],"name": "donate","outputs": [],"stateMutability": "payable","type": "function"},
   {
     "anonymous": false,
@@ -1061,7 +1053,7 @@ const ABI = [
     "name": "FundReleased","type": "event"
   },
   {
-    "inputs": [{"internalType": "bytes32","name": "identityHash","type": "bytes32"},{"internalType": "uint256","name": "score","type": "uint256"},{"internalType": "address","name": "wallet","type": "address"}],
+    "inputs": [{"internalType": "bytes32","name": "identityHash","type": "bytes32"},{"internalType": "uint256","name": "score","type": "uint256"},{"internalType": "uint256","name": "allocatedAmount","type": "uint256"},{"internalType": "address","name": "wallet","type": "address"}],
     "name": "registerVictim","outputs": [],"stateMutability": "nonpayable","type": "function"
   },
   {
@@ -1108,7 +1100,6 @@ const ABI = [
   {"inputs": [],"name": "totalDonated","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
   {"inputs": [],"name": "totalScore","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
   {"inputs": [],"name": "victimCount","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
-  {"inputs": [],"name": "victimPayoutDone","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},
   {"inputs": [],"name": "victimPool","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
   {"inputs": [{"internalType": "uint256","name": "","type": "uint256"}],"name": "victims","outputs": [{"internalType": "uint256","name": "id","type": "uint256"},{"internalType": "bytes32","name": "identityHash","type": "bytes32"},{"internalType": "uint256","name": "score","type": "uint256"},{"internalType": "uint256","name": "reliefAmount","type": "uint256"},{"internalType": "address","name": "walletAddress","type": "address"},{"internalType": "bool","name": "isRegistered","type": "bool"},{"internalType": "bool","name": "isPaid","type": "bool"}],"stateMutability": "view","type": "function"}
 ];
@@ -1421,7 +1412,7 @@ function AdminDashboard({ showToast }) {
     if (!contract) return;
     setDistributing(true);
     try {
-      const tx = await contract.autoDistribute();
+      const tx = await contract.finalizeDistribution();
       showToast(t.distTxSent, "info");
       await tx.wait();
       showToast(t.distSuccess, "success");
@@ -2676,6 +2667,9 @@ function VictimPortal({ showToast }) {
     } catch {}
   }, []);
 
+  const [claiming, setClaiming] = useState(false);
+  const { contract, isConnected, connect } = useContract();
+
   const lookup = async () => {
     if (!nid.trim()) { showToast(t.enterNid, "error"); return; }
     setLoading(true);
@@ -2692,21 +2686,45 @@ function VictimPortal({ showToast }) {
 
     if (data && data.found && readContract) {
       try {
-        const isDist = await readContract.isDistributed();
-        if (isDist) {
-          data.stage = data.verification_status === 'Verified' ? 'Disbursed' : 'Rejected';
+        const [vCount, totalDist, isDist] = await readContract.getDistributionProgress();
+        const victimData = await readContract.getVictim(data.victim_id);
+        const isPaidOnChain = victimData.isPaid;
+
+        if (isPaidOnChain) {
+          data.stage = 'Disbursed';
+        } else if (isDist) {
+          data.stage = data.verification_status === 'Verified' ? 'Approved' : 'Rejected';
         } else {
-          const statusMap = { 'Verified': 'Approved', 'Pending': 'Pending' };
+          const statusMap = { 'Verified': 'Verified', 'Pending': 'Pending' };
           data.stage = statusMap[data.verification_status] || 'Pending';
           data.receipt_id = null;
           data.tx_hash = null;
         }
-      } catch {}
+      } catch (e) {
+         console.error("Contract read error", e);
+      }
     }
 
     setResult(data);
     setChecked(true);
     setLoading(false);
+  };
+
+  const handleClaim = async () => {
+    if (!isConnected) {
+       try { await connect(); } catch(e) { showToast(e.message, "error"); return; }
+    }
+    setClaiming(true);
+    try {
+      const tx = await contract.claimRelief(result.victim_id);
+      showToast("Claim transaction sent...", "info");
+      await tx.wait();
+      showToast("Relief claimed successfully!", "success");
+      lookup();
+    } catch (e) {
+      showToast(e.reason || e.message, "error");
+    }
+    setClaiming(false);
   };
 
   const mockData = (searchNid) => {
@@ -2893,6 +2911,14 @@ function VictimPortal({ showToast }) {
                           <div className="stat-sub">{t.vsEqualShare}: ৳{result.traditional_equal_bdt?.toLocaleString()}</div>
                         </div>
                       </div>
+
+                      {result.stage === 'Approved' && (
+                        <button className="btn btn-primary mt-16" style={{width:'100%', padding:'14px'}}
+                          onClick={handleClaim} disabled={claiming}>
+                          {claiming ? <><span className="spinner"/> Claiming...</> : '🎁 Claim Relief Funds'}
+                        </button>
+                      )}
+
                       <div className="alert alert-info mt-16" style={{fontSize:'12px'}}>
                         {t.vulnExplain}
                       </div>

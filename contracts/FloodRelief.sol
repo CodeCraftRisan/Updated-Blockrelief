@@ -47,7 +47,6 @@ contract FloodRelief {
 
     uint256 public targetFund;
     uint256 public totalDonated;
-    uint256 public totalScore;
     uint256 public victimCount;
     bool    public isDistributed;
     bool    private locked;
@@ -55,9 +54,8 @@ contract FloodRelief {
     // Batch distribution tracking
     uint256 public victimPool;
     uint256 public reservePool;
-    uint256 public lastDistributedId;
     uint256 public totalDistributed;
-    bool    public victimPayoutDone;
+    bool    public distributionFinalized;
 
     // ============================================================
     //  SECTION 2 : STRUCTS
@@ -97,10 +95,9 @@ contract FloodRelief {
     event DonationReceived(address indexed donor, uint256 amount, uint256 ticketNumber, uint256 totalDonated);
     event VictimRegistered(uint256 indexed victimId, bytes32 identityHash, uint256 score, uint256 allocatedAmount, address wallet);
     event FundReleased(uint256 indexed victimId, uint256 amount, address wallet);
-    event AllFundsDistributed(uint256 totalDistributed, uint256 recipients);
+    event DistributionFinalized(uint256 victimPool, uint256 reservePool);
     event ReserveWithdrawn(address indexed receiver, uint256 amount);
     event TargetFundUpdated(uint256 newTarget);
-    event BatchDistributed(uint256 fromId, uint256 toId, uint256 batchWeiPaid);
 
     // ============================================================
     //  SECTION 5 : MODIFIERS
@@ -155,7 +152,6 @@ contract FloodRelief {
             isPaid:          false
         });
 
-        totalScore += score;
         emit VictimRegistered(victimCount, identityHash, score, allocatedAmount, wallet);
     }
 
@@ -201,117 +197,49 @@ contract FloodRelief {
     }
 
     // ============================================================
-    //  SECTION 9 : BATCH DISTRIBUTION (Sepolia / Polygon safe)
+    //  SECTION 9 : PULL PAYMENT MODEL (Recommended for Research)
     // ============================================================
 
     /**
-     * Paginated distribution — call in batches of 10 for testnets.
-     * For Ganache demo, one call with (0, victimCount) works fine.
-     *
-     * Usage:
-     *   distributeBatch(0,  10)  → pays victims 1..10
-     *   distributeBatch(10, 20)  → pays victims 11..20
-     *   ...
-     *   distributeBatch(90, 100) → pays victims 91..100
+     * Finalizes the fund pool and locks the distribution phase.
+     * Separates the reserve pool from the victim pool.
      */
-    function distributeBatch(
-        uint256 fromIndex,
-        uint256 toIndex
-    ) external onlyAdmin noReentrant {
-        require(totalDonated >= targetFund,          "Target fund not reached");
-        require(!victimPayoutDone,                   "Already paid all victims");
-        require(victimCount > 0,                     "No victims registered");
-        require(totalScore  > 0,                     "Total score is zero");
-        require(fromIndex == lastDistributedId,      "Must continue from last batch");
-        require(toIndex   <= victimCount,            "toIndex exceeds victim count");
-        require(toIndex   >  fromIndex,              "toIndex must be > fromIndex");
+    function finalizeDistribution() external onlyAdmin {
+        require(totalDonated >= targetFund, "Target fund not reached");
+        require(!isDistributed,             "Already finalized");
 
-        // Lock pool once on first batch
-        if (lastDistributedId == 0) {
-            isDistributed = true;
-            uint256 bal  = address(this).balance;
-            reservePool  = bal > targetFund ? bal - targetFund : 0;
-            uint256 allocated = bal - reservePool;
-            victimPool   = allocated;
-        }
+        isDistributed = true;
+        uint256 bal   = address(this).balance;
+        reservePool   = bal > targetFund ? bal - targetFund : 0;
+        victimPool    = bal - reservePool;
 
-        // [FIX-SYNTAX] Declared batchPaid and added the missing for-loop
-        uint256 batchPaid = 0;
-
-        for (uint256 i = fromIndex + 1; i <= toIndex; i++) {
-            Victim storage v = victims[i];
-            if (!v.isRegistered || v.isPaid) continue;
-
-            // [FIX-RESEARCH] Use stored allocatedAmount
-            uint256 share = v.allocatedAmount;
-
-            // [FIX-HIGH] Checks-Effects-Interactions:
-            // ALL state updates BEFORE external call
-            v.reliefAmount    = share;
-            v.isPaid          = true;
-            totalDistributed += share;
-            batchPaid        += share;
-
-            // External call LAST
-            (bool ok, ) = payable(v.walletAddress).call{value: share}("");
-            if (ok) {
-                emit FundReleased(i, share, v.walletAddress);
-            }
-        }
-
-        lastDistributedId = toIndex;
-        emit BatchDistributed(fromIndex, toIndex, batchPaid);
-
-        if (toIndex == victimCount) {
-            victimPayoutDone = true;
-            emit AllFundsDistributed(totalDistributed, victimCount);
-        }
+        emit DistributionFinalized(victimPool, reservePool);
     }
 
-    // ============================================================
-    //  SECTION 10 : AUTO DISTRIBUTE (Ganache demo only)
-    // ============================================================
-
     /**
-     * Single-tx distribution — Ganache only (no gas limit).
-     * Do NOT use on Sepolia or Polygon — use distributeBatch() instead.
+     * Pull Payment: Victims claim their own relief.
+     * This avoids gas limit issues in loops and improves accounting.
      */
-    function autoDistribute() external onlyAdmin noReentrant {
-        require(totalDonated >= targetFund, "Target fund not reached");
-        require(!isDistributed,             "Already distributed");
-        require(victimCount > 0,            "No victims registered");
-        require(totalScore  > 0,            "Total score is zero");
+    function claimRelief(uint256 victimId) external noReentrant {
+        require(isDistributed, "Distribution not finalized");
+        require(victimId > 0 && victimId <= victimCount, "Invalid victim ID");
 
-        isDistributed    = true;
-        victimPayoutDone = true;
+        Victim storage v = victims[victimId];
+        require(v.walletAddress == msg.sender, "Only victim wallet can claim");
+        require(!v.isPaid,                     "Already paid");
 
-        uint256 bal  = address(this).balance;
-        reservePool  = bal > targetFund ? bal - targetFund : 0;
-        uint256 allocated = bal - reservePool;
-        victimPool   = allocated;
+        uint256 amount = v.allocatedAmount;
+        require(amount > 0, "No relief allocated");
 
-        uint256 distributed = 0;
+        // [FIX-HIGH] Checks-Effects-Interactions
+        v.isPaid = true;
+        v.reliefAmount = amount;
+        totalDistributed += amount;
 
-        for (uint256 i = 1; i <= victimCount; i++) {
-            Victim storage v = victims[i];
-            if (!v.isRegistered || v.isPaid) continue;
+        (bool ok, ) = payable(msg.sender).call{value: amount}("");
+        require(ok, "Claim transfer failed");
 
-            // [FIX-RESEARCH] Use stored allocatedAmount
-            uint256 share = v.allocatedAmount;
-
-            // [FIX-HIGH] State BEFORE external call
-            v.reliefAmount    = share;
-            v.isPaid          = true;
-            distributed      += share;
-            totalDistributed += share;
-
-            (bool ok, ) = payable(v.walletAddress).call{value: share}("");
-            if (ok) {
-                emit FundReleased(i, share, v.walletAddress);
-            }
-        }
-
-        emit AllFundsDistributed(distributed, victimCount);
+        emit FundReleased(victimId, amount, msg.sender);
     }
 
     // ============================================================
@@ -388,12 +316,11 @@ contract FloodRelief {
     }
 
     function getDistributionProgress() external view returns (
-        uint256 paidVictims,
         uint256 totalVictims,
         uint256 weiDistributed,
-        bool    allDone
+        bool    isFinalized
     ) {
-        return (lastDistributedId, victimCount, totalDistributed, victimPayoutDone);
+        return (victimCount, totalDistributed, isDistributed);
     }
 
     function isAdmin(address user) external view returns (bool) {

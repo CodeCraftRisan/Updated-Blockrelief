@@ -78,3 +78,27 @@ def test_only_admin_can_register(w3, flood_relief):
     identity_hash = Web3.keccak(text="victim2")
     with pytest.raises(Exception):
         flood_relief.functions.registerVictim(identity_hash, 8000, w3.to_wei(0.5, 'ether'), w3.eth.accounts[3]).transact({'from': non_admin})
+
+def test_pull_payment_claim(w3, flood_relief):
+    admin = w3.eth.accounts[0]
+    victim_wallet = w3.eth.accounts[2]
+    identity_hash = Web3.keccak(text="victim1")
+    amount = w3.to_wei(0.5, 'ether')
+
+    # 1. Donate enough funds
+    flood_relief.functions.donate().transact({'from': w3.eth.accounts[1], 'value': w3.to_wei(1, 'ether')})
+
+    # 2. Register victim
+    flood_relief.functions.registerVictim(identity_hash, 8000, amount, victim_wallet).transact({'from': admin})
+
+    # 3. Finalize distribution
+    flood_relief.functions.finalizeDistribution().transact({'from': admin})
+
+    # 4. Victim claims
+    initial_balance = w3.eth.get_balance(victim_wallet)
+    tx_hash = flood_relief.functions.claimRelief(1).transact({'from': victim_wallet})
+    w3.eth.wait_for_transaction_receipt(tx_hash)
+
+    assert w3.eth.get_balance(victim_wallet) > initial_balance
+    v = flood_relief.functions.getVictim(1).call()
+    assert v[6] == True # isPaid (index 6 in getVictim return)

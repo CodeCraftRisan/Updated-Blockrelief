@@ -34,7 +34,8 @@ GANACHE_DEPLOY_GAS      = 1_923_440    # same contract → same gas
 GANACHE_AVG_REGISTER    = 145_161      # avg per registerVictim()
 GANACHE_TOTAL_REGISTER  = 14_516_101   # 100 victims
 GANACHE_GAS_PRICE_GWEI  = 20           # Ganache default
-GANACHE_DISTRIBUTE_GAS  = 2_200_000    # autoDistribute() estimate
+GANACHE_DISTRIBUTE_GAS  = 150_000      # finalizeDistribution() estimate
+GANACHE_CLAIM_GAS       = 65_000       # claimRelief() avg estimate
 
 # ── Sepolia (Etherscan — Jun 01, 2026) ──
 SEPOLIA_DEPLOY_GAS      = 1_923_440    # ACTUAL from screenshot
@@ -64,7 +65,7 @@ MATIC_PRICE_USD = 0.50     # 1 POL/MATIC ≈ $0.50 (approximate)
 def calculate_costs():
     """
     Full deployment cost:
-    Deploy + Register×100 (estimated) + autoDistribute()
+    Deploy + Register×100 (estimated) + finalizeDistribution()
     """
     networks = {}
 
@@ -258,7 +259,7 @@ def make_plots(networks):
                  color='#14b8a6', alpha=0.9, edgecolor='#0f1525', linewidth=0.5)
     b3 = ax1.bar(x, dist_costs,     bar_w,
                  bottom=[d+r for d,r in zip(deploy_costs, register_costs)],
-                 label='autoDistribute()',
+                 label='finalizeDistribution()',
                  color='#f59e0b', alpha=0.9, edgecolor='#0f1525', linewidth=0.5)
 
     ax1.set_xticks(x)

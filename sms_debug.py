@@ -11,10 +11,11 @@
 
 import requests
 import json
+import os
 
 # ── তোমার phone-এর IP দাও ──
-GATEWAY_IP   = "192.168.0.108"   # ← তোমার IP বদলাও
-GATEWAY_PORT = "8080"
+GATEWAY_IP   = os.getenv("SMS_GATEWAY_IP", "127.0.0.1")   # ← তোমার IP বদলাও
+GATEWAY_PORT = os.getenv("SMS_GATEWAY_PORT", "8080")
 BASE_URL     = f"http://{GATEWAY_IP}:{GATEWAY_PORT}"
 
 # Test phone number (তোমার নিজের number)

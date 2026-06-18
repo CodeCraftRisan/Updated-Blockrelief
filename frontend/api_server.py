@@ -115,6 +115,7 @@ def victim_lookup():
 
         return jsonify({
             "found":                  True,
+            "victim_id":              int(r.get('Victim_ID', 0)),
             "nid":                    str(r.get('NID', nid)),
             "name":                   str(r.get('Name', 'Unknown')),
             "upazila":                str(r.get('Upazila', '—')),

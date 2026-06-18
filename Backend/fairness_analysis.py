@@ -246,12 +246,7 @@ def run_fairness_analysis():
     else:
         print("  [WARNING] Low correlation - check weight calculation in fuzzy_ahp.py.")
 
-    # ---- Trigger outcome report generation ----
-    try:
-        import generate_outcome_report
-        generate_outcome_report.generate_report()
-    except Exception as e:
-        print(f"Warning: Could not auto-generate demographic outcome report: {e}")
+    # [INFO] Outcome report generation is now handled by run_pipeline.py
 
 
 if __name__ == "__main__":

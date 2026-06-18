@@ -43,7 +43,7 @@ In real-life relief campaigns, donations often exceed the planned target. Withou
 The Block-Relief contract now tracks excess donations separately using a `reservePool`:
 
 - The contract still uses `targetFund` as the campaign goal.
-- When total donations exceed this target, the surplus is not immediately used in the current victim and lottery distribution.
+- When total donations exceed this target, the surplus is not immediately used in the current victim distribution.
 - Instead, the extra amount is held in `reservePool` for future NGO support, contingency spending, or additional relief tasks.
 
 ### 3.3 Reserve Pool Behavior
@@ -51,9 +51,7 @@ The Block-Relief contract now tracks excess donations separately using a `reserv
 At distribution time, the contract computes:
 
 - `reserved = max(contractBalance - targetFund, 0)`
-- `allocated = contractBalance - reserved`
-- `lotteryPool = allocated * 20%`
-- `victimPool = allocated - lotteryPool`
+- `victimPool = contractBalance - reserved`
 
 This ensures the original distribution target remains stable and the donated reserve is preserved separately.
 
@@ -73,7 +71,7 @@ The purpose of this button is not to send funds to an arbitrary external address
 
 This approach models a real-world relief operation where:
 
-- core campaign funding is used immediately for flood victims and lottery incentives,
+- core campaign funding is used immediately for flood victims,
 - surplus donations are preserved for future emergency support,
 - the administrator can later allocate the reserve for additional overhead, logistics, or follow-up relief.
 
