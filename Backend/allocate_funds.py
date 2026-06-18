@@ -29,9 +29,9 @@ SCORED_VICTIMS_PATH  = config.SCORED_CSV
 FUND_ALLOCATION_PATH = config.ALLOCATION_CSV
 
 # --- Configuration ---
-TOTAL_FUND_POOL_BDT = 1_000_000   # 10 Lakh BDT
-MIN_RELIEF_BDT      = 2_000       # Minimum floor
-MAX_RELIEF_BDT      = 25_000      # Maximum cap
+TOTAL_FUND_POOL_BDT = config.TOTAL_FUND_POOL_BDT
+MIN_RELIEF_BDT = config.MIN_RELIEF_BDT
+MAX_RELIEF_BDT = config.MAX_RELIEF_BDT
 
 
 def allocate_proportional_funds():
